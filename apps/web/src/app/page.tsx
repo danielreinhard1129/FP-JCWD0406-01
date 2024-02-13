@@ -1,95 +1,52 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+'use client';
+
+import { loginAction } from '@/libs/features/userSlice';
+import { useAppDispatch, useAppSelector } from '@/libs/hooks';
+import { Button, Modal } from 'flowbite-react';
+import { useState } from 'react';
 
 export default function Home() {
+  const [openModal, setOpenModal] = useState(false);
+
+  const user: any = {
+    id: 1,
+    name: 'step',
+    email: 'step@mail.com',
+    role: 'admin'
+  }
+  const dispach =useAppDispatch()
+  dispach(loginAction(user))
+
+  const getuser = useAppSelector((state) => state.user)
+  console.log("dari global state",getuser)
+
+  
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
+    <div className='min-h-screen flex justify-center items-center'>
+    <Button onClick={() => setOpenModal(true)}>Click me</Button>
+    <Modal show={openModal} onClose={() => setOpenModal(false)}>
+      <Modal.Header>Terms of Service</Modal.Header>
+      <Modal.Body>
+        <div className="space-y-6">
+          <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+            With less than a month to go before the European Union enacts new consumer privacy laws for its citizens,
+            companies around the world are updating their terms of service agreements to comply.
           </p>
-        </a>
-      </div>
-    </main>
+          <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+            The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant
+            to ensure a common set of data rights in the European Union. It requires organizations to notify users as
+            soon as possible of high-risk data breaches that could personally affect them.
+          </p>
+        </div>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button onClick={() => setOpenModal(false)}>I accept</Button>
+        <Button color="gray" onClick={() => setOpenModal(false)}>
+          Decline
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  </div>
   )
 }
