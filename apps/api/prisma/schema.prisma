@@ -152,17 +152,7 @@ model Stock {
   product Product @relation(fields: [productId], references: [id])
   branchId Int
   StoreBranch Store_Branch @relation(fields: [branchId], references: [id])
-  jurnal Jurnal[]
   stockChange Stock_Change[]
-}
-
-model Jurnal {
-  id    Int       @id @default(autoincrement())
-  information String
-  amount Int
-  createdAt DateTime @default(now())
-  stockId Int
-  stock Stock @relation(fields: [stockId], references: [id])
 }
 
 model History_Discount{
