@@ -51,7 +51,6 @@ model Address {
   customer Customer[]
   cityId Int
   city City @relation(fields: [cityId], references: [id]) 
-
 }
 
 model City {
@@ -62,7 +61,7 @@ model City {
   address Address[]
   provinceId Int
   province Province @relation(fields: [provinceId], references: [id])
-  StoreBranch Store_Branch[]
+  storeBranch Store_Branch[]
 }
 
 model Province {
@@ -91,7 +90,7 @@ model Admin {
   id     Int       @id @default(autoincrement())
   email String
   password String
-  StoreBranch Store_Branch[]
+  storeBranch Store_Branch[]
 }
 
 model Voucher {
@@ -104,7 +103,7 @@ model Voucher {
   claimLimit Int
   minSpend Int
   maxDiscount Int
-  StoreBranch Store_Branch[]
+  storeBranch Store_Branch[]
 }
 
 model Discount {
@@ -117,7 +116,7 @@ model Discount {
   expiredAt DateTime
   isActive Boolean @default(false)
   branchId Int
-  StoreBranch Store_Branch @relation(fields: [branchId], references: [id])
+  storeBranch Store_Branch @relation(fields: [branchId], references: [id])
   productId Int
   product Product @relation(fields: [productId], references: [id])
   historyDiscount History_Discount[]
@@ -148,10 +147,10 @@ model Stock {
   amount Int
   createdAt DateTime @default(now())
   updatedAt DateTime
-  productId Int
+  productId Int @unique
   product Product @relation(fields: [productId], references: [id])
   branchId Int
-  StoreBranch Store_Branch @relation(fields: [branchId], references: [id])
+  storeBranch Store_Branch @relation(fields: [branchId], references: [id])
   stockChange Stock_Change[]
 }
 
@@ -188,9 +187,9 @@ model Order {
   customerId Int
   customer Customer @relation(fields: [customerId], references: [id])
   branchId Int
-  StoreBranch Store_Branch @relation(fields: [branchId], references: [id])
-  StatusId Int
-  status Status @relation(fields: [StatusId], references: [id])
+  storeBranch Store_Branch @relation(fields: [branchId], references: [id])
+  statusId Int
+  status Status @relation(fields: [statusId], references: [id])
   orderList Order_List[]
 }
 
@@ -211,8 +210,8 @@ model Order_List {
 
 model Stock_Change{
   id    Int       @id @default(autoincrement())
-  StockBefore Int
-  StockAfter Int
+  stockBefore Int
+  stockAfter Int
   createdAt    DateTime @default(now())
   stockId Int
   stock Stock @relation(fields: [stockId], references: [id])
