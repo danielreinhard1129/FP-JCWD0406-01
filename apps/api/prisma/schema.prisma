@@ -10,16 +10,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Sample {
-  id        Int      @id @default(autoincrement())
-  name      String
-  code      String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@map("samples")
-}
-
 model Customer {
   id              Int                @id @default(autoincrement())
   email           String             @unique
@@ -112,7 +102,7 @@ model Voucher {
   claimLimit  Int
   minSpend    Int
   maxDiscount Int
-  StoreBranch Store_Branch[]
+  storeBranch Store_Branch[]
 }
 
 model Discount {
@@ -234,4 +224,5 @@ model Stock_Change {
   createdAt   DateTime @default(now())
   stockId     Int
   stock       Stock    @relation(fields: [stockId], references: [id])
+
 }

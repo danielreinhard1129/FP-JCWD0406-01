@@ -6,6 +6,7 @@ import NavbarComp from '@/components/NavbarComp';
 import FooterComp from '@/components/FooterComp';
 import MobileNavBar from '@/components/MobileNavBar';
 
+
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
