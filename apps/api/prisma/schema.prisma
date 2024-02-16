@@ -10,220 +10,228 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Sample {
+  id        Int      @id @default(autoincrement())
+  name      String
+  code      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("samples")
+}
 
 model Customer {
-  id           Int      @id @default(autoincrement())
-  email        String   @unique
-  phone        Int
-  password     String
-  username     String
-  verified     Boolean  @default(false)
-  referralCode String   @unique
-  referrer     String
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  profileId   Int
-  profile   Profile @relation(fields: [profileId], references: [id])
-  addressId Int  
-  address Address @relation(fields: [addressId], references: [id])
+  id              Int                @id @default(autoincrement())
+  email           String             @unique
+  phone           Int
+  password        String
+  username        String
+  verified        Boolean            @default(false)
+  referralCode    String             @unique
+  referrer        String
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+  profileId       Int
+  profile         Profile            @relation(fields: [profileId], references: [id])
+  addressId       Int
+  address         Address            @relation(fields: [addressId], references: [id])
   historyDiscount History_Discount[]
-  cart Cart[]
-  order Order[]
-  orderList Order_List[]
+  cart            Cart[]
+  order           Order[]
+  orderList       Order_List[]
 }
 
 model Profile {
-  id     Int       @id @default(autoincrement())
-  name   String
-  gender String
-  birth  DateTime
-  avatar String
+  id       Int        @id @default(autoincrement())
+  name     String
+  gender   String
+  birth    DateTime
+  avatar   String
   customer Customer[]
 }
 
 model Address {
-  id     Int       @id @default(autoincrement())
-  label String
-  detail String
-  latitude String
+  id        Int        @id @default(autoincrement())
+  label     String
+  detail    String
+  latitude  String
   longitude String
-  isDefault Boolean @default(false)
-  customer Customer[]
-  cityId Int
-  city City @relation(fields: [cityId], references: [id]) 
-
+  isDefault Boolean    @default(false)
+  customer  Customer[]
+  cityId    Int
+  city      City       @relation(fields: [cityId], references: [id])
 }
 
 model City {
-  id     Int       @id @default(autoincrement())
-  name String
-  type String
-  postalCode Int
-  address Address[]
-  provinceId Int
-  province Province @relation(fields: [provinceId], references: [id])
+  id          Int            @id @default(autoincrement())
+  name        String
+  type        String
+  postalCode  Int
+  address     Address[]
+  provinceId  Int
+  province    Province       @relation(fields: [provinceId], references: [id])
   StoreBranch Store_Branch[]
 }
 
 model Province {
-  id     Int       @id @default(autoincrement())
+  id   Int    @id @default(autoincrement())
   name String
   city City[]
 }
 
-model Store_Branch{
-  id     Int       @id @default(autoincrement())
-  name String
-  cityId Int
-  city City @relation(fields: [cityId], references: [id])
-  adminId Int
-  admin Admin @relation(fields: [adminId], references: [id])
-  latitude String
+model Store_Branch {
+  id        Int        @id @default(autoincrement())
+  name      String
+  cityId    Int
+  city      City       @relation(fields: [cityId], references: [id])
+  adminId   Int
+  admin     Admin      @relation(fields: [adminId], references: [id])
+  latitude  String
   longitude String
   voucherId Int
-  voucher Voucher @relation(fields: [voucherId], references: [id])
-  discount Discount[]
-  stock Stock[]
-  order Order[]
+  voucher   Voucher    @relation(fields: [voucherId], references: [id])
+  discount  Discount[]
+  stock     Stock[]
+  order     Order[]
 }
 
 model Admin {
-  id     Int       @id @default(autoincrement())
-  email String
-  password String
+  id          Int            @id @default(autoincrement())
+  email       String
+  password    String
   StoreBranch Store_Branch[]
 }
 
 model Voucher {
-  id     Int       @id @default(autoincrement())
-  name String
+  id          Int            @id @default(autoincrement())
+  name        String
   description String
-  value Int
-  startAt DateTime
-  expiredAt DateTime
-  claimLimit Int
-  minSpend Int
+  value       Int
+  startAt     DateTime
+  expiredAt   DateTime
+  claimLimit  Int
+  minSpend    Int
   maxDiscount Int
   StoreBranch Store_Branch[]
 }
 
 model Discount {
-  id    Int       @id @default(autoincrement())
-  typeDiscount String
-  discountValue Int
+  id              Int                @id @default(autoincrement())
+  typeDiscount    String
+  discountValue   Int
   minimumPurchase Int
-  discountLaw String
-  startAt DateTime
-  expiredAt DateTime
-  isActive Boolean @default(false)
-  branchId Int
-  StoreBranch Store_Branch @relation(fields: [branchId], references: [id])
-  productId Int
-  product Product @relation(fields: [productId], references: [id])
+  discountLaw     String
+  startAt         DateTime
+  expiredAt       DateTime
+  isActive        Boolean            @default(false)
+  branchId        Int
+  StoreBranch     Store_Branch       @relation(fields: [branchId], references: [id])
+  productId       Int
+  product         Product            @relation(fields: [productId], references: [id])
   historyDiscount History_Discount[]
 }
 
 model Product {
-  id    Int       @id @default(autoincrement())
-  name String
-  image String
-  location String
-  price Int
-  discount Discount[]
+  id         Int        @id @default(autoincrement())
+  name       String
+  image      String
+  location   String
+  price      Int
+  discount   Discount[]
   categoryId Int
-  category Category @relation(fields: [categoryId], references: [id])
-  stock Stock[]
-  cart Cart[]
-  order Order[]
+  category   Category   @relation(fields: [categoryId], references: [id])
+  stock      Stock[]
+  cart       Cart[]
+  order      Order[]
 }
 
-model Category{
-  id    Int       @id @default(autoincrement())  
-  name String
+model Category {
+  id      Int       @id @default(autoincrement())
+  name    String
   product Product[]
 }
 
 model Stock {
-  id    Int       @id @default(autoincrement())
-  amount Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime
-  productId Int
-  product Product @relation(fields: [productId], references: [id])
-  branchId Int
-  StoreBranch Store_Branch @relation(fields: [branchId], references: [id])
-  jurnal Jurnal[]
+  id          Int            @id @default(autoincrement())
+  amount      Int
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime
+  productId   Int
+  product     Product        @relation(fields: [productId], references: [id])
+  branchId    Int
+  StoreBranch Store_Branch   @relation(fields: [branchId], references: [id])
+  jurnal      Jurnal[]
   stockChange Stock_Change[]
 }
 
 model Jurnal {
-  id    Int       @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   information String
-  amount Int
-  createdAt DateTime @default(now())
-  stockId Int
-  stock Stock @relation(fields: [stockId], references: [id])
+  amount      Int
+  createdAt   DateTime @default(now())
+  stockId     Int
+  stock       Stock    @relation(fields: [stockId], references: [id])
 }
 
-model History_Discount{
-  id    Int       @id @default(autoincrement())
-  usedAt DateTime
+model History_Discount {
+  id             Int      @id @default(autoincrement())
+  usedAt         DateTime
   amountDiscount Int
-  customerId Int
-  customer Customer @relation(fields: [customerId], references: [id])
-  discountId Int
-  discount Discount @relation(fields: [discountId], references: [id])
+  customerId     Int
+  customer       Customer @relation(fields: [customerId], references: [id])
+  discountId     Int
+  discount       Discount @relation(fields: [discountId], references: [id])
 }
 
 model Cart {
-  id    Int       @id @default(autoincrement())
+  id         Int      @id @default(autoincrement())
   customerId Int
-  customer Customer @relation(fields: [customerId], references: [id])
-  productId Int
-  product Product @relation(fields: [productId], references: [id])
-  qty Int
+  customer   Customer @relation(fields: [customerId], references: [id])
+  productId  Int
+  product    Product  @relation(fields: [productId], references: [id])
+  qty        Int
 }
 
 model Order {
-  id    Int       @id @default(autoincrement())
-  uuid String @unique
-  qty Int
-  amount Int
-  address String?
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  paymentProof Boolean @default(false)
-  productId Int
-  product Product @relation(fields: [productId], references: [id])
-  customerId Int
-  customer Customer @relation(fields: [customerId], references: [id])
-  branchId Int
-  StoreBranch Store_Branch @relation(fields: [branchId], references: [id])
-  StatusId Int
-  status Status @relation(fields: [StatusId], references: [id])
-  orderList Order_List[]
+  id           Int          @id @default(autoincrement())
+  uuid         String       @unique
+  qty          Int
+  amount       Int
+  address      String?
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  paymentProof Boolean      @default(false)
+  productId    Int
+  product      Product      @relation(fields: [productId], references: [id])
+  customerId   Int
+  customer     Customer     @relation(fields: [customerId], references: [id])
+  branchId     Int
+  StoreBranch  Store_Branch @relation(fields: [branchId], references: [id])
+  StatusId     Int
+  status       Status       @relation(fields: [StatusId], references: [id])
+  orderList    Order_List[]
 }
 
 model Status {
-  id    Int       @id @default(autoincrement())
+  id    Int     @id @default(autoincrement())
   title String
   order Order[]
 }
 
 model Order_List {
-  id    Int       @id @default(autoincrement()) 
+  id         Int      @id @default(autoincrement())
   customerId Int
-  customer Customer @relation(fields: [customerId], references: [id])
-  orderId Int
-  order Order @relation(fields: [orderId], references: [id])
-  createdAt    DateTime @default(now())
+  customer   Customer @relation(fields: [customerId], references: [id])
+  orderId    Int
+  order      Order    @relation(fields: [orderId], references: [id])
+  createdAt  DateTime @default(now())
 }
 
-model Stock_Change{
-  id    Int       @id @default(autoincrement())
+model Stock_Change {
+  id          Int      @id @default(autoincrement())
   StockBefore Int
-  StockAfter Int
-  createdAt    DateTime @default(now())
-  stockId Int
-  stock Stock @relation(fields: [stockId], references: [id])
+  StockAfter  Int
+  createdAt   DateTime @default(now())
+  stockId     Int
+  stock       Stock    @relation(fields: [stockId], references: [id])
 }
