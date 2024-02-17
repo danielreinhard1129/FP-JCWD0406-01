@@ -56,7 +56,7 @@ const ProductDetails = ({ product }: any) => {
                 <img
                   ref={imgRef}
                   className="object-cover inline-block"
-                  src={product.product?.image}
+                  src={product.image}
                   alt="product title"
                   width="340"
                   height="340"
@@ -65,7 +65,7 @@ const ProductDetails = ({ product }: any) => {
             </aside>
             <main>
               <h2 className="font-semibold text-2xl mb-4">
-                {product.product?.name}
+                {product.name}
               </h2>
               <div className="flex flex-wrap items-center space-x-2 mb-2">
                 <svg
@@ -82,7 +82,7 @@ const ProductDetails = ({ product }: any) => {
                 {new Intl.NumberFormat('id-ID', {
                   style: 'currency',
                   currency: 'IDR',
-                }).format(product.product?.price)}
+                }).format(product.price)}
               </p>
               <p className="mb-4 text-gray-500">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.

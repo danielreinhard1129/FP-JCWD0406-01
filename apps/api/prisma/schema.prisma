@@ -28,7 +28,6 @@ model Customer {
   historyDiscount History_Discount[]
   cart            Cart[]
   order           Order[]
-  orderList       Order_List[]
 }
 
 model Profile {
@@ -61,7 +60,7 @@ model City {
   address Address[]
   provinceId Int
   province Province @relation(fields: [provinceId], references: [id])
-  StoreBranch Store_Branch[]
+  storeBranch Store_Branch[]
 }
 
 model Province {
@@ -90,7 +89,7 @@ model Admin {
   id     Int       @id @default(autoincrement())
   email String
   password String
-  StoreBranch Store_Branch[]
+  storeBranch Store_Branch[]
 }
 
 model Voucher {
@@ -116,7 +115,7 @@ model Discount {
   expiredAt DateTime
   isActive Boolean @default(false)
   branchId Int
-  StoreBranch Store_Branch @relation(fields: [branchId], references: [id])
+  storeBranch Store_Branch @relation(fields: [branchId], references: [id])
   productId Int
   product Product @relation(fields: [productId], references: [id])
   historyDiscount History_Discount[]
@@ -133,7 +132,7 @@ model Product {
   category   Category   @relation(fields: [categoryId], references: [id])
   stock      Stock[]
   cart       Cart[]
-  order      Order[]
+  orderItem      Order_Item[]
 }
 
 model Category {
@@ -147,10 +146,10 @@ model Stock {
   amount Int
   createdAt DateTime @default(now())
   updatedAt DateTime
-  productId Int
+  productId Int @unique()
   product Product @relation(fields: [productId], references: [id])
   branchId Int
-  StoreBranch Store_Branch @relation(fields: [branchId], references: [id])
+  storeBranch Store_Branch @relation(fields: [branchId], references: [id])
   jurnal Jurnal[]
   stockChange Stock_Change[]
 }
@@ -184,23 +183,40 @@ model Cart {
 }
 
 model Order {
-  id    Int       @id @default(autoincrement())
-  uuid String @unique
-  qty Int
+  id    String       @id
   amount Int
+  message String?
+  snap_token String?
+  snap_redirect_url String?
+  payment_method String?
   address String?
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
-  paymentProof Boolean @default(false)
-  productId Int
-  product Product @relation(fields: [productId], references: [id])
   customerId Int
   customer Customer @relation(fields: [customerId], references: [id])
   branchId Int
-  StoreBranch Store_Branch @relation(fields: [branchId], references: [id])
-  StatusId Int
-  status Status @relation(fields: [StatusId], references: [id])
-  orderList Order_List[]
+  storeBranch Store_Branch @relation(fields: [branchId], references: [id])
+  statusId Int
+  status Status @relation(fields: [statusId], references: [id])
+  orderItem Order_Item[]
+  @@map("order")
+} 
+
+model Order_Item {
+  id    String       @id
+  orderId String
+  productId Int
+  productName String
+  price Int 
+  quantity Int
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id])
+
+  @@index([productId], map: "productId")
+  @@index([orderId], map: "orderId")
+  @@map("orderItem")
 }
 
 model Status {
@@ -209,19 +225,11 @@ model Status {
   order Order[]
 }
 
-model Order_List {
-  id         Int      @id @default(autoincrement())
-  customerId Int
-  customer   Customer @relation(fields: [customerId], references: [id])
-  orderId    Int
-  order      Order    @relation(fields: [orderId], references: [id])
-  createdAt  DateTime @default(now())
-}
 
 model Stock_Change{
   id    Int       @id @default(autoincrement())
-  StockBefore Int
-  StockAfter Int
+  stockBefore Int
+  stockAfter Int
   createdAt    DateTime @default(now())
   stockId Int
   stock Stock @relation(fields: [stockId], references: [id])

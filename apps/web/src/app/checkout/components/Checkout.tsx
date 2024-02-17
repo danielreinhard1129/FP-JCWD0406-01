@@ -1,9 +1,67 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
+'use client';
+import CartContext from '@/context/CartContext';
+import { IAddToCart } from '@/types/cart.type';
 import Link from 'next/link';
-import React from 'react';
+import { useContext, useEffect, useState } from 'react';
+import SelectAddress from './SelectAddress';
+import axios from 'axios';
 
 const Checkout = () => {
+  const { cart } = useContext(CartContext);
+  const [shipping, setShipping] = useState(25000);
+  const [tax, setTax] = useState(10000);
+  const [total, setTotal] = useState(0);
+  const [subtotal, setSubtotal] = useState(0);
+  const [item, setItem] = useState(0)
+  const baseUrl = "http://localhost:8000/api"
+
+  useEffect(() => {
+    const calculateTotals = () => {
+      let subTotal = 0;
+
+      cart?.cartItems?.forEach((cartItem: IAddToCart) => {
+        subTotal += cartItem.price * cartItem.quantity;
+      });
+
+      let total = 0
+      cart?.cartItems?.forEach((cartItem: IAddToCart) => {
+        total += cartItem.quantity;
+      });
+
+      setItem(total)
+
+      const newSubtotal = subTotal.toFixed(2);
+      const newTotal = (subTotal + shipping + tax).toFixed(2);
+
+      setSubtotal(Number(newSubtotal));
+      setTotal(Number(newTotal));
+    };
+
+    calculateTotals();
+  }, [cart, shipping, tax]);
+
+  const handlePay = async () => {
+    try {
+      console.log("hello")
+      const response = await axios.post(baseUrl+'/transactions',{
+        address:"",
+        amount: 0,
+        customerId: 1,
+        branchId: 1,
+        products: cart?.cartItems?.map((item : any) => ({
+          id: item.productId,
+          quantity: item.quantity
+        }))
+      })
+
+      console.log("handlepay", response.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <>
       <div className="font-[sans-serif] bg-white">
@@ -17,27 +75,20 @@ const Checkout = () => {
               </div>
               <form className="lg:mt-12">
                 <div>
-                  <h2 className="text-2xl font-extrabold text-[#333]">
-                    Shipment Address
-                  </h2>
-                  <div className="grid grid-cols-2 gap-6 mt-8">
-                    <div className="w-[412px] border h-20">
-                      <h1>addesrs 1</h1>
-                    </div>
-                    <div className="w-[412px] border h-20">
-                      <h1>addesrs 2</h1>
-                    </div>
-                    <div className="w-[412px] border h-20">
-                      <h1>addesrs 3</h1>
-                    </div>
-                    <div className="w-[412px] border h-20">
-                      <h1>addesrs 4</h1>
-                    </div>
-                  </div>
+                  <h3 className="text-xl font-extrabold text-[#333] mb-4">
+                    Choose Shipping Address
+                  </h3>
+                  <SelectAddress/>
                 </div>
                 <div>
+                  <h3 className="text-xl font-extrabold text-[#333] mt-14 mb-4">
+                    Message
+                  </h3>
+                    <textarea id="pesan" name="pesan" rows={4} className="mt-1 p-2 w-full border rounded-md"></textarea>
+                </div>
+                {/* <div>
                   <h2 className="text-2xl font-extrabold text-[#333] mt-12">
-                    Shipping info
+                    Billing Detail
                   </h2>
                   <div className="grid grid-cols-2 gap-6 mt-8">
                     <input
@@ -181,7 +232,7 @@ const Checkout = () => {
                       </label>
                     </div>
                   </div>
-                </div>
+                </div> */}
                 <div className="flex flex-wrap gap-4 mt-8">
                   <Link href="/cart">
                     <button
@@ -193,6 +244,7 @@ const Checkout = () => {
                   </Link>
                   <button
                     type="button"
+                    onClick={handlePay}
                     className="min-w-[150px] px-6 py-3.5 text-sm bg-[#333] text-white rounded-md hover:bg-[#111]"
                   >
                     Confirm payment
@@ -201,29 +253,49 @@ const Checkout = () => {
               </form>
             </div>
             <div className="lg:h-[300px] lg:sticky lg:top-0 border-spacing-3 shadow-md">
-              <div className="relative h-[300px]">
+              <div className="relative h-[290px]">
                 <div className="p-8 lg:overflow-auto lg:h-[calc(100vh-60px)] max-lg:mb-8">
                   <h2 className="text-2xl font-extrabold text-[#333]">
                     Order Summary
                   </h2>
                   <div className="space-y-6 mt-10">
-                    <div className="grid sm:grid-cols-2 items-start gap-6">
-                      <div className="">Items(2):</div>
-                      <div className="text-end">$136,00</div>
+                    <div className="grid grid-cols-2 items-start gap-6">
+                      <div className="">Items({item}):</div>
+                      <div className="text-end">
+                        {' '}
+                        {new Intl.NumberFormat('id-ID', {
+                          style: 'currency',
+                          currency: 'IDR',
+                        }).format(subtotal)}
+                      </div>
                     </div>
-                    <div className="grid sm:grid-cols-2 items-start gap-6">
-                      <div className="">Shipping & handling:</div>
-                      <div className="text-end">$3.99</div>
+                    <div className="grid grid-cols-2 items-start gap-6">
+                      <div className="">Fee Shipping:</div>
+                      <div className="text-end">
+                        {new Intl.NumberFormat('id-ID', {
+                          style: 'currency',
+                          currency: 'IDR',
+                        }).format(shipping)}
+                      </div>
                     </div>
-                    <div className="grid sm:grid-cols-2 items-start gap-6">
-                      <div className="">Fee Shipping</div>
-                      <div className="text-end">$20,00</div>
+                    <div className="grid grid-cols-2 items-start gap-6">
+                      <div className="">Tax</div>
+                      <div className="text-end">
+                        {' '}
+                        {new Intl.NumberFormat('id-ID', {
+                          style: 'currency',
+                          currency: 'IDR',
+                        }).format(tax)}
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div className="absolute left-0 bottom-0 w-full px-8 py-4">
+                <div className="absolute left-0 bottom-0 w-full px-8 py-4 mb-2">
                   <h4 className="flex flex-wrap gap-4 text-base text-[#333] font-bold">
-                    Total <span className="ml-auto">$161.99</span>
+                    Total <span className="ml-auto">{new Intl.NumberFormat('id-ID', {
+                    style: 'currency',
+                    currency: 'IDR',
+                  }).format(total)}</span>
                   </h4>
                 </div>
               </div>

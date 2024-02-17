@@ -12,14 +12,14 @@ export class TransactionRouter {
   }
 
   private initializeRoutes(): void {
-    this.router.get('/create', this.transactionController.createTransaction);
-    this.router.post('/', this.transactionController.getTransactions);
-    this.router.post(
-      '/filter/id',
+    this.router.post('/', this.transactionController.createTransaction);
+    this.router.get('/', this.transactionController.getTransactions);
+    this.router.get(
+      '/filter/:transaction_id',
       this.transactionController.getTransactionById,
     );
-    this.router.post(
-      '/status',
+    this.router.put(
+      '/status/:transaction_id',
       this.transactionController.updateTransactionStatus,
     );
   }

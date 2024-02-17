@@ -7,11 +7,7 @@ import { IAddToCart } from '@/types/cart.type';
 import Link from 'next/link';
 const Cart = () => {
   const [subtotal, setSubtotal] = useState(0);
-  const [shipping, setShipping] = useState(25000);
-  const [tax, setTax] = useState(10000);
-  const [total, setTotal] = useState(0);
   const { addItemToCart, deleteItemFromCart, cart } = useContext(CartContext);
-
   useEffect(() => {
     const calculateTotals = () => {
       let subTotal = 0;
@@ -21,14 +17,11 @@ const Cart = () => {
       });
 
       const newSubtotal = subTotal.toFixed(2);
-      const newTotal = (subTotal + shipping + tax).toFixed(2);
-
       setSubtotal(Number(newSubtotal));
-      setTotal(Number(newTotal));
     };
 
     calculateTotals();
-  }, [cart, shipping, tax]);
+  }, [cart]);
 
   const incrementQty = (cartItem: IAddToCart) => {
     const newQuantity = cartItem?.quantity + 1;
@@ -164,7 +157,7 @@ const Cart = () => {
               </table>
             </div>
           )}
-          <div className=" max-w-xl ml-auto mt-6">
+          <div className="max-w-lg ml-auto shadow-sm p-10">
             <ul className="text-[#333] divide-y">
               <li className="flex flex-wrap gap-4 text-md py-3">
                 Subtotal{' '}
@@ -173,33 +166,6 @@ const Cart = () => {
                     style: 'currency',
                     currency: 'IDR',
                   }).format(subtotal)}
-                </span>
-              </li>
-              <li className="flex flex-wrap gap-4 text-md py-3">
-                Shipping{' '}
-                <span className="ml-auto font-bold">
-                  {new Intl.NumberFormat('id-ID', {
-                    style: 'currency',
-                    currency: 'IDR',
-                  }).format(shipping)}
-                </span>
-              </li>
-              <li className="flex flex-wrap gap-4 text-md py-3">
-                Tax{' '}
-                <span className="ml-auto font-bold">
-                  {new Intl.NumberFormat('id-ID', {
-                    style: 'currency',
-                    currency: 'IDR',
-                  }).format(tax)}
-                </span>
-              </li>
-              <li className="flex flex-wrap gap-4 text-md py-3 font-bold">
-                Total{' '}
-                <span className="ml-auto">
-                  {new Intl.NumberFormat('id-ID', {
-                    style: 'currency',
-                    currency: 'IDR',
-                  }).format(total)}
                 </span>
               </li>
             </ul>

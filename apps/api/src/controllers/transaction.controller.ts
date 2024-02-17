@@ -1,9 +1,11 @@
+import { createTransactionAction } from '@/actions/transaction/createTransaction.action';
 import { NextFunction, Request, Response } from 'express';
 
 export class TransactionController {
   async createTransaction(req: Request, res: Response, next: NextFunction) {
     try {
-      return res.status(200).send('create Transaction success');
+      const result = await createTransactionAction(req.body)
+      return res.status(result.status).send(result);
     } catch (error) {
       next(error);
     }

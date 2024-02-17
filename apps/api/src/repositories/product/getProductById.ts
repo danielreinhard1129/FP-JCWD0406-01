@@ -2,11 +2,10 @@ import prisma from '@/prisma';
 
 export const getProductById = async (id: number) => {
   try {
-    const result = await prisma.stock.findUnique({
-      where: { productId: id },
+    const result = await prisma.product.findUnique({
+      where: { id: id },
       include: {
-        product: { include: { category: true } },
-        storeBranch: true,
+        stock: {include: {storeBranch: true}}
       },
     });
     return result;
