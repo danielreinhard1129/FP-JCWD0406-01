@@ -8,7 +8,8 @@ import express, {
 } from 'express';
 import cors from 'cors';
 import { PORT } from './config';
-import { SampleRouter } from './routers/sample.router';
+import { ProductRouter } from './routers/product.router';
+import { CategoryRouter } from './routers/category.router';
 
 export default class App {
   private app: Express;
@@ -50,13 +51,16 @@ export default class App {
   }
 
   private routes(): void {
-    const sampleRouter = new SampleRouter();
+    const productRouter = new ProductRouter()
+    const categoryRouter = new CategoryRouter()
 
     this.app.get('/api', (req: Request, res: Response) => {
       res.send(`Hello, Purwadhika Student !`);
     });
-
-    this.app.use('/api/samples', sampleRouter.getRouter());
+    this.app.use("/api/media/products", express.static(__dirname + "/public/products"));
+    this.app.use("/api/media/categories", express.static(__dirname + "/public/categories"));
+    this.app.use('/api/products', productRouter.getRouter());
+    this.app.use('/api/categories',categoryRouter.getRouter())
   }
 
   public start(): void {
