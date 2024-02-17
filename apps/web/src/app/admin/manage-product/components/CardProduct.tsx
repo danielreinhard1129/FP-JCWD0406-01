@@ -11,7 +11,11 @@ const CardProduct = ({ product, refreshData }: any) => {
   const [openDelete, setOpenDelete] = useState(false);
   const [openUpdate, setOpenUpdate] = useState(false);
   return (
-    <Card className="max-w-sm" imgSrc={`${product.image}`} horizontal>
+    <Card
+      className="max-w-12 text-black text-[10px]"
+      imgSrc={`${product.image}`}
+      horizontal
+    >
       <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
         {product?.name}
       </h5>

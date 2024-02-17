@@ -7,7 +7,7 @@ import { MdDashboard } from 'react-icons/md';
 
 export function SidebarAdmin() {
   return (
-    <section className="bg-[#272c2f] text-white w-max h-screen pt-4 px-12 sticky top-0">
+    <section className="bg-[#272c2f] text-white w-max h-screen pt-4 px-12 sticky top-0 500 shadow-[rgb(165,170,178)_3px_0px_8px_0px] shadow-black">
       <h1 className={`font-mono font-bold text-[2rem]`}>
         Gr<span className="text-yellow-300">oc</span>eria
       </h1>
