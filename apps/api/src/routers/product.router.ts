@@ -1,36 +1,37 @@
-import { ProductsController } from '@/controllers/products.controller';
 import { upload } from '@/helper/multer';
 import { productValidation } from '@/validation/product.validation';
+import { ProductController } from '@/controllers/product.controller';
 import { Router } from 'express';
 
 export class ProductRouter {
   private router: Router;
-  private productsController: ProductsController;
+  private productController: ProductController;
 
   constructor() {
-    this.productsController = new ProductsController();
+    this.productController = new ProductController();
     this.router = Router();
     this.initializeRoutes();
   }
 
   private initializeRoutes(): void {
-    this.router.get('/', this.productsController.getAllProduct);
     this.router.post(
       '/create-product',
       upload(),
       productValidation,
-      this.productsController.createProduct,
+      this.productController.createProduct,
     );
     this.router.put(
       '/update-product/:id',
       upload(),
       productValidation,
-      this.productsController.editProduct,
+      this.productController.editProduct,
     );
     this.router.delete(
       '/delete-product/:id',
-      this.productsController.deleteProduct,
+      this.productController.deleteProduct,
     );
+    this.router.get('/', this.productController.getProducts);
+    this.router.post('/filter/id', this.productController.getProductById);
   }
 
   getRouter(): Router {

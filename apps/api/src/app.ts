@@ -10,6 +10,7 @@ import cors from 'cors';
 import { PORT } from './config';
 import { ProductRouter } from './routers/product.router';
 import { CategoryRouter } from './routers/category.router';
+import { TransactionRouter } from './routers/transaction.router';
 
 export default class App {
   private app: Express;
@@ -51,16 +52,24 @@ export default class App {
   }
 
   private routes(): void {
-    const productRouter = new ProductRouter()
-    const categoryRouter = new CategoryRouter()
+    const productRouter = new ProductRouter();
+    const categoryRouter = new CategoryRouter();
+    const transactionRouter = new TransactionRouter();
 
     this.app.get('/api', (req: Request, res: Response) => {
       res.send(`Hello, Purwadhika Student !`);
     });
-    this.app.use("/api/media/products", express.static(__dirname + "/public/products"));
-    this.app.use("/api/media/categories", express.static(__dirname + "/public/categories"));
+    this.app.use(
+      '/api/media/products',
+      express.static(__dirname + '/public/products'),
+    );
+    this.app.use(
+      '/api/media/categories',
+      express.static(__dirname + '/public/categories'),
+    );
+    this.app.use('/api/categories', categoryRouter.getRouter());
     this.app.use('/api/products', productRouter.getRouter());
-    this.app.use('/api/categories',categoryRouter.getRouter())
+    this.app.use('/api/transactions', transactionRouter.getRouter());
   }
 
   public start(): void {

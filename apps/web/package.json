@@ -13,6 +13,8 @@
   "dependencies": {
     "@arismun/format-rupiah": "^3.0.0",
     "@reduxjs/toolkit": "^2.2.0",
+    "@splidejs/react-splide": "^0.7.12",
+    "@splidejs/splide": "^4.1.4",
     "axios": "^1.6.7",
     "cloudinary": "^2.0.1",
     "date-fns": "^3.3.1",
