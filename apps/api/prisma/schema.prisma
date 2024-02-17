@@ -122,12 +122,14 @@ model Discount {
 }
 
 model Product {
-  id         Int        @id @default(autoincrement())
-  name       String
-  image      String
-  location   String
-  price      Int
-  discount   Discount[]
+  id    Int       @id @default(autoincrement())
+  name String @unique
+  image String
+  price Int 
+  description String 
+  weight Int
+  unitWeight Unit
+  discount Discount[]
   categoryId Int
   category   Category   @relation(fields: [categoryId], references: [id])
   stock      Stock[]
@@ -135,9 +137,15 @@ model Product {
   order      Order[]
 }
 
-model Category {
-  id      Int       @id @default(autoincrement())
-  name    String
+enum Unit {
+  GRAM
+  KG
+}
+
+model Category{
+  id    Int       @id @default(autoincrement())  
+  name String @unique
+  image String
   product Product[]
 }
 
