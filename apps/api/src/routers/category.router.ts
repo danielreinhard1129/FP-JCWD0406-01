@@ -1,4 +1,4 @@
-import { CategoriesController } from '@/controllers/categories.controller';
+import { CategoriesController } from '@/controllers/category.controller';
 import { upload } from '@/helper/multer';
 import { createCategoryValidation } from '@/validation/category.validation';
 import { Router } from 'express';

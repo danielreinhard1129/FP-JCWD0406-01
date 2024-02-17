@@ -1,6 +1,6 @@
-import { createCategoryAction } from '@/actions/categories/createCategory.action';
-import { deleteCategoryAction } from '@/actions/categories/deleteCategory.action';
-import { updateCategoryAction } from '@/actions/categories/updateCategory.action';
+import { createCategoryAction } from '@/actions/category/createCategory.action';
+import { deleteCategoryAction } from '@/actions/category/deleteCategory.action';
+import { updateCategoryAction } from '@/actions/category/updateCategory.action';
 import { getAllCategoryRepo } from '@/repositories/categories/getAllCategoryRepo';
 import { NextFunction, Request, Response } from 'express';
 

@@ -11,7 +11,7 @@ const useGetAllProduct = () => {
   const fetch = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get(' http://localhost:8000/api/products');
+      const { data } = await axios.get('http://localhost:8000/api/products');
       setData(data.data);
     } catch (error) {
       throw error;

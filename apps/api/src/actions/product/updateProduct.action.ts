@@ -1,6 +1,6 @@
-import { findProductByIdRepo } from '@/repositories/products/findProductByIdRepo';
-import { findProductByNameRepo } from '@/repositories/products/findProductByNameRepo';
-import { updateProductRepo } from '@/repositories/products/updateProductRepo';
+import { findProductByIdRepo } from '@/repositories/product/findProductByIdRepo';
+import { findProductByNameRepo } from '@/repositories/product/findProductByNameRepo';
+import { updateProductRepo } from '@/repositories/product/updateProductRepo';
 import { IProduct } from '@/type.api/product.type';
 
 export async function updateProductAction(

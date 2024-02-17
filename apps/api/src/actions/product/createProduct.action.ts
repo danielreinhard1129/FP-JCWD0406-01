@@ -1,6 +1,6 @@
 import { findCategoryByIdRepo } from '@/repositories/categories/findCategoryByIdRepo';
-import { createProductRepo } from '@/repositories/products/createProductRepo';
-import { findProductByNameRepo } from '@/repositories/products/findProductByNameRepo';
+import { createProductRepo } from '@/repositories/product/createProductRepo';
+import { findProductByNameRepo } from '@/repositories/product/findProductByNameRepo';
 import { IProduct } from '@/type.api/product.type';
 import { Request } from 'express';
 import { validationResult } from 'express-validator';
