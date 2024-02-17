@@ -27,7 +27,7 @@ const ProductPage = () => {
   }
 
   return (
-    <section className="w-full px-10 py-10">
+    <section className="w-full px-10 py-10 bg-[#272c2f] text-white">
       <Toaster />
       <div className="flex justify-between mt-20">
         <h1 className={`${roboto.className} text-3xl`}>Manage Product</h1>
