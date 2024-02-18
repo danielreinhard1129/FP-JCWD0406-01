@@ -6,7 +6,7 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 
 const useFormikProductForm = (
-  product: IProduct,
+  product: any,
   router: string,
   refreshData: CallableFunction,
   method: string,

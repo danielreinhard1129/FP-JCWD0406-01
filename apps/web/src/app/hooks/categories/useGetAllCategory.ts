@@ -1,9 +1,9 @@
-import { IProduct } from '@/app/type.web/product.type';
+import { ICategory } from '@/app/type.web/category.type';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 const useGetAllCategory = () => {
-  const [data, setData] = useState<IProduct[]>();
+  const [data, setData] = useState<ICategory[]>();
   const [loading, setLoading] = useState<boolean>(false);
   useEffect(() => {
     fetch();

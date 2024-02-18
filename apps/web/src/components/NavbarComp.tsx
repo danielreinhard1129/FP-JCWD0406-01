@@ -9,7 +9,7 @@ const poppins = Poppins({ subsets: ['latin'], weight: '600' });
 
 const NavbarComp = () => {
   return (
-    <div>
+    <div className="sticky top-0 z-50 bg-white">
       <div className="hidden text-xl sm:flex sm:flex-row sm:justify-center sm:max-w-7xl sm:container  sm:mx-auto sm:p-5 items-center">
         <Link href="/">
           <div className={`${poppins.className} flex items-center`}>
