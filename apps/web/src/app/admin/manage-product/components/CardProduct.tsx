@@ -4,12 +4,21 @@ import { MdDelete } from 'react-icons/md';
 import { FormatRupiah } from '@arismun/format-rupiah';
 import { Card } from 'flowbite-react';
 import React, { useState } from 'react';
-import ModalDeleteProduct from './ModalDelete';
-import ModalEditProduct from './ModalEditProduct';
+import FormProduct from './FormProduct';
+import ModalDelete from '../../components/ModalDelete';
+import useFormikProductForm from '@/app/hooks/formiks/useFormikProductForm';
+import ModalInput from '../../components/ModalInput';
 
 const CardProduct = ({ product, refreshData }: any) => {
   const [openDelete, setOpenDelete] = useState(false);
   const [openUpdate, setOpenUpdate] = useState(false);
+  const formik = useFormikProductForm(
+    product,
+    '/products/update-product/' + product.id,
+    refreshData,
+    'put',
+    setOpenUpdate,
+  );
   return (
     <Card
       className="max-w-12 text-black text-[10px]"
@@ -48,16 +57,19 @@ const CardProduct = ({ product, refreshData }: any) => {
           delete <MdDelete />
         </p>
       </div>
-      <ModalDeleteProduct
-        id={product.id}
+      <ModalDelete
+        url={`http://localhost:8000/api/products/delete-product/` + product.id}
         openModal={openDelete}
+        title={'Product'}
         setOpenModal={setOpenDelete}
         refreshData={refreshData}
       />
-      <ModalEditProduct
+      <ModalInput
         product={product}
         openModal={openUpdate}
         setOpenModal={setOpenUpdate}
+        Form={FormProduct}
+        formik={formik}
         refreshData={refreshData}
         judul="Edit Product"
       />

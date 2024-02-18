@@ -21,8 +21,15 @@ export class CategoryRouter {
       createCategoryValidation,
       this.categoriesController.createCategory,
     );
-    this.router.patch('/update-category/:id',upload('categories'), this.categoriesController.updateCategory)
-    this.router.delete('/delete-category', this.categoriesController.deleteCategory)
+    this.router.put(
+      '/update-category/:id',
+      upload('categories'),
+      this.categoriesController.updateCategory,
+    );
+    this.router.delete(
+      '/delete-category',
+      this.categoriesController.deleteCategory,
+    );
   }
 
   getRouter(): Router {

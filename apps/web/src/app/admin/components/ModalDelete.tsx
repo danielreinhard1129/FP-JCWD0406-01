@@ -3,15 +3,16 @@ import { Button, Modal } from 'flowbite-react';
 import React from 'react';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
 
-const ModalDeleteProduct = ({
+const ModalDelete = ({
   openModal,
   setOpenModal,
-  id,
+  url,
   refreshData,
+  title
 }: any) => {
   const confirmDelete = async () => {
     try {
-      await axios.delete(`http://localhost:8000/api/products/delete-product/${id}`)
+      await axios.delete(`${url}`)
       refreshData();
       setOpenModal(true);
     } catch (error) {
@@ -25,7 +26,7 @@ const ModalDeleteProduct = ({
         <div className="text-center mt-5">
           <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-red-700 dark:text-gray-200" />
           <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-            Are you sure you want to Delete this product?
+            Are you sure you want to Delete this {title}?
           </h3>
           <div className="flex justify-center gap-4">
             <Button color="failure" onClick={confirmDelete}>
@@ -41,4 +42,4 @@ const ModalDeleteProduct = ({
   );
 };
 
-export default ModalDeleteProduct;
+export default ModalDelete;
