@@ -8,7 +8,11 @@ import { deleteProductAction } from '@/actions/product/deleteProduct.action';
 export class ProductController {
   async getProducts(req: Request, res: Response, next: NextFunction) {
     try {
-      const result = await getProductsAction();
+      let search = '';
+      if (req.query.search) {
+        search = req.query.search as string;
+      }
+      const result = await getProductsAction(search);
       return res.status(result.status).send(result);
     } catch (error) {
       next(error);
@@ -27,6 +31,7 @@ export class ProductController {
   async createProduct(req: Request, res: Response, next: NextFunction) {
     try {
       const result = await createProductAction(req);
+
       res.status(result.status).send(result);
     } catch (error) {
       next(error);

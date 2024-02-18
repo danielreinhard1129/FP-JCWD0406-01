@@ -11,6 +11,7 @@ import { PORT } from './config';
 import { ProductRouter } from './routers/product.router';
 import { CategoryRouter } from './routers/category.router';
 import { TransactionRouter } from './routers/transaction.router';
+import { StoreRouter } from './routers/store.router';
 
 export default class App {
   private app: Express;
@@ -55,21 +56,23 @@ export default class App {
     const productRouter = new ProductRouter();
     const categoryRouter = new CategoryRouter();
     const transactionRouter = new TransactionRouter();
+    const store = new StoreRouter()
 
     this.app.get('/api', (req: Request, res: Response) => {
       res.send(`Hello, Purwadhika Student !`);
     });
     this.app.use(
       '/api/media/products',
-      express.static(__dirname + '/public/products'),
+      express.static(__dirname + '/images/products'),
     );
     this.app.use(
       '/api/media/categories',
-      express.static(__dirname + '/public/categories'),
+      express.static(__dirname + '/images/categories'),
     );
     this.app.use('/api/categories', categoryRouter.getRouter());
     this.app.use('/api/products', productRouter.getRouter());
     this.app.use('/api/transactions', transactionRouter.getRouter());
+    this.app.use('/api/stores', store.getRouter())
   }
 
   public start(): void {

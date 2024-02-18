@@ -1,6 +1,7 @@
 import { findCategoryByIdRepo } from '@/repositories/categories/findCategoryByIdRepo';
 import { createProductRepo } from '@/repositories/product/createProductRepo';
 import { findProductByNameRepo } from '@/repositories/product/findProductByNameRepo';
+import { getStoresRepo } from '@/repositories/store/getStoresRepo';
 import { IProduct } from '@/type.api/product.type';
 import { Request } from 'express';
 import { validationResult } from 'express-validator';
@@ -15,6 +16,11 @@ export async function createProductAction(req: Request) {
 
     const findByName = await findProductByNameRepo(name);
     const findIdCategory = await findCategoryByIdRepo(categoryId);
+    // const stores = await getStoresRepo();
+
+    // if (!stores?.length) {
+    //   return { status: 400, message: 'there are no branch stores' };
+    // }
 
     if (findByName)
       return { message: 'product name already exists', status: 400 };
@@ -27,6 +33,7 @@ export async function createProductAction(req: Request) {
         status: 400,
         message: 'The unit weight in grams cannot be more than 1000',
       };
+
     image = `${process.env.API_URL}/media/products/${req.file.filename}`;
     price = parseInt(String(price), 0);
     categoryId = parseInt(String(categoryId), 0);
