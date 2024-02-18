@@ -1,8 +1,8 @@
 import { getProducts } from '@/repositories/product/getProducts';
 
-export const getProductsAction = async () => {
+export const getProductsAction = async (search: string) => {
   try {
-    const result = await getProducts();
+    const result = await getProducts(search);
     return {
       message: 'get products success',
       status: 200,

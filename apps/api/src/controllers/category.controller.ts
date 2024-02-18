@@ -4,7 +4,7 @@ import { updateCategoryAction } from '@/actions/category/updateCategory.action';
 import { getAllCategoryRepo } from '@/repositories/categories/getAllCategoryRepo';
 import { NextFunction, Request, Response } from 'express';
 
-export class CategoriesController {
+export class CategoryController {
   async createCategory(req: Request, res: Response, next: NextFunction) {
     try {
       const result = await createCategoryAction(req);

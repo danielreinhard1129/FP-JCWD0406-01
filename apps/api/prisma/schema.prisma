@@ -153,7 +153,7 @@ model Stock {
   id          Int            @id @default(autoincrement())
   amount      Int
   createdAt   DateTime       @default(now())
-  updatedAt   DateTime
+  updatedAt   DateTime       @updatedAt
   productId   Int
   product     Product        @relation(fields: [productId], references: [id])
   branchId    Int

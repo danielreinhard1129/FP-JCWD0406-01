@@ -5,17 +5,21 @@ import { Button } from 'flowbite-react';
 import { Poppins } from 'next/font/google';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { MdOutlineAddShoppingCart } from 'react-icons/md';
 const poppins2 = Poppins({ subsets: ['latin'], weight: '400' });
 
 const ListProducts = () => {
-  const { data } = useGetAllProduct();
-  //   const [dropDown, setDropdown] = useState(false);
+  const searchParams = useSearchParams()
+  const search = searchParams.get('search')
+  const { data } = useGetAllProduct(search);
+
   return (
     <div className="w-full mb-5">
+        {data ? (
+            <>
       <div className="flex justify-between items-center shadow-lg mb-8 mx-5 rounded-lg p-2">
-        <p>Showing 1-6 of 66 Results</p>
+        <p>Showing 1-{data?.length > 10 ? 10 : data.length} of {data?.length} Results {search ? `of "${search}"` : ""}</p>
         <div className="flex items-center mr-3">
           <p className="mr-3">Sort By: </p>
           <select className="rounded-lg">
@@ -27,7 +31,7 @@ const ListProducts = () => {
         </div>
       </div>
       <div className="flex flex-col items-center w-full">
-        <div className="grid grid-cols-4 gap-5 ">
+        <div className="grid grid-cols-4 gap-6 ">
           {data?.map((product) => {
             return (
               <div
@@ -65,7 +69,11 @@ const ListProducts = () => {
             );
           })}
         </div>
-      </div>
+      </div> </>) :
+      (
+        <div></div>
+      )
+}
     </div>
   );
 };

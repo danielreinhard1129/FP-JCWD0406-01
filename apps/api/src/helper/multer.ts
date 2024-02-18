@@ -4,7 +4,7 @@ import path from 'path';
 export function upload(folder = 'products') {
   const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, `${__dirname}/../public/${folder}`);
+      cb(null, `${__dirname}/../images/${folder}`);
     },
     filename: function (req, file, cb) {
       cb(

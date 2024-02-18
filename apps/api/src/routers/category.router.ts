@@ -1,14 +1,15 @@
-import { CategoriesController } from '@/controllers/category.controller';
+
+import { CategoryController } from '@/controllers/category.controller';
 import { upload } from '@/helper/multer';
 import { createCategoryValidation } from '@/validation/category.validation';
 import { Router } from 'express';
 
 export class CategoryRouter {
   private router: Router;
-  private categoriesController: CategoriesController;
+  private categoriesController: CategoryController;
 
   constructor() {
-    this.categoriesController = new CategoriesController();
+    this.categoriesController = new CategoryController();
     this.router = Router();
     this.initializeRoutes();
   }
