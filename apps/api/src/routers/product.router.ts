@@ -31,7 +31,7 @@ export class ProductRouter {
       this.productController.deleteProduct,
     );
     this.router.get('/', this.productController.getProducts);
-    this.router.post('/filter/id', this.productController.getProductById);
+    this.router.get('/:id', this.productController.getProductById);
   }
 
   getRouter(): Router {

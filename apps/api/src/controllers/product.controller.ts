@@ -4,15 +4,31 @@ import { NextFunction, Request, Response } from 'express';
 import { createProductAction } from '@/actions/product/createProduct.action';
 import { updateProductAction } from '@/actions/product/updateProduct.action';
 import { deleteProductAction } from '@/actions/product/deleteProduct.action';
+import { IFilter } from '@/type.api/filter.type';
 
 export class ProductController {
   async getProducts(req: Request, res: Response, next: NextFunction) {
     try {
       let search = '';
+      let filterCategory: IFilter = {};
       if (req.query.search) {
         search = req.query.search as string;
       }
-      const result = await getProductsAction(search);
+
+      if (req.query.category1) {
+        console.log(req.query.category1);
+
+        filterCategory.category1 = parseInt(req.query.category1 as string, 0);
+      }
+
+      if (req.query.category2) {
+        filterCategory.category2 = parseInt(req.query.category2 as string, 0);
+      }
+      if (req.query.category3) {
+        filterCategory.category3 = parseInt(req.query.category3 as string, 0);
+      }
+
+      const result = await getProductsAction(search, filterCategory);
       return res.status(result.status).send(result);
     } catch (error) {
       next(error);
@@ -21,7 +37,8 @@ export class ProductController {
 
   async getProductById(req: Request, res: Response, next: NextFunction) {
     try {
-      const result = await getProductByIdAction(req.body.id);
+      const { id } = req.params;
+      const result = await getProductByIdAction(parseInt(id, 0));
       return res.status(result.status).send(result);
     } catch (error) {
       next(error);

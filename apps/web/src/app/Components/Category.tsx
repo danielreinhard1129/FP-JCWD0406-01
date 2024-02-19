@@ -35,8 +35,8 @@ const Category = () => {
                   <Image
                     width={200}
                     height={50}
-                    src={category.image}
-                    alt={category.name}
+                    src={category?.image || ''}
+                    alt={category?.name || ''}
                   />
                 </div>
                 <span className={`${poppins2.className} mt-2 text-[#848484]`}>
