@@ -6,6 +6,15 @@ export async function findProductByIdRepo(id: number) {
       where: {
         id,
       },
+      include: {
+        category: true,
+        stock: {
+          include: {
+            StoreBranch: true,
+            stockChange: true,
+          },
+        },
+      },
     });
     return result;
   } catch (error) {

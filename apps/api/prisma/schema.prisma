@@ -131,6 +131,8 @@ model Product {
   unitWeight Unit
   discount Discount[]
   categoryId Int
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
   category   Category   @relation(fields: [categoryId], references: [id])
   stock      Stock[]
   cart       Cart[]

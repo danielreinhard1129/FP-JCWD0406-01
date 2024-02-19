@@ -4,7 +4,6 @@ import { Roboto } from 'next/font/google';
 import { Button, Spinner } from 'flowbite-react';
 import CardProduct from './CardProduct';
 import useGetAllProduct from '@/app/hooks/products/useGetAllProduct';
-import { Toaster } from 'react-hot-toast';
 import ModalInput from '../../components/ModalInput';
 import FormProduct from './FormProduct';
 import useFormikProductForm from '@/app/hooks/formiks/useFormikProductForm';
@@ -36,7 +35,6 @@ const ProductPage = () => {
 
   return (
     <section className="w-full px-10 py-10 bg-[#272c2f] text-white">
-      <Toaster />
       <div className="flex justify-between top-0 sticky bg-[#272c2f] py-4">
         <h1 className={`${roboto.className} text-3xl`}>Manage Product</h1>
         <Button size={'sm'} color="success" onClick={() => setOpenAdd(true)}>

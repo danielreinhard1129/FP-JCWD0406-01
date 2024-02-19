@@ -65,9 +65,10 @@ const useFormikProductForm = (
                 },
               );
 
+        toast.success('Successfully toasted!', { duration: 1000 });
         setOpenModal(false);
         refreshData();
-        toast.success('Successfully toasted!');
+        resetForm();
       } catch (error: any) {
         toast.error(error.response.data.message);
       }

@@ -49,9 +49,9 @@ const useFormikCategoryForm = (
               },
             );
 
+        toast.success('Successfully!', { duration: 1000 });
         setOpenModal(false);
         refreshData();
-        toast.success('Successfully!', { duration: 2000 });
         resetForm();
       } catch (error: any) {
         toast.error(error.response.data.message);
