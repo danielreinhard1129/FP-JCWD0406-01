@@ -72,14 +72,13 @@ model Province {
 model Store_Branch {
   id        Int        @id @default(autoincrement())
   name      String
-  cityId    Int
-  city      City       @relation(fields: [cityId], references: [id])
-  adminId   Int
-  admin     Admin      @relation(fields: [adminId], references: [id])
+  cityId    Int?
+  city      City?       @relation(fields: [cityId], references: [id])
+  adminId   Int?
+  admin     Admin?      @relation(fields: [adminId], references: [id])
   latitude  String
   longitude String
-  voucherId Int
-  voucher   Voucher    @relation(fields: [voucherId], references: [id])
+  voucher Voucher[]
   discount  Discount[]
   stock     Stock[]
   order     Order[]
@@ -102,14 +101,16 @@ model Voucher {
   claimLimit  Int
   minSpend    Int
   maxDiscount Int
-  storeBranch Store_Branch[]
+  storeBranchId Int
+  storeBranch Store_Branch @relation(fields: [storeBranchId] ,references: [id])
+
 }
 
 model Discount {
   id              Int                @id @default(autoincrement())
   typeDiscount    String
-  discountValue   Int
-  minimumPurchase Int
+  discountValue   Int?
+  minimumPurchase Int?
   discountLaw     String
   startAt         DateTime
   expiredAt       DateTime

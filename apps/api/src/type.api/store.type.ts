@@ -5,5 +5,4 @@ export interface IStore {
   adminId: number;
   latitude: string;
   longitude: string;
-  voucherId: number;
 }

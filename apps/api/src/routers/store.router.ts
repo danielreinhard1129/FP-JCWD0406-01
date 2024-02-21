@@ -3,16 +3,16 @@ import { Router } from 'express';
 
 export class StoreRouter {
   private router: Router;
-  private categoriesController: StoreController;
+  private storeController: StoreController;
 
   constructor() {
-    this.categoriesController = new StoreController();
+    this.storeController = new StoreController();
     this.router = Router();
     this.initializeRoutes();
   }
 
   private initializeRoutes(): void {
-    this.router.get('/', this.categoriesController.getStores);
+    this.router.get('/', this.storeController.getStores);
   }
 
   getRouter(): Router {
