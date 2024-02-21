@@ -1,3 +1,4 @@
+import { IProduct } from './product.type';
 import { IStoreBranch } from './store.type';
 
 export interface IStock {
@@ -7,5 +8,6 @@ export interface IStock {
   updatedAt: Date;
   productId: number;
   branchId: number;
-  StoreBranch: IStoreBranch;
+  storeBranch: IStoreBranch;
+  product: IProduct
 }

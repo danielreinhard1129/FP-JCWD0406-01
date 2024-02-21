@@ -3,6 +3,7 @@ import { createProductRepo } from '@/repositories/product/createProductRepo';
 import { findProductByNameRepo } from '@/repositories/product/findProductByNameRepo';
 import { getStoresRepo } from '@/repositories/store/getStoresRepo';
 import { IProduct } from '@/type.api/product.type';
+import { IStore } from '@/type.api/store.type';
 import { Request } from 'express';
 import { validationResult } from 'express-validator';
 
@@ -16,11 +17,11 @@ export async function createProductAction(req: Request) {
 
     const findByName = await findProductByNameRepo(name);
     const findIdCategory = await findCategoryByIdRepo(categoryId);
-    // const stores = await getStoresRepo();
+    const stores = await getStoresRepo();;
 
-    // if (!stores?.length) {
-    //   return { status: 400, message: 'there are no branch stores' };
-    // }
+    if ( stores && stores?.length <= 0 ) {
+      return { status: 400, message: 'there are no branch stores' };
+    }
 
     if (findByName)
       return { message: 'product name already exists', status: 400 };
@@ -47,7 +48,7 @@ export async function createProductAction(req: Request) {
       unitWeight,
       categoryId,
     };
-    await createProductRepo(data);
+    await createProductRepo(data, stores as IStore[]);
 
     return { message: 'Success add product', status: 200 };
   } catch (error) {
