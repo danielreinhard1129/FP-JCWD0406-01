@@ -4,7 +4,7 @@ import { Spinner } from 'flowbite-react';
 import { Roboto } from 'next/font/google';
 import React, { useState } from 'react';
 import { TableProducts } from './TableProducts';
-import StoreList from './StoreList';
+import StoreList from '../../components/StoreList';
 
 const roboto = Roboto({
   weight: '900',

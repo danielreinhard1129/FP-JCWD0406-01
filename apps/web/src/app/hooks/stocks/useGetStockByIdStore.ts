@@ -16,7 +16,6 @@ export const useGetStockByIdStore = (id: number) => {
       const { data } = await axios.get(
         'http://localhost:8000/api/stocks/' + id,
       );
-      console.log();
 
       setData(data.data);
     } catch (error) {

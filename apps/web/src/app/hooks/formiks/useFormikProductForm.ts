@@ -70,7 +70,7 @@ const useFormikProductForm = (
         refreshData();
         resetForm();
       } catch (error: any) {
-        toast.error(error.response.data.message);
+        toast.error(error.response.data.message || error.response.data);
       }
     },
   });
