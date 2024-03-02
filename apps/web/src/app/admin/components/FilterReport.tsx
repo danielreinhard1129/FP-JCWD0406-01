@@ -4,7 +4,7 @@ import { format } from 'date-fns';
 import { Button, Datepicker, Dropdown } from 'flowbite-react';
 import React, { useState } from 'react';
 
-const FilterSalesReport = ({
+const FilterReport = ({
   startDate,
   endDate,
   setStartDate,
@@ -68,4 +68,4 @@ const FilterSalesReport = ({
   );
 };
 
-export default FilterSalesReport;
+export default FilterReport;

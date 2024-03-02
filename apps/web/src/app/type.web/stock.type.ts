@@ -8,6 +8,15 @@ export interface IStock {
   updatedAt: Date;
   productId: number;
   branchId: number;
-  storeBranch: IStoreBranch;
-  product: IProduct
+  StoreBranch: IStoreBranch;
+  product: IProduct;
+}
+
+export interface IHistoryStock {
+  id: number;
+  StockBefore: number;
+  StockAfter: number;
+  createdAt: string;
+  stockId: string;
+  stock: IStock;
 }

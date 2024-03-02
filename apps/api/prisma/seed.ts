@@ -2,18 +2,30 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-  const result = await prisma.order.create({
+  const result = await prisma.admin.create({
       data: {
-          amount: 5,
-          qty: 6,
-          uuid: 'audhud7y66',
-          address: "indonesia",
-          branchId:1,
-          customerId: 1,
-          productId: 1,
-          StatusId: 1
+          email:"adoko@email.com",
+          password: "sdq",
+          isSuper: true
       }
   })
+
+  // -- store branch Data
+  // name: "Jaya Store",
+  //         adminId:1 ,
+  //         latitude: "dqdqd",
+  //         longitude: "dqdqw",
+
+  // --order data
+  // amount: 5,
+  //         qty: 6,
+  //         uuid: 'audhud7y66',
+  //         address: "indonesia",
+  //         branchId:1,
+  //         customerId: 1,
+  //         productId: 1,
+  //         StatusId: 1
+
 //   const result = await prisma.status.create({
 //       data: {
 //           title: "waiting"
