@@ -14,6 +14,7 @@ import { TransactionRouter } from './routers/transaction.router';
 import { StoreRouter } from './routers/store.router';
 import { StockRouter } from './routers/stock.router';
 import { OrderRouter } from './routers/order.router';
+import { StoreAdminRouter } from './routers/storeAdmin.router';
 
 export default class App {
   private app: Express;
@@ -61,6 +62,7 @@ export default class App {
     const store = new StoreRouter();
     const stock = new StockRouter();
     const order = new OrderRouter();
+    const storeAdmin = new StoreAdminRouter()
 
     this.app.get('/api', (req: Request, res: Response) => {
       res.send(`Hello, Purwadhika Student !`);
@@ -79,6 +81,7 @@ export default class App {
     this.app.use('/api/stores', store.getRouter());
     this.app.use('/api/stocks', stock.getRouter());
     this.app.use('/api/orders', order.getRouter());
+    this.app.use('/api/store-admins', storeAdmin.getRouter());
   }
 
   public start(): void {

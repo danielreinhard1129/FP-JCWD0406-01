@@ -12,7 +12,7 @@ const roboto = Roboto({
 });
 
 const StockPage = () => {
-  const [storeId, setStoreId] = useState(1);
+  const [storeId, setStoreId] = useState(0);
   const { data, loading, refreshData } = useGetStockByIdStore(storeId);
 
   if (loading) {

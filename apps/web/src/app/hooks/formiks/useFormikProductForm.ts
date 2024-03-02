@@ -14,34 +14,34 @@ const useFormikProductForm = (
 ) => {
   const validationSchema = Yup.object().shape({
     name: Yup.string().required('Title cannot be empty'),
-    weight: Yup.number().required('Weight cannot be empty'),
+    weight: Yup.string().required('Weight cannot be empty'),
     description: Yup.string().required('Description cannot be empty'),
-    price: Yup.number().required('Price cannot be empty'),
+    price: Yup.string().required('Price cannot be empty'),
     unitWeight: Yup.string().required('Unit cannot be empty'),
     image: Yup.string().required('Image cannot be empty'),
-    categoryId: Yup.number().required('Category cannot be empty'),
+    categoryId: Yup.string().required('Category cannot be empty'),
   });
 
   const formik = useFormik({
     initialValues: {
       name: product.name || '',
       description: product.description || '',
-      weight: product.weight || 0,
+      weight: product.weight || '',
       unitWeight: product.unitWeight || 'GRAM',
       image: product.image,
-      price: product.price || 0,
-      categoryId: product?.categoryId || 1,
+      price: product.price || '',
+      categoryId: product?.categoryId || '0',
     },
     validationSchema,
     onSubmit: async (values, { resetForm }) => {
       try {
         const data = new FormData();
         data.append('name', values.name);
-        data.append('price', String(values.price));
+        data.append('price', values.price);
         data.append('description', values.description);
-        data.append('weight', String(values.weight));
+        data.append('weight', values.weight);
         data.append('unitWeight', values.unitWeight);
-        data.append('categoryId', String(values.categoryId));
+        data.append('categoryId', values.categoryId);
         data.append('image', values.image);
 
         const result =

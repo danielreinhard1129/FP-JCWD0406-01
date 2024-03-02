@@ -1,7 +1,7 @@
 import useGetStores from '@/app/hooks/stores/useGetStores';
 import React from 'react';
 
-const StoreList = ({storeId, setStoreId }: any) => {
+const StoreList = ({ storeId, setStoreId }: any) => {
   const { data } = useGetStores();
   return (
     <div className="mt-12">
@@ -14,8 +14,13 @@ const StoreList = ({storeId, setStoreId }: any) => {
           onChange={(e) => setStoreId(e.target.value)}
           value={storeId}
         >
+          <option value={'0'}>Select</option>
           {data?.map((store) => {
-            return <option key={store.id} value={store.id}>{store.name}</option>;
+            return (
+              <option key={store.id} value={store.id}>
+                {store.name}
+              </option>
+            );
           })}
         </select>
       </form>

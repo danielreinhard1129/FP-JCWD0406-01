@@ -22,9 +22,15 @@ export function SidebarAdmin() {
             Dashboard
           </li>
         </Link>
+        <Link href={'/admin/manage-store-admin'}>
+        <li className="flex items-center px-5 py-2 whitespace-nowrap rounded-sm hover:bg-[#374151]">
+            <MdDashboard className="mr-2" />
+            Manage Store Admin
+          </li>
+        </Link>
         <li className="px-5 py-2  mt-2 flex items-center flex-col">
           <h1
-            className="flex items-center rounded-sm hover:bg-[#374151] cursor-pointer"
+            className="flex items-center rounded-sm whitespace-nowrap hover:bg-[#374151] cursor-pointer"
             onClick={() => setDropdown(!dropDown)}
           >
             <FaBoxOpen className="mr-2" /> Product Management
@@ -46,7 +52,7 @@ export function SidebarAdmin() {
                 href={'/admin/manage-category'}
                 className="text-white  px-5  py-1 rounded-sm hover:bg-[#374151]"
               >
-                ManageCategory
+                Manage Category
               </Link>
             </li>
             <li className="mt-2">

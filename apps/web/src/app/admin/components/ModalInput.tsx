@@ -2,7 +2,7 @@ import { Modal } from 'flowbite-react';
 import React from 'react';
 
 const ModalInput
- = ({ openModal, setOpenModal,Form, formik, judul, refreshData }: any) => {
+ = ({ openModal, setOpenModal,Form, formik, judul, refreshData ,method}: any) => {
   return (
     <Modal show={openModal} size="xl" onClose={() => setOpenModal(false)} popup>
       <Modal.Body>
@@ -10,7 +10,7 @@ const ModalInput
           <h3 className="text-xl font-medium text-gray-900 dark:text-white">
             {judul}
           </h3>
-          <Form setOpenModal={setOpenModal} formik={formik} refreshData={refreshData}/>
+          <Form setOpenModal={setOpenModal} formik={formik} refreshData={refreshData} method={method}/>
         </div>
       </Modal.Body>
     </Modal>

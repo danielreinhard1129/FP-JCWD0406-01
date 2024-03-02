@@ -2,13 +2,13 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-  const result = await prisma.admin.create({
-      data: {
-          email:"adoko@email.com",
-          password: "sdq",
-          isSuper: true
-      }
-  })
+  const result = await prisma.store_Branch.create({
+    data: {
+      name: 'Serjon Store',
+      latitude: 'dqdqd',
+      longitude: 'dqdqw',
+    },
+  });
 
   // -- store branch Data
   // name: "Jaya Store",
@@ -26,24 +26,24 @@ async function main() {
   //         productId: 1,
   //         StatusId: 1
 
-//   const result = await prisma.status.create({
-//       data: {
-//           title: "waiting"
-//       }
-//   })
+  //   const result = await prisma.status.create({
+  //       data: {
+  //           title: "waiting"
+  //       }
+  //   })
 
-//   const alice = await prisma.customer.create({
-//     data: {
-//       email: 'sdqd1',
-//       password: 'ffqfq',
-//       phone: '987676557',
-//       referralCode: 'qdqd',
-//       referrer: 'wdqd',
-//       username: 'saqdq',
-//       addressId: 1,
-//       profileId: 1,
-//     },
-//   });
+  //   const alice = await prisma.customer.create({
+  //     data: {
+  //       email: 'sdqd1',
+  //       password: 'ffqfq',
+  //       phone: '987676557',
+  //       referralCode: 'qdqd',
+  //       referrer: 'wdqd',
+  //       username: 'saqdq',
+  //       addressId: 1,
+  //       profileId: 1,
+  //     },
+  //   });
 
   console.log({ result });
 }

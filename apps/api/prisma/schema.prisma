@@ -22,7 +22,7 @@ model Customer {
   createdAt       DateTime           @default(now())
   updatedAt       DateTime           @updatedAt
   profileId       Int?
-  profile         Profile?            @relation(fields: [profileId], references: [id])
+  profile         Profile?           @relation(fields: [profileId], references: [id])
   addressId       Int
   address         Address            @relation(fields: [addressId], references: [id])
   historyDiscount History_Discount[]
@@ -73,38 +73,38 @@ model Store_Branch {
   id        Int        @id @default(autoincrement())
   name      String
   cityId    Int?
-  city      City?       @relation(fields: [cityId], references: [id])
-  adminId   Int?
-  admin     Admin?      @relation(fields: [adminId], references: [id])
+  city      City?      @relation(fields: [cityId], references: [id])
+  admin     Admin[]
   latitude  String
   longitude String
-  voucher Voucher[]
+  voucher   Voucher[]
   discount  Discount[]
   stock     Stock[]
   order     Order[]
 }
 
 model Admin {
-  id          Int            @id @default(autoincrement())
-  email       String
-  password    String
-  isSuper     Boolean   @default(false)
-  StoreBranch Store_Branch[]
+  id            Int          @id @default(autoincrement())
+  name          String
+  email         String   @unique
+  password      String 
+  storeId       Int
+  store_branch Store_Branch @relation(fields: [storeId], references: [id])
+  isSuper       Boolean      @default(false)
 }
 
 model Voucher {
-  id          Int            @id @default(autoincrement())
-  name        String
-  description String
-  value       Int
-  startAt     DateTime
-  expiredAt   DateTime
-  claimLimit  Int
-  minSpend    Int
-  maxDiscount Int
+  id            Int          @id @default(autoincrement())
+  name          String
+  description   String
+  value         Int
+  startAt       DateTime
+  expiredAt     DateTime
+  claimLimit    Int
+  minSpend      Int
+  maxDiscount   Int
   storeBranchId Int
-  storeBranch Store_Branch @relation(fields: [storeBranchId] ,references: [id])
-
+  storeBranch   Store_Branch @relation(fields: [storeBranchId], references: [id])
 }
 
 model Discount {
@@ -124,21 +124,21 @@ model Discount {
 }
 
 model Product {
-  id    Int       @id @default(autoincrement())
-  name String @unique
-  image String
-  price Int 
-  description String 
-  weight Int
-  unitWeight Unit
-  discount Discount[]
-  categoryId Int
-  createdAt       DateTime           @default(now())
-  updatedAt       DateTime           @updatedAt
-  category   Category   @relation(fields: [categoryId], references: [id])
-  stock      Stock[]
-  cart       Cart[]
-  order      Order[]
+  id          Int        @id @default(autoincrement())
+  name        String     @unique
+  image       String
+  price       Int
+  description String
+  weight      Int
+  unitWeight  Unit
+  discount    Discount[]
+  categoryId  Int
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  category    Category   @relation(fields: [categoryId], references: [id])
+  stock       Stock[]
+  cart        Cart[]
+  order       Order[]
 }
 
 enum Unit {
@@ -146,10 +146,10 @@ enum Unit {
   KG
 }
 
-model Category{
-  id    Int       @id @default(autoincrement())  
-  name String @unique
-  image String
+model Category {
+  id      Int       @id @default(autoincrement())
+  name    String    @unique
+  image   String
   product Product[]
 }
 
@@ -164,7 +164,6 @@ model Stock {
   StoreBranch Store_Branch   @relation(fields: [branchId], references: [id])
   stockChange Stock_Change[]
 }
-
 
 model History_Discount {
   id             Int      @id @default(autoincrement())

@@ -14,7 +14,9 @@ export const useGetHistoriesStock = (
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    fetch();
+    if(id > 0){
+      fetch();
+    }
   }, [id, categoryId, startDate, endDate,search]);
 
   const fetch = async () => {
