@@ -3,6 +3,7 @@
 import { Dropdown } from 'flowbite-react';
 import Link from 'next/link';
 import { useState } from 'react';
+import { FaBoxes } from 'react-icons/fa';
 import { FaBoxOpen } from 'react-icons/fa6';
 import { MdDashboard } from 'react-icons/md';
 import { TbReport } from 'react-icons/tb';
@@ -62,6 +63,12 @@ export function SidebarAdmin() {
           <li className="flex items-center mt-2 px-5 py-2 rounded-sm hover:bg-[#374151]">
             <TbReport className="mr-2" />
             Sales Report
+          </li>
+        </Link>
+        <Link href={'/admin/stock-report'}>
+          <li className="flex items-center mt-2 px-5 py-2 rounded-sm hover:bg-[#374151]">
+            <FaBoxes className="mr-2" />
+            Stock Report
           </li>
         </Link>
       </ul>

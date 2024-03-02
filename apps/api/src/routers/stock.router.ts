@@ -12,6 +12,7 @@ export class StockRouter {
   }
 
   private initializeRoutes(): void {
+    this.router.get('/history-stock/:id',this.stockController.getHistoriesStock)
     this.router.get('/:id', this.stockController.getStockByIdStore);
     this.router.patch('/:id', this.stockController.updateStock);
   }

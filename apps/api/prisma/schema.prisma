@@ -88,6 +88,7 @@ model Admin {
   id          Int            @id @default(autoincrement())
   email       String
   password    String
+  isSuper     Boolean   @default(false)
   StoreBranch Store_Branch[]
 }
 
@@ -226,5 +227,4 @@ model Stock_Change {
   createdAt   DateTime @default(now())
   stockId     Int
   stock       Stock    @relation(fields: [stockId], references: [id])
-
 }
