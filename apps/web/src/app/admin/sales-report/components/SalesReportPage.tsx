@@ -18,7 +18,7 @@ const SalesReportPage = () => {
   const [search, setSearch] = useState('');
   const [endDate, setEndDate] = useState(new Date().toISOString());
   const [categoryId, setCategoryId] = useState(0);
-  const [storeId, setStoreId] = useState(1);
+  const [storeId, setStoreId] = useState(0);
   const { data, loading, refreshData } = useGetAllOrder(
     storeId,
     categoryId,

@@ -8,7 +8,9 @@ export const useGetStockByIdStore = (id: number) => {
   const [data, setData] = useState<IStock>();
   const [loading, setLoading] = useState<boolean>(false);
   useEffect(() => {
-    fetch();
+    if (id > 0) {
+      fetch();
+    }
   }, [id]);
   const fetch = async () => {
     try {

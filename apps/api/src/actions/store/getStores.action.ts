@@ -1,4 +1,5 @@
-import { getStoresRepo } from '@/repositories/store/getStoresRepo';
+import { getStoresRepo } from "@/repositories/store/getStoresRepo";
+
 
 export const getStoresAction = async () => {
   try {

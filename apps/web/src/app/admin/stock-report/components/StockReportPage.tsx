@@ -18,7 +18,7 @@ export const StockReportPage = () => {
   const [search, setSearch] = useState('');
   const [endDate, setEndDate] = useState(new Date().toISOString());
   const [categoryId, setCategoryId] = useState(0);
-  const [storeId, setStoreId] = useState(1);
+  const [storeId, setStoreId] = useState(0);
   const { data, loading, refreshData } = useGetHistoriesStock(
     storeId,
     categoryId,
@@ -26,8 +26,6 @@ export const StockReportPage = () => {
     endDate,
     search,
   );
-
-  console.log(data);
 
   return (
     <div className="w-full px-10 py-10 bg-[#272c2f] text-white">
@@ -58,7 +56,9 @@ export const StockReportPage = () => {
         />
       </div>
 
-      <div className="mt-4">{data && <TableStockReport data={data} loading={loading}/>}</div>
+      <div className="mt-4">
+        {data && <TableStockReport data={data} loading={loading} />}
+      </div>
     </div>
   );
 };
