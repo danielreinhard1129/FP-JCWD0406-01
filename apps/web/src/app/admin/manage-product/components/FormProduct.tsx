@@ -1,7 +1,7 @@
 import useGetAllCategory from '@/app/hooks/categories/useGetAllCategory';
 import { Button } from 'flowbite-react';
 import React from 'react';
-import InputFields from './InputFields';
+import InputFields from '../../components/InputFields';
 
 const FormProduct = ({ setOpenModal, formik }: any) => {
   const { data } = useGetAllCategory();
@@ -28,6 +28,7 @@ const FormProduct = ({ setOpenModal, formik }: any) => {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         >
+          <option value="0">Select Category</option>
           {data?.map((value) => {
             return (
               <option value={`${value.id}`} key={value.id}>
@@ -36,6 +37,9 @@ const FormProduct = ({ setOpenModal, formik }: any) => {
             );
           })}
         </select>
+        {formik.touched.categoryId && formik.errors.categoryId && (
+          <p className="text-red-500 text-xs mt-1">{formik.errors.categoryId}</p>
+        )}
       </div>
       <div className="mt-3 w-[80%]">
         <label htmlFor="description">Product Description</label>
@@ -51,6 +55,9 @@ const FormProduct = ({ setOpenModal, formik }: any) => {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         ></textarea>
+        {formik.touched.description && formik.errors.description && (
+          <p className="text-red-500 text-xs mt-1">{formik.errors.description}</p>
+        )}
       </div>
       <div className="mt-3 flex mx-12 w-[80%]">
         <div className="w-1/2 relative">

@@ -1,11 +1,19 @@
 'use client';
 
+<<<<<<< HEAD
 // import { IStock } from '@/app/type.web/stock.type';
+=======
+import { IStock } from '@/app/type.web/stock.type';
+>>>>>>> c476141f9f575303ab8721e1dd964618c829a059
 import { Table } from 'flowbite-react';
 import ModalInput from '../../components/ModalInput';
 import { useState } from 'react';
 import FormStock from './FormStock';
+<<<<<<< HEAD
 // import useFormikUpdateStock from '@/app/hooks/formiks/useFormikUpdateStock';
+=======
+import useFormikUpdateStock from '@/app/hooks/formiks/useFormikUpdateStock';
+>>>>>>> c476141f9f575303ab8721e1dd964618c829a059
 
 export function TableProducts({ stocks, refreshData }: any) {
   const [openUpdate, setOpenUpdate] = useState(false);

@@ -3,7 +3,7 @@ import { SidebarAdmin } from './components/SideBarAdmin';
 
 const AdminPage = () => {
   return (
-    <section>
+    <section >
       <SidebarAdmin />
     </section>
   );

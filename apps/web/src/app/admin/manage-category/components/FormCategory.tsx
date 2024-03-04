@@ -1,6 +1,6 @@
 import { Button } from 'flowbite-react';
 import React from 'react';
-import InputFields from '../../manage-product/components/InputFields';
+import InputFields from '../../components/InputFields';
 
 const FormCategory = ({ setOpenModal, formik }: any) => {
   return (

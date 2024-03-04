@@ -13,7 +13,7 @@ datasource db {
 model Customer {
   id              Int                @id @default(autoincrement())
   email           String             @unique
-  phone           Int
+  phone           String
   password        String
   username        String
   verified        Boolean            @default(false)
@@ -21,8 +21,8 @@ model Customer {
   referrer        String
   createdAt       DateTime           @default(now())
   updatedAt       DateTime           @updatedAt
-  profileId       Int
-  profile         Profile            @relation(fields: [profileId], references: [id])
+  profileId       Int?
+  profile         Profile?           @relation(fields: [profileId], references: [id])
   historyDiscount History_Discount[]
   cart            Cart[]
   order           Order[]
@@ -77,39 +77,41 @@ model Store_Branch {
   address        String?
   latitude       String
   longitude      String
-  voucherId      Int
-  voucher        Voucher         @relation(fields: [voucherId], references: [id])
   discount       Discount[]
   stock          Stock[]
   stockMutations StockMutation[]
   jurnal         Jurnal[]
+  voucher        Voucher[]
 }
 
 model Admin {
   id          Int            @id @default(autoincrement())
+  name          String
   email       String
   password    String
   storeBranch Store_Branch[]
+  isSuper       Boolean      @default(false)
 }
 
 model Voucher {
-  id          Int            @id @default(autoincrement())
-  name        String
-  description String
-  value       Int
-  startAt     DateTime
-  expiredAt   DateTime
-  claimLimit  Int
-  minSpend    Int
-  maxDiscount Int
-  storeBranch Store_Branch[]
+  id            Int          @id @default(autoincrement())
+  name          String
+  description   String
+  value         Int
+  startAt       DateTime
+  expiredAt     DateTime
+  claimLimit    Int
+  minSpend      Int
+  maxDiscount   Int
+  storeBranchId Int
+  storeBranch   Store_Branch @relation(fields: [storeBranchId], references: [id])
 }
 
 model Discount {
   id              Int                @id @default(autoincrement())
   typeDiscount    String
-  discountValue   Int
-  minimumPurchase Int
+  discountValue   Int?
+  minimumPurchase Int?
   discountLaw     String
   startAt         DateTime
   expiredAt       DateTime
@@ -122,22 +124,32 @@ model Discount {
 }
 
 model Product {
-  id         Int          @id @default(autoincrement())
-  name       String       @unique
-  image      String
-  location   String
-  price      Int
-  discount   Discount[]
-  categoryId Int
-  category   Category     @relation(fields: [categoryId], references: [id])
-  stock      Stock[]
-  cart       Cart[]
-  orderItem  Order_Item[]
+  id          Int        @id @default(autoincrement())
+  name        String     @unique
+  image       String
+  price       Int
+  description String
+  weight      Int
+  unitWeight  Unit
+  discount    Discount[]
+  categoryId  Int
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  category    Category   @relation(fields: [categoryId], references: [id])
+  stock       Stock[]
+  cart        Cart[]
+  orderItems Order_Item[]
+}
+
+enum Unit {
+  GRAM
+  KG
 }
 
 model Category {
   id      Int       @id @default(autoincrement())
-  name    String
+  name    String    @unique
+  image   String
   product Product[]
 }
 
@@ -252,3 +264,4 @@ model Jurnal {
 
   @@map("jurnal")
 }
+
