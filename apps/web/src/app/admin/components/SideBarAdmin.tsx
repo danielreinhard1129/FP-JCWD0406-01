@@ -23,7 +23,7 @@ export function SidebarAdmin() {
           </li>
         </Link>
         <Link href={'/admin/manage-store-admin'}>
-        <li className="flex items-center px-5 py-2 whitespace-nowrap rounded-sm hover:bg-[#374151]">
+          <li className="flex items-center px-5 py-2 whitespace-nowrap rounded-sm hover:bg-[#374151]">
             <MdDashboard className="mr-2" />
             Manage Store Admin
           </li>
@@ -65,6 +65,12 @@ export function SidebarAdmin() {
             </li>
           </ul>
         </li>
+        <Link
+          href={'/admin/manage-order'}
+          className="text-white text-[15px] px-5  py-1 rounded-sm hover:bg-[#374151]"
+        >
+          Manage Order
+        </Link>
         <Link href={'/admin/sales-report'}>
           <li className="flex items-center mt-2 px-5 py-2 rounded-sm hover:bg-[#374151]">
             <TbReport className="mr-2" />

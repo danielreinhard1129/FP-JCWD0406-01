@@ -45,6 +45,17 @@ export class ProductController {
     }
   }
 
+  async getProductByIdProduct (req: Request, res: Response, next: NextFunction) {
+    try {
+      const id = parseInt(req.params.id, 10);
+      const result = await getProductByIdAction(id);
+      return res.status(result.status).send(result);
+    } catch (error) {
+      next(error);
+    }
+   
+  }
+
   async createProduct(req: Request, res: Response, next: NextFunction) {
     try {
       const result = await createProductAction(req);
@@ -57,12 +68,12 @@ export class ProductController {
   async editProduct(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
-      const result = await updateProductAction(
-        parseInt(id, 0),
-        req.body,
-        req.file,
-      );
-      res.status(result.status).send(result);
+      // const result = await updateProductAction(
+      //   parseInt(id, 0),
+      //   req.body,
+      //   req.file,
+      // );
+      // res.status(result.status).send(result);
     } catch (error) {
       next(error);
     }

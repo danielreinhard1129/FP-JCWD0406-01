@@ -30,7 +30,7 @@ const ModalDelete = ({
           </h3>
           <div className="flex justify-center gap-4">
             <Button color="failure" onClick={confirmDelete}>
-              Yes, I'm sure
+              {"Yes, I'm sure"}
             </Button>
             <Button color="gray" onClick={() => setOpenModal(false)}>
               No, cancel
