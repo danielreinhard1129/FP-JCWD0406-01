@@ -1,38 +1,61 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 
-import { useRef, useContext } from 'react';
+import { useRef, useContext, useState, useEffect } from 'react';
 import CartContext from '@/context/CartContext';
 import { useAppSelector } from '@/libs/hooks';
 import { useRouter } from 'next/navigation';
 import { IProduct } from '@/types/cart.type';
+import { toast } from 'sonner';
 
 const ProductDetails = ({ product }: any) => {
   const user = useAppSelector((state) => state.user);
   const router = useRouter();
+  const [stock, setStock] = useState(0);
 
   const { addItemToCart, cart } = useContext(CartContext);
   const imgRef = useRef(null);
 
-  const readyStock = product.amount >= 1;
+  const readyStock = stock >= 1;
+
+  setTimeout(() => {
+    if (product?.stock?.length) {
+      function calculateTotalAmount(product: any) {
+        let totalAmount = 0;
+
+        for (const stockItem of product?.stock) {
+          totalAmount += stockItem.amount;
+        }
+        return totalAmount;
+      }
+
+      const totalAmount = calculateTotalAmount(product);
+      setStock(totalAmount);
+    }
+  });
 
   const addToCartHandler = () => {
     // validasi user jika sudah login
-    // if(user.id === 0){
-    //   return router.push("/login")
-    // }
+    if (!user.id) {
+      return router.push('/login');
+    }
+
+    // valiadsi user jika belum diverifikasi
+    if (!user.isVerified) {
+      return toast.info('Your account is not yet verified.');
+    }
 
     const cartItem = {
-      productId: product.product.id,
-      name: product.product.name,
-      price: product.product.price,
-      image: product.product.image,
-      stock: product.amount,
-      seller: product.storeBranch.name,
+      productId: product.id,
+      branchStoreId: product.stock[0].branchId,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      stock: stock,
     };
 
-    const itemExist = cart.cartItems.find(
-      (i: IProduct) => i.productId === product.product.id,
+    const itemExist = cart?.cartItems?.find(
+      (i: IProduct) => i.productId === product.id,
     );
 
     if (itemExist) {
@@ -64,9 +87,7 @@ const ProductDetails = ({ product }: any) => {
               </div>
             </aside>
             <main>
-              <h2 className="font-semibold text-2xl mb-4">
-                {product.name}
-              </h2>
+              <h2 className="font-semibold text-2xl mb-4">{product.name}</h2>
               <div className="flex flex-wrap items-center space-x-2 mb-2">
                 <svg
                   width="6px"
@@ -79,10 +100,12 @@ const ProductDetails = ({ product }: any) => {
                 <span className="text-green-500">Verified</span>
               </div>
               <p className="mb-4 font-semibold text-xl">
-                {new Intl.NumberFormat('id-ID', {
-                  style: 'currency',
-                  currency: 'IDR',
-                }).format(product.price)}
+                {product?.price
+                  ? new Intl.NumberFormat('id-ID', {
+                      style: 'currency',
+                      currency: 'IDR',
+                    }).format(product.price)
+                  : ''}
               </p>
               <p className="mb-4 text-gray-500">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -121,16 +144,7 @@ const ProductDetails = ({ product }: any) => {
                   {' '}
                   <b className="font-medium w-36 inline-block">Category:</b>
                   <span className="text-gray-500">
-                    {product.product?.category.name}
-                  </span>
-                </li>
-                <li className="mb-1">
-                  {' '}
-                  <b className="font-medium w-36 inline-block">
-                    Seller / Brand
-                  </b>
-                  <span className="text-gray-500">
-                    {product.storeBranch?.name}
+                    {product.category?.name}
                   </span>
                 </li>
               </ul>

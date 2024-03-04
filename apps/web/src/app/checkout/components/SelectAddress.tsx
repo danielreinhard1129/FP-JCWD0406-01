@@ -1,13 +1,26 @@
 'use client';
-import React, { useState } from 'react';
+import { axiosInstance } from '@/libs/axios';
+import { useAppSelector } from '@/libs/hooks';
+import React, { useEffect, useState } from 'react';
 
-const SelectAddress = () => {
-  const [selectedAddress, setSelectedAddress]: any = useState(null);
+const SelectAddress = ({ selectedAddress, setSelectedAddress }: any) => {
+  const [addresses, setAddresses]: any = useState();
 
-  const addresses = [
-    { id: 1, name: 'Alamat 1', address: 'Jalan Contoh 123' },
-    { id: 2, name: 'Alamat 2', address: 'Jalan Contoh 456' },
-  ];
+  const user = useAppSelector((state) => state.user);
+
+  const getUserAddress = async () => {
+    try {
+      const response = await axiosInstance.get(`/customers/filter/${user.id}`);
+      setAddresses(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getUserAddress();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleAddressChange = (address: any) => {
     setSelectedAddress(address);
@@ -16,7 +29,7 @@ const SelectAddress = () => {
   return (
     <div>
       <div className="grid grid-cols-1 gap-4">
-        {addresses.map((address) => (
+        {addresses?.addresses.map((address: any, index: any) => (
           <div
             key={address.id}
             className={`p-4 border ${
@@ -26,18 +39,17 @@ const SelectAddress = () => {
             } cursor-pointer`}
             onClick={() => handleAddressChange(address)}
           >
-            <h3 className="text-lg font-semibold">{address.name}</h3>
-            <p>{address.address}</p>
+            <h3 className="text-lg font-semibold">Alamat {index + 1}</h3>
+            <p>{address.detail}</p>
           </div>
         ))}
       </div>
-      <h3 className="text-xl font-extrabold text-[#333] mt-14">
-        Shipping Address
+      <h3 className="text-xl font-extrabold text-[#333] mt-14 mb-4">
+        Delivery Address
       </h3>
       {selectedAddress ? (
-        <div className="mt-4 p-4 border border-gray-300">
-          <p>{selectedAddress.name}</p>
-          <p>{selectedAddress.address}</p>
+        <div className="bg-gray-200 p-4 rounded-md shadow-md">
+          <p>{selectedAddress.detail}</p>
         </div>
       ) : (
         <div className="mt-4 p-4 border border-gray-300 h-20 flex justify-center items-center">

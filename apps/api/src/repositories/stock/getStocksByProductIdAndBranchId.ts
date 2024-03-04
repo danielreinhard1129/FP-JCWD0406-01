@@ -1,15 +1,19 @@
 import prisma from '@/prisma';
 
-export const getProductsByIds = async ({products}: any) => {
+export const getStocksByProductIdAndBranchId = async ({
+  products,
+  branchId,
+}: any) => {
   try {
     const result = await prisma.stock.findMany({
       where: {
         productId: {
-            in: products.map((product: any) => product.id)
-        }
+          in: products.map((product: any) => product.id),
+        },
+        branchId,
       },
       include: {
-        product: { include: { category: true } },
+        product: true,
       },
     });
     return result;

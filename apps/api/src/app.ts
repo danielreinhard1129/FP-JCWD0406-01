@@ -10,6 +10,8 @@ import cors from 'cors';
 import { PORT } from './config';
 import { ProductRouter } from './routers/product.router';
 import { TransactionRouter } from './routers/transaction.router';
+import { CustomerRouter } from './routers/customer.router';
+import { BranchRouter } from './routers/branch.router';
 
 export default class App {
   private app: Express;
@@ -53,9 +55,12 @@ export default class App {
   private routes(): void {
     const productRouter = new ProductRouter();
     const transactionRouter = new TransactionRouter();
-
+    const customerRouter = new CustomerRouter();
+    const branchRouter = new BranchRouter();
+    this.app.use('/api/customers', customerRouter.getRouter());
     this.app.use('/api/products', productRouter.getRouter());
     this.app.use('/api/transactions', transactionRouter.getRouter());
+    this.app.use('/api/branchs', branchRouter.getRouter());
   }
 
   public start(): void {

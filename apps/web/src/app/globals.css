@@ -1,3 +1,81 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+.pagination{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5rem;
+    font-size: 1.2rem;
+    gap:5px
+}
+
+.pagination .page-num{
+    padding: 4px 10px;
+    cursor: pointer;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    font-weight: 400;
+}
+
+.pagination .page-num:hover{
+    background-color: #333;
+    color: white;
+}
+
+.pagination .active {
+    background-color: #111;
+    color: white
+}
+
+@media(max-width: 1281px){
+    .detail-order {
+        display: none;
+    }
+    .search {
+        flex-direction: column;
+    }
+}
+
+@media(min-width: 768px){
+    .order {
+        display: none;
+    }
+}
+
+@media(max-width: 760px){
+    .header {
+        display: none;
+    }
+}
+
+
+
+.sidebar {
+    width: 250px; /* Sesuaikan lebar sidebar sesuai kebutuhan */
+    height: 100vh;
+    background-color: #333; /* Sesuaikan warna background */
+    color: #fff; /* Sesuaikan warna teks */
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: -400px; /* Sembunyikan sidebar di awal */
+    transition: left 0.3s ease; /* Animasi ketika muncul dan hilang */
+  }
+
+.content {
+    margin-left: 0px; /* Sesuaikan margin kiri content */
+    transition: margin-left 0.3s ease; /* Animasi ketika sidebar muncul dan hilang */
+}
