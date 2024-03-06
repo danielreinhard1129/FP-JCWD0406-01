@@ -18,9 +18,25 @@ export class TransactionRouter {
       '/filter/:transaction_id',
       this.transactionController.getTransactionById,
     );
-    this.router.put(
+    this.router.patch(
       '/status/:transaction_id',
       this.transactionController.updateTransactionStatus,
+    );
+    this.router.patch(
+      '/payment_proof/:transaction_id',
+      this.transactionController.updateTransactionPaymentProof,
+    );
+    this.router.post(
+      '/filter/date',
+      this.transactionController.getTransactionByDate,
+    );
+    this.router.post(
+      '/status/midtrans/:transaction_id',
+      this.transactionController.updateStatusByMidtrans,
+    );
+    this.router.post(
+      '/filter/branchId',
+      this.transactionController.getTransactionByBranchId,
     );
   }
 

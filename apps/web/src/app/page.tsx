@@ -18,7 +18,6 @@ export default function Home() {
   dispach(loginAction(user));
 
   const getuser = useAppSelector((state) => state.user);
-  console.log('dari global state', getuser);
 
   return (
     <div className="min-h-screen flex justify-center items-center">

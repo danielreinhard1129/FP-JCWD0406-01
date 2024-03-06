@@ -25,6 +25,7 @@ export const CartProvider = ({ children }) => {
     price,
     image,
     stock,
+    branchId,
     seller,
     quantity = 1,
   }) => {
@@ -34,6 +35,7 @@ export const CartProvider = ({ children }) => {
       price,
       image,
       stock,
+      branchId,
       seller,
       quantity,
     };

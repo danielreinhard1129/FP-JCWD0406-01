@@ -14,7 +14,8 @@ export class ProductController {
 
   async getProductById(req: Request, res: Response, next: NextFunction) {
     try {
-      const result = await getProductByIdAction(req.body.id);
+      const id = parseInt(req.params.id, 10);
+      const result = await getProductByIdAction(id);
       return res.status(result.status).send(result);
     } catch (error) {
       next(error);

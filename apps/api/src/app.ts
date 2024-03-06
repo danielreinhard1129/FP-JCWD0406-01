@@ -10,9 +10,12 @@ import cors from 'cors';
 import { PORT } from './config';
 import { ProductRouter } from './routers/product.router';
 import { TransactionRouter } from './routers/transaction.router';
+import { UserRouter } from './routers/user.router';
+import { BranchRouter } from './routers/branch.router';
 
 export default class App {
-  private app: Express;
+  // private app: Express;
+  readonly app: Express;
 
   constructor() {
     this.app = express();
@@ -28,7 +31,6 @@ export default class App {
   }
 
   private handleError(): void {
-    // not found
     this.app.use((req: Request, res: Response, next: NextFunction) => {
       if (req.path.includes('/api/')) {
         res.status(404).send('Not found !');
@@ -37,7 +39,6 @@ export default class App {
       }
     });
 
-    // error
     this.app.use(
       (err: Error, req: Request, res: Response, next: NextFunction) => {
         if (req.path.includes('/api/')) {
@@ -53,9 +54,12 @@ export default class App {
   private routes(): void {
     const productRouter = new ProductRouter();
     const transactionRouter = new TransactionRouter();
-
+    const userRouter = new UserRouter();
+    const branchRouter = new BranchRouter();
+    this.app.use('/api/customers', userRouter.getRouter());
     this.app.use('/api/products', productRouter.getRouter());
     this.app.use('/api/transactions', transactionRouter.getRouter());
+    this.app.use('/api/branchs', branchRouter.getRouter());
   }
 
   public start(): void {

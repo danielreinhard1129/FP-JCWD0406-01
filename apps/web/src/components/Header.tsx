@@ -1,8 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 import CartContext from '@/context/CartContext';
+import { loginAction } from '@/libs/features/userSlice';
+import { useAppDispatch } from '@/libs/hooks';
 import Link from 'next/link';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { FaRegHeart } from 'react-icons/fa';
 import { IoBagHandle } from 'react-icons/io5';
 import { IoPersonOutline } from 'react-icons/io5';
@@ -10,6 +12,43 @@ import { IoPersonOutline } from 'react-icons/io5';
 export const Header = () => {
   const { cart } = useContext(CartContext);
   const cartItems = cart?.cartItems;
+
+  const login: any = {
+    id: 1,
+    name: 'step',
+    email: 'step@gmail.com',
+    role: 'admin',
+    isVerified: true,
+  };
+  const dispach = useAppDispatch();
+  dispach(loginAction(login));
+
+  // const [countdown, setCountdown] = useState<number>(parseInt(
+  //   localStorage.getItem('countdown') || '0',
+  //   10,
+  // ));
+
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setCountdown((prevCountdown) => {
+  //       if (prevCountdown <= 0) {
+  //         clearInterval(interval);
+  //         return prevCountdown;
+  //       }
+
+  //       const newCountdown = prevCountdown - 1;
+  //       localStorage.setItem('countdown', newCountdown.toString());
+
+  //       if (newCountdown <= 0) {
+  //         clearInterval(interval);
+  //       }
+
+  //       return newCountdown;
+  //     });
+  //   }, 1000);
+
+  //   return () => clearInterval(interval);
+  // }, [countdown]);
 
   return (
     <header className="py-4 shadow-sm bg-white">
@@ -30,9 +69,9 @@ export const Header = () => {
               >
                 <path
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
                 />
               </svg>

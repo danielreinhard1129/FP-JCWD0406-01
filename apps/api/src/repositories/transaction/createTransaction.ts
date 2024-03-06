@@ -1,16 +1,29 @@
 import prisma from '@/prisma';
 
-export const createTransaction = async (transactionId:string, amount:number, statusId: number, address: string, branchId: number, customerId:number) => {
+export const createTransaction = async (
+  transactionId: string,
+  branchId: number,
+  amount: number,
+  statusId: number,
+  address: string,
+  userId: number,
+  snapToken: string,
+  snapRedirectUrl: string,
+  message: string,
+) => {
   try {
     const result = await prisma.order.create({
-        data: {
-            id: transactionId,
-            amount,
-            address,
-            branchId,
-            customerId,
-            statusId,
-        }
+      data: {
+        orderId: transactionId,
+        branchId,
+        amount,
+        address,
+        userId,
+        statusId,
+        snapToken,
+        snapRedirectUrl,
+        message,
+      },
     });
     return result;
   } catch (error) {

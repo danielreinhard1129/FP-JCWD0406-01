@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,227 +7,190 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Customer {
-  id              Int                @id @default(autoincrement())
-  email           String             @unique
-  phone           Int
-  password        String
-  username        String
-  verified        Boolean            @default(false)
-  referralCode    String             @unique
-  referrer        String
-  createdAt       DateTime           @default(now())
-  updatedAt       DateTime           @updatedAt
-  profileId       Int
-  profile         Profile            @relation(fields: [profileId], references: [id])
-  addressId       Int
-  address         Address            @relation(fields: [addressId], references: [id])
-  historyDiscount History_Discount[]
-  cart            Cart[]
-  order           Order[]
-}
+model User {
+  id         Int       @id @default(autoincrement())
+  email      String    @unique
+  phone      Int
+  password   String
+  username   String
+  isVerified Boolean   @default(false)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  addresses  Address[]
+  orders     Order[]
 
-model Profile {
-  id       Int        @id @default(autoincrement())
-  name     String
-  gender   String
-  birth    DateTime
-  avatar   String
-  customer Customer[]
+  @@map("user")
 }
 
 model Address {
-  id        Int        @id @default(autoincrement())
+  id        Int     @id @default(autoincrement())
   label     String
   detail    String
-  latitude  String
-  longitude String
-  isDefault Boolean @default(false)
-  customer Customer[]
-  cityId Int
-  city City @relation(fields: [cityId], references: [id]) 
+  latitude  Decimal
+  longitude Decimal
+  userId    Int
+  user      User    @relation(fields: [userId], references: [id])
+  cityId    Int
+  city      City    @relation(fields: [cityId], references: [id])
 
+  @@map("address")
 }
 
 model City {
-  id     Int       @id @default(autoincrement())
-  name String
-  type String
-  postalCode Int
-  address Address[]
-  provinceId Int
-  province Province @relation(fields: [provinceId], references: [id])
-  storeBranch Store_Branch[]
+  id           Int           @id @default(autoincrement())
+  name         String
+  postalCode   Int
+  provinceId   Int
+  province     Province      @relation(fields: [provinceId], references: [id], onDelete: Cascade)
+  addresses    Address[]
+  storeBranchs StoreBranch[]
+
+  @@map("city")
 }
 
 model Province {
-  id   Int    @id @default(autoincrement())
-  name String
-  city City[]
+  id     Int    @id @default(autoincrement())
+  name   String
+  cities City[]
+
+  @@map("province")
 }
 
-model Store_Branch {
-  id        Int        @id @default(autoincrement())
-  name      String
-  cityId    Int
-  city      City       @relation(fields: [cityId], references: [id])
-  adminId   Int
-  admin     Admin      @relation(fields: [adminId], references: [id])
-  latitude  String
-  longitude String
-  voucherId Int
-  voucher   Voucher    @relation(fields: [voucherId], references: [id])
-  discount  Discount[]
-  stock     Stock[]
-  order     Order[]
+model StoreBranch {
+  id             Int             @id @default(autoincrement())
+  name           String
+  latitude       Decimal
+  longitude      Decimal
+  address        String
+  adminId        Int
+  admin          Admin           @relation(fields: [adminId], references: [id], onDelete: Cascade)
+  cityId         Int
+  city           City            @relation(fields: [cityId], references: [id])
+  stocks         Stock[]
+  stockMutations StockMutation[]
+  journals       Journal[]
+
+  @@map("store_branch")
 }
 
 model Admin {
-  id     Int       @id @default(autoincrement())
-  email String
-  password String
-  storeBranch Store_Branch[]
-}
+  id           Int           @id @default(autoincrement())
+  name         String
+  email        String
+  password     String
+  isSuperAdmin Boolean       @default(false)
+  storeBranchs StoreBranch[]
 
-model Voucher {
-  id          Int            @id @default(autoincrement())
-  name        String
-  description String
-  value       Int
-  startAt     DateTime
-  expiredAt   DateTime
-  claimLimit  Int
-  minSpend    Int
-  maxDiscount Int
-  storeBranch Store_Branch[]
-}
-
-model Discount {
-  id              Int                @id @default(autoincrement())
-  typeDiscount    String
-  discountValue   Int
-  minimumPurchase Int
-  discountLaw String
-  startAt DateTime
-  expiredAt DateTime
-  isActive Boolean @default(false)
-  branchId Int
-  storeBranch Store_Branch @relation(fields: [branchId], references: [id])
-  productId Int
-  product Product @relation(fields: [productId], references: [id])
-  historyDiscount History_Discount[]
+  @@map("admin")
 }
 
 model Product {
-  id         Int        @id @default(autoincrement())
-  name       String
-  image      String
-  location   String
-  price      Int
-  discount   Discount[]
-  categoryId Int
-  category   Category   @relation(fields: [categoryId], references: [id])
-  stock      Stock[]
-  cart       Cart[]
-  orderItem      Order_Item[]
+  id          Int         @id @default(autoincrement())
+  name        String
+  image       String
+  price       Decimal
+  description String
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  categoryId  Int
+  category    Category    @relation(fields: [categoryId], references: [id])
+  stocks      Stock[]
+  orderItems  OrderItem[]
+
+  @@map("product")
 }
 
 model Category {
-  id      Int       @id @default(autoincrement())
-  name    String
-  product Product[]
+  id       Int       @id @default(autoincrement())
+  name     String
+  products Product[]
+
+  @@map("category")
 }
 
 model Stock {
-  id    Int       @id @default(autoincrement())
-  amount Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime
-  productId Int @unique()
-  product Product @relation(fields: [productId], references: [id])
-  branchId Int
-  storeBranch Store_Branch @relation(fields: [branchId], references: [id])
-  jurnal Jurnal[]
-  stockChange Stock_Change[]
-}
+  id             Int             @id @default(autoincrement())
+  amount         Int
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime
+  productId      Int
+  product        Product         @relation(fields: [productId], references: [id])
+  branchId       Int
+  storeBranch    StoreBranch     @relation(fields: [branchId], references: [id])
+  stockMutations StockMutation[]
 
-model Jurnal {
-  id    Int       @id @default(autoincrement())
-  information String
-  amount Int
-  createdAt DateTime @default(now())
-  stockId Int
-  stock Stock @relation(fields: [stockId], references: [id])
-}
-
-model History_Discount{
-  id    Int       @id @default(autoincrement())
-  usedAt DateTime
-  amountDiscount Int
-  customerId     Int
-  customer       Customer @relation(fields: [customerId], references: [id])
-  discountId     Int
-  discount       Discount @relation(fields: [discountId], references: [id])
-}
-
-model Cart {
-  id         Int      @id @default(autoincrement())
-  customerId Int
-  customer   Customer @relation(fields: [customerId], references: [id])
-  productId  Int
-  product    Product  @relation(fields: [productId], references: [id])
-  qty        Int
+  @@map("stock")
 }
 
 model Order {
-  id    String       @id
-  amount Int
-  message String?
-  snap_token String?
-  snap_redirect_url String?
-  payment_method String?
-  address String?
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  customerId Int
-  customer Customer @relation(fields: [customerId], references: [id])
-  branchId Int
-  storeBranch Store_Branch @relation(fields: [branchId], references: [id])
-  statusId Int
-  status Status @relation(fields: [statusId], references: [id])
-  orderItem Order_Item[]
-  @@map("order")
-} 
+  id              Int         @id @default(autoincrement())
+  orderId         String      @unique
+  branchId        Int?
+  amount          Int
+  message         String?
+  snapToken       String?
+  snapRedirectUrl String?
+  paymentProof    String?
+  address         String?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  userId          Int
+  user            User        @relation(fields: [userId], references: [id])
+  statusId        Int
+  status          Status      @relation(fields: [statusId], references: [id])
+  orderItems      OrderItem[]
 
-model Order_Item {
-  id    String       @id
-  orderId String
-  productId Int
+  @@map("order")
+}
+
+model OrderItem {
+  id          Int      @id @default(autoincrement())
   productName String
-  price Int 
-  quantity Int
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  product Product @relation(fields: [productId], references: [id])
+  price       Decimal
+  quantity    Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  orderId     String
+  order       Order    @relation(fields: [orderId], references: [orderId], onDelete: Cascade)
+  productId   Int
+  product     Product  @relation(fields: [productId], references: [id])
 
   @@index([productId], map: "productId")
   @@index([orderId], map: "orderId")
-  @@map("orderItem")
+  @@map("order_item")
 }
 
 model Status {
-  id    Int     @id @default(autoincrement())
-  title String
-  order Order[]
+  id     Int     @id @default(autoincrement())
+  title  String
+  orders Order[]
+
+  @@map("status")
 }
 
+model StockMutation {
+  id                  Int         @id @default(autoincrement())
+  orderId             String
+  productId           Int
+  quantity            Int
+  createdAt           DateTime    @default(now())
+  updatedAt           DateTime    @updatedAt
+  stockId             Int
+  stock               Stock       @relation(fields: [stockId], references: [id])
+  destinationBranchId Int
+  storeBranch         StoreBranch @relation(fields: [destinationBranchId], references: [id])
 
-model Stock_Change{
-  id    Int       @id @default(autoincrement())
-  stockBefore Int
-  stockAfter Int
-  createdAt    DateTime @default(now())
-  stockId Int
-  stock Stock @relation(fields: [stockId], references: [id])
+  @@map("stock_mutation")
+}
+
+model Journal {
+  id          Int         @id @default(autoincrement())
+  branchId    Int
+  title       String
+  reason      String
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  storeBranch StoreBranch @relation(fields: [branchId], references: [id])
+
+  @@map("journal")
 }
