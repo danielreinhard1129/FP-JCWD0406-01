@@ -63,10 +63,10 @@ export class TransactionController {
   ) {
     try {
       const { transaction_id } = req.params;
-      const { payment_proof } = req.body;
+      const { paymentProof } = req.body;
       const result = await updateTransactionPaymentProofAction(
         transaction_id,
-        payment_proof,
+        paymentProof,
       );
       return res.status(result.status).send(result);
     } catch (error) {
@@ -92,11 +92,11 @@ export class TransactionController {
     next: NextFunction,
   ) {
     try {
-      const transaction_id = req.params.transaction_id;
-      const transaction_status = req.body.transaction_status;
+      const transactionId = req.params.transaction_id;
+      const transactionStatus = req.body.transactionStatus;
       const result = await updateStatusByMidtransAction({
-        transaction_id,
-        transaction_status,
+        transactionId,
+        transactionStatus,
       });
       return res.status(result.status).send(result);
     } catch (error) {

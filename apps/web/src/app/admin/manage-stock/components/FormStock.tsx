@@ -5,7 +5,6 @@ import { Button } from 'flowbite-react';
 const FormStock = ({ setOpenModal, formik }: any) => {
   return (
     <form onSubmit={formik.handleSubmit}>
-        
       <InputFields
         label="amount"
         type="number"

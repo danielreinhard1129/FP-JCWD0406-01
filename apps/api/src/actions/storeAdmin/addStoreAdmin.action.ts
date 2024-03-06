@@ -9,8 +9,8 @@ export const addStoreAdminAction = async (body: IStoreAdmin) => {
     body.storeId = parseInt(String(body.storeId), 0);
     const store = await getStoreByIdRepo(body.storeId);
     const isExist = await getStoreAdminByEmail(body.email);
-    if (isExist) return { status: 400, message: 'Email Sudah ada' };
-    if (!store) return { status: 404, message: 'Store is not found' };
+    // if (isExist) return { status: 400, message: 'Email Sudah ada' };
+    // if (!store) return { status: 404, message: 'Store is not found' };
 
     body.password = await hashPaswword(body.password);
 

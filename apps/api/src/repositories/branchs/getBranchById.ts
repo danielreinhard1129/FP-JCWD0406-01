@@ -2,7 +2,7 @@ import prisma from '@/prisma';
 
 export const getBranchById = async (branchId: number) => {
   try {
-    const result = await prisma.store_Branch.findUnique({
+    const result = await prisma.storeBranch.findUnique({
       where: {
         id: branchId,
       },

@@ -1,5 +1,4 @@
 import { axiosInstance } from '@/libs/axios';
-import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 interface IAddress {
@@ -61,7 +60,7 @@ export const usePaymentByManual = ({
       const response = await axiosInstance.post('/transactions', {
         address: selectedAddress.detail,
         amount: total,
-        customerId: user.id,
+        userId: user.id,
         branchId,
         message,
         products: cart?.cartItems?.map((item: any) => ({
@@ -73,7 +72,7 @@ export const usePaymentByManual = ({
       if (response && response.status === 200) {
         await localStorage.removeItem('cart');
         router.push(
-          `/order_status/?transaction_id=${response.data.transaction.order_id}`,
+          `/order_status/?transaction_id=${response.data.transaction.orderId}`,
         );
         setMessage('');
         setSelectedAddress('');

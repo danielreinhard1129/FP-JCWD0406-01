@@ -9,9 +9,9 @@ export const getTransactions = async (skip: number, limit: number) => {
         createdAt: 'desc',
       },
       include: {
-        orderItem: true,
+        orderItems: true,
         status: true,
-        customer: true,
+        user: true,
       },
     });
     return result;

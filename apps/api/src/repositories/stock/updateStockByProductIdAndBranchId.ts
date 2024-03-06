@@ -17,8 +17,6 @@ export const updateStockByProductIdAndBranchId = async ({ products }: any) => {
         },
       });
 
-      console.log({ result });
-
       return result;
     });
 

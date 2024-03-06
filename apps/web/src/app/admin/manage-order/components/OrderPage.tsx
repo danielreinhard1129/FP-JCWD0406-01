@@ -4,7 +4,6 @@ import Pagination from './Pagination';
 import { useGetTransactions } from '@/hooks/transaction/useGetTransactions';
 import { useGetTransactionsByBranchId } from '@/hooks/transaction/useGetTransactionsByBranchId';
 import { useGetBranchs } from '@/hooks/branch/useGetBranchs';
-import { Spinner } from 'flowbite-react';
 
 const OrderPage = () => {
   const [totalPage, setTotalPage]: any = useState(0);
@@ -15,10 +14,8 @@ const OrderPage = () => {
   const [page, setPage]: any = useState(1);
   const itemPerPage = 6;
 
-  const branchId = 1;
-  const LoginAdmin: number = 1;
-  // id 1 => superAdmin
-  // id 2 =? adminBranch
+  const branchId = 2;
+  const LoginAdmin: number = 2;
 
   const {
     data: transactions,

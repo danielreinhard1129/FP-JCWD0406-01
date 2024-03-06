@@ -7,11 +7,10 @@ export const getTransactionsByBranchIdAction = async (
   perPage: number,
 ) => {
   try {
-    console.log({ branchId, page, perPage });
     const skip = (page - 1) * perPage;
     const result = await getTransactionsByBranchId(branchId, skip, perPage);
     const getTotalTransactions = await getTotalTransactionsByBranchId(branchId);
-    console.log({ getTotalTransactions });
+
     return {
       message: 'get transaction by branch id success',
       status: 200,

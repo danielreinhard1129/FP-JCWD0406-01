@@ -1,12 +1,7 @@
 import { createTransaction } from '@/repositories/transaction/createTransaction';
 import { createTransactionItems } from '@/repositories/transaction/createTransactionItems';
 import { nanoid } from 'nanoid';
-import {
-  MIDTRANS_SERVER_KEY,
-  MIDTRANS_APP_URL,
-  FRONT_END_URL,
-} from '@/utils/constant';
-import { getCustomerById } from '@/repositories/customer/getCustomerById';
+import { getUserById } from '@/repositories/user/getUserById';
 import schedule from 'node-schedule';
 import { updateTransactionStatus } from '@/repositories/transaction/updateTransactionStatus';
 import { getTransactionById } from '@/repositories/transaction/getTransactionById';
@@ -19,21 +14,30 @@ import { updateStockByProductIdAndBranchId } from '@/repositories/stock/updateSt
 import { updateReturnStockByProductIdAndBranchId } from '@/repositories/stock/updateReturnStockByProductIdAndBranchId';
 import { updateStockIncrementByProductIdAndBranchId } from '@/repositories/stock/updateStockIncrementByProductIdAndBranchId';
 import { createMutationStock } from '@/repositories/mutation/createMutationStock';
+import {
+  MIDTRANS_SERVER_KEY,
+  MIDTRANS_APP_URL,
+  FRONT_END_URL,
+} from '@/utils/constant';
 
 interface IBody {
   products: any;
   address: string;
   amount: number;
-  customerId: number;
+  userId: number;
   message: string;
   branchId: number;
 }
 
 export const createTransactionAction = async (body: IBody) => {
   try {
-    const { products, address, amount, customerId, message, branchId } = body;
+    const { products, address, amount, userId, message, branchId } = body;
 
-    // cek stock untuk keseluruhan gudang
+    if (!products.length)
+      throw new Error(
+        "Oops, the product you entered is not in the checkout page. Make sure it's in your cart before proceeding.",
+      );
+
     const getProducts = await getStocksByProductId({ products });
 
     const totalStock: any = {};
@@ -60,7 +64,6 @@ export const createTransactionAction = async (body: IBody) => {
     if (!isRequestFulfilled)
       throw new Error("Sorry, we don't have enough in stock for your order");
 
-    // cek stock yang ada berada di branch yang terdekat dengan alamat customer
     const productsFromDB = await getStocksByProductIdAndBranchId({
       products,
       branchId,
@@ -103,9 +106,6 @@ export const createTransactionAction = async (body: IBody) => {
 
     const nearestBranch = checkAndProcessOrder({ products, productsFromDB });
 
-    // jika stock tidak mencukupi pinjam stock di branch terdekat dengan branch yang meminjam
-    // cari branch terdekat yang ingin dipinjam stocknya
-
     function haversine(lat1: any, lon1: any, lat2: any, lon2: any) {
       const R = 6371.0;
 
@@ -126,24 +126,28 @@ export const createTransactionAction = async (body: IBody) => {
       return distance;
     }
 
-    function cariCabangTerdekat(userLat: any, userLon: any, daftarCabang: any) {
-      let cabangTerdekat = null;
-      let jarakTerdekat = Infinity;
+    function FindNearestBranch(
+      userLat: any,
+      userLon: any,
+      listOfBranches: any,
+    ) {
+      let nearestBranch = null;
+      let closestDistance = Infinity;
 
-      for (const cabang of daftarCabang) {
-        const cabangLat = Number(cabang.latitude);
-        const cabangLon = Number(cabang.longitude);
+      for (const branch of listOfBranches) {
+        const branchLat = Number(branch.latitude);
+        const branchLon = Number(branch.longitude);
 
-        const jarak = haversine(userLat, userLon, cabangLat, cabangLon);
+        const distance = haversine(userLat, userLon, branchLat, branchLon);
 
-        if (jarak < jarakTerdekat) {
-          jarakTerdekat = jarak;
-          cabangTerdekat = cabang;
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          nearestBranch = branch;
         }
       }
 
-      const distance = jarakTerdekat.toFixed(2);
-      return { cabangTerdekat, distance };
+      const distance = closestDistance.toFixed(2);
+      return { nearestBranch, distance };
     }
 
     const getBranch = await getBranchById(branchId);
@@ -152,21 +156,19 @@ export const createTransactionAction = async (body: IBody) => {
     const branchLatitude = Number(getBranch?.latitude);
     const branchLongitude = Number(getBranch?.longitude);
 
-    let cabangTerdekat: any;
+    let closestBranch: any;
     let lendingStore;
 
-    console.log('nearst', nearestBranch?.insufficientProducts);
-
     if (nearestBranch?.insufficientProducts.length > 0) {
-      cabangTerdekat = cariCabangTerdekat(
+      closestBranch = FindNearestBranch(
         branchLatitude,
         branchLongitude,
         getBranchAll,
       );
-      // cek stock dari branch nearest
+
       const checkstockNearestBranch = await getStocksByProductIdAndBranchId({
         products: nearestBranch?.insufficientProducts,
-        branchId: cabangTerdekat?.cabangTerdekat?.id,
+        branchId: closestBranch?.nearestBranch?.id,
       });
 
       function isStockSufficient({ stockShortages, stockNearestBranch }: any) {
@@ -189,19 +191,18 @@ export const createTransactionAction = async (body: IBody) => {
       if (!isStockEnough) throw new Error('Product stock is not enough');
 
       lendingStore = await updateStockDecrementByProductIdAndBranchId({
-        branchId: cabangTerdekat?.cabangTerdekat?.id,
+        branchId: closestBranch?.nearestBranch?.id,
         products: nearestBranch?.insufficientProducts,
       });
     }
 
-    // mengurangi stock pada branch bersangkutan dengan customer
     const decrementStock = await updateStockByProductIdAndBranchId({
       products: nearestBranch?.productsFromDB,
     });
 
     const getStockLendingStore = await getStocksByProductIdAndBranchId({
       products: nearestBranch?.insufficientProducts,
-      branchId: cabangTerdekat?.cabangTerdekat?.id,
+      branchId: closestBranch?.nearestBranch?.id,
     });
 
     nearestBranch?.insufficientProducts.forEach((item) => {
@@ -226,11 +227,10 @@ export const createTransactionAction = async (body: IBody) => {
     const transactionId = `GRC-${nanoid(4)}-${nanoid(3)}`;
     const statusId = 1;
 
-    const customer: any = await getCustomerById(customerId);
+    const user: any = await getUserById(userId);
 
     const authString = btoa(`${MIDTRANS_SERVER_KEY}:`);
 
-    // membuat mutasi stock untuk mencatat perpindahan stock
     const mutationStock = await createMutationStock({
       transactionId,
       stocks: getStockLendingStore,
@@ -248,9 +248,9 @@ export const createTransactionAction = async (body: IBody) => {
         name: product?.product?.name,
       })),
       customer_details: {
-        first_name: customer?.username,
-        email: customer?.email,
-        phone: customer?.phone,
+        first_name: user?.username,
+        email: user?.email,
+        phone: user?.phone,
       },
       callback: {
         finish: `${FRONT_END_URL}/order_status/?transaction_id=${transactionId}`,
@@ -275,8 +275,8 @@ export const createTransactionAction = async (body: IBody) => {
       throw new Error('Failed to create transactions');
     }
 
-    const snap_token = data.token;
-    const snap_redirect_url = data.redirect_url;
+    const snapToken = data.token;
+    const snapRedirectUrl = data.redirect_url;
 
     const transaction = await createTransaction(
       transactionId,
@@ -284,9 +284,9 @@ export const createTransactionAction = async (body: IBody) => {
       amount,
       statusId,
       address,
-      customerId,
-      snap_token,
-      snap_redirect_url,
+      userId,
+      snapToken,
+      snapRedirectUrl,
       message,
     );
     const transactionItems = await createTransactionItems({
@@ -317,19 +317,20 @@ export const createTransactionAction = async (body: IBody) => {
       borrowedProducts: nearestBranch?.insufficientProducts,
     });
 
-    schedule.scheduleJob(new Date(Date.now() + 60 * 60 * 1000), async () => {
+    schedule.scheduleJob(new Date(Date.now() + 1 * 60 * 1000), async () => {
       const statusId = 6;
-      const status = await getTransactionById(transaction.order_id);
+      const status = await getTransactionById(transaction.orderId);
 
       if (status?.statusId === 1) {
-        await updateTransactionStatus(transaction.order_id, statusId);
+        await updateTransactionStatus(transaction.orderId, statusId);
 
         const returnStock = updateReturnStockByProductIdAndBranchId({
           products: beforeAddTerupdate,
         });
+
         const returnStockByNearestBranch =
           await updateStockIncrementByProductIdAndBranchId({
-            branchId: cabangTerdekat?.cabangTerdekat?.id,
+            branchId: closestBranch?.nearestBranch?.id,
             products: nearestBranch?.insufficientProducts,
           });
       }

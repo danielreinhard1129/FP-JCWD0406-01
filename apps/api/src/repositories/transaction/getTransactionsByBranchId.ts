@@ -14,7 +14,7 @@ export const getTransactionsByBranchId = async (
         createdAt: 'desc',
       },
       include: {
-        orderItem: {
+        orderItems: {
           include: {
             product: {
               select: {
@@ -26,7 +26,7 @@ export const getTransactionsByBranchId = async (
             },
           },
         },
-        customer: true,
+        user: true,
         status: true,
       },
     });

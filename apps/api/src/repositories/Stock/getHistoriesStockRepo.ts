@@ -35,23 +35,23 @@ export async function getHistoriesStockRepo(
       AND.push({stock:{ product }});
     }
 
-    const result = await prisma.stock_Change.findMany({
-      where: {
-        AND,
-      },
-      include:{
-        stock: {
-          include: {
-            product: {
-              include: {
-                category: true
-              }
-            },StoreBranch: true
-          }
-        }
-      }
-    });
-    return result;
+    // const result = await prisma.stock_Change.findMany({
+    //   where: {
+    //     AND,
+    //   },
+    //   include:{
+    //     stock: {
+    //       include: {
+    //         product: {
+    //           include: {
+    //             category: true
+    //           }
+    //         },StoreBranch: true
+    //       }
+    //     }
+    //   }
+    // });
+    // return result;
   } catch (error) {
     throw error;
   }

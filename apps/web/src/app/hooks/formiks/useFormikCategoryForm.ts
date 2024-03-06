@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 
 import { useFormik } from 'formik';
 import axios from 'axios';
-import toast from 'react-hot-toast';
+// import toast from 'react-hot-toast';
 import { ICategory } from '@/app/type.web/category.type';
 
 const useFormikCategoryForm = (
@@ -49,12 +49,12 @@ const useFormikCategoryForm = (
               },
             );
 
-        toast.success('Successfully!', { duration: 1000 });
+        // toast.success('Successfully!', { duration: 1000 });
         setOpenModal(false);
         refreshData();
         resetForm();
       } catch (error: any) {
-        toast.error(error.response.data.message);
+        // toast.error(error.response.data.message);
       }
     },
   });

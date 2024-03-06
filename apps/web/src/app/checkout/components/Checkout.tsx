@@ -2,18 +2,15 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 import CartContext from '@/context/CartContext';
-
-import Link from 'next/link';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import SelectAddress from './SelectAddress';
 import { useAppSelector } from '@/libs/hooks';
 import PaymentMethod from './PaymentMethod';
 import { usePaymentByMidtrans } from '@/hooks/payment/usePaymentByMidtrans';
 import { usePaymentByManual } from '@/hooks/payment/usePaymentByManual';
-import { Spinner } from 'flowbite-react';
 import { useCalculateTotals } from '@/hooks/calculate/useCalculateTotals';
-import { axiosInstance } from '@/libs/axios';
 import BranchService from './BranchService';
+import { useGetBranchByGeolocation } from '@/hooks/branch/useGetBranchByGeolocation';
 
 const Checkout = () => {
   const user = useAppSelector((state) => state.user);
@@ -23,10 +20,11 @@ const Checkout = () => {
   const [message, setMessage] = useState('');
   const [selectedAddress, setSelectedAddress]: any = useState(null);
   const [total, setTotal]: any = useState(0);
-  const [branchService, setBranchService]: any = useState();
+
+  const { branchService } = useGetBranchByGeolocation({ selectedAddress });
 
   const { snapShow, handlePaymentByMidtrans } = usePaymentByMidtrans({
-    branchId: branchService?.cabangTerdekat?.id,
+    branchId: branchService?.nearestBranch?.id,
     total,
     selectedAddress,
     setSelectedAddress,
@@ -37,7 +35,7 @@ const Checkout = () => {
   });
 
   const { handlePaymentByManual } = usePaymentByManual({
-    branchId: branchService?.cabangTerdekat?.id,
+    branchId: branchService?.nearestBranch?.id,
     selectedAddress,
     total,
     user,
@@ -54,28 +52,6 @@ const Checkout = () => {
     setTotal,
   });
 
-  const getBranch = async () => {
-    try {
-      if (selectedAddress === null) {
-        return;
-      }
-      const response = await axiosInstance.post('/branchs/select/branch', {
-        latitude: selectedAddress.latitude,
-        longitude: selectedAddress.longitude,
-      });
-      setBranchService(response.data.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    if (selectedAddress?.latitude && selectedAddress?.longitude) {
-      getBranch();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedAddress]);
-
   return (
     <>
       <div className="font-[sans-serif] bg-white">
@@ -88,7 +64,7 @@ const Checkout = () => {
                     Checkout
                   </h2>
                 </div>
-                <form className="lg:mt-12">
+                <div className="lg:mt-12">
                   <div>
                     <h3 className="text-xl font-extrabold text-[#333] mb-4">
                       Select Delivery Address
@@ -103,8 +79,8 @@ const Checkout = () => {
                       Select Your Nearest Branch
                     </h3>
                     <BranchService
-                      branchName={branchService?.cabangTerdekat?.name}
-                      address={branchService?.cabangTerdekat?.address}
+                      branchName={branchService?.nearestBranch?.name}
+                      address={branchService?.nearestBranch?.address}
                       distance={branchService?.distance}
                     />
                   </div>
@@ -158,7 +134,7 @@ const Checkout = () => {
                       handlePaymentByManual={handlePaymentByManual}
                     />
                   </div>
-                </form>
+                </div>
               </div>
               <div className="lg:h-[300px] lg:sticky lg:top-0 border-spacing-3 shadow-md mx-4 lg:px-5">
                 <div className="relative h-[290px]">

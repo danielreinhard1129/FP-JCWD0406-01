@@ -3,13 +3,13 @@ import { updateTransactionStatus } from '@/repositories/transaction/updateTransa
 
 export const updateTransactionPaymentProofAction = async (
   transactionId: string,
-  payment_proof: string,
+  paymentProof: string,
 ) => {
   try {
     const statusId = 2;
     const result = await updateTransactionPaymentProof(
       transactionId,
-      payment_proof,
+      paymentProof,
     );
     const updateStatus = await updateTransactionStatus(transactionId, statusId);
     return {

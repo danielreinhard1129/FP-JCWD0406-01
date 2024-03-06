@@ -4,7 +4,6 @@ export const getBranchByGeolocationAction = async (body: any) => {
   try {
     const { latitude, longitude } = body;
 
-    // Haversine formula
     function haversine(lat1: any, lon1: any, lat2: any, lon2: any) {
       const R = 6371.0;
 
@@ -25,42 +24,45 @@ export const getBranchByGeolocationAction = async (body: any) => {
       return distance;
     }
 
-    // revisi penulisan diganti dengan isi dalam discord
-    function cariCabangTerdekat(userLat: any, userLon: any, daftarCabang: any) {
-      let cabangTerdekat = null;
-      let jarakTerdekat = Infinity;
+    function FindNearestBranch(
+      userLat: any,
+      userLon: any,
+      listOfBranches: any,
+    ) {
+      let nearestBranch = null;
+      let closestDistance = Infinity;
 
-      for (const cabang of daftarCabang) {
-        const cabangLat = Number(cabang.latitude);
-        const cabangLon = Number(cabang.longitude);
+      for (const branch of listOfBranches) {
+        const branchLat = Number(branch.latitude);
+        const branchLon = Number(branch.longitude);
 
-        const jarak = haversine(userLat, userLon, cabangLat, cabangLon);
+        const distance = haversine(userLat, userLon, branchLat, branchLon);
 
-        if (jarak < jarakTerdekat) {
-          jarakTerdekat = jarak;
-          cabangTerdekat = cabang;
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          nearestBranch = branch;
         }
       }
 
-      const distance = jarakTerdekat.toFixed(2);
-      return { cabangTerdekat, distance };
+      const distance = closestDistance.toFixed(2);
+      return { nearestBranch, distance };
     }
 
     const userLatitude = Number(latitude);
     const userLongitude = Number(longitude);
 
-    const daftarCabang = await getBranchs();
+    const listOfBranches = await getBranchs();
 
-    const cabangTerdekat = cariCabangTerdekat(
+    const nearestBranch = FindNearestBranch(
       userLatitude,
       userLongitude,
-      daftarCabang,
+      listOfBranches,
     );
 
     return {
       message: 'get branchs by Geolocation success',
       status: 200,
-      data: cabangTerdekat,
+      data: nearestBranch,
     };
   } catch (error) {
     throw error;

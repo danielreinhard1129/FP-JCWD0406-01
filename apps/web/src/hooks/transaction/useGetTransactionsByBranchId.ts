@@ -1,5 +1,4 @@
 import { axiosInstance } from '@/libs/axios';
-import { useState } from 'react';
 
 interface ITransactionByBranchId {
   setTotalPage: (input: number) => void;

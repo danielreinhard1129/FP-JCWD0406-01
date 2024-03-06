@@ -6,7 +6,6 @@ import { Toaster } from 'sonner';
 import { GlobalProvider } from './GlobalProvider';
 import { Header } from '@/components/Header';
 import { QueryProvider } from './QueryClientProvider';
-// import { Toaster } from 'react-hot-toast';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -37,7 +36,6 @@ export default function RootLayout({
             </StoreProvider>
           </GlobalProvider>
         </QueryProvider>
-        <Toaster />
       </body>
     </html>
   );

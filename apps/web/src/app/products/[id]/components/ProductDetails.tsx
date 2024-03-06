@@ -150,7 +150,7 @@ const ProductDetails = ({ id }: any) => {
                       Seller / Brand :
                     </b>
                     <span className="text-gray-500">
-                      {data?.stock?.storeBranch?.name || 'uknown'}
+                      {/* {data?.stock?.storeBranch?.name || 'uknown'} */}
                     </span>
                   </li>
                 </ul>

@@ -12,10 +12,10 @@ export async function createCategoryAction(req: Request) {
     const { name } = req.body as ICategory;
     const isExist = await findCategoryByNameRepo(name);
 
-    if (isExist) return { message: 'Category already exist', status: 400 };
-    if (!req.file) return { status: 400, message: 'No file chosen' };
+    // if (isExist) return { message: 'Category already exist', status: 400 };
+    // if (!req.file) return { status: 400, message: 'No file chosen' };
 
-    req.body.image = `${process.env.API_URL}/media/categories/${req.file.filename}`;
+    // req.body.image = `${process.env.API_URL}/media/categories/${req.file.filename}`;
 
     await createCategoryRepo(req.body);
     return { status: 200, message: 'Success add Category' };

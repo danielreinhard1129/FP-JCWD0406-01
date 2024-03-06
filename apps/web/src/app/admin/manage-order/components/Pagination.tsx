@@ -2,7 +2,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
-import { Modal, Spinner } from 'flowbite-react';
+import { Modal } from 'flowbite-react';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
 import { useGetTransactionById } from '@/hooks/transaction/useGetTransactionById';
 import { useUpdateStatusTransactionById } from '@/hooks/transaction/useUpdateStatusTransactionById';
@@ -69,7 +69,7 @@ const Pagination = ({
             <div className="flex flex-col md:flex-row md:justify-around border md:h-[70px] md:items-center">
               <div className="flex justify-between md:flex-col md:text-base flex-shrink-0 md:w-1/5 p-4">
                 <h1 className="font-semibold order">Transaction Id:</h1>
-                <h1 className="text-gray-600"># {transaction?.order_id}</h1>
+                <h1 className="text-gray-600"># {transaction?.orderId}</h1>
               </div>
               <div className="flex justify-between md:flex-col md:text-base flex-shrink-0 md:w-1/5 p-4 md:p-3 lg:p-4">
                 <h1 className="font-semibold order">Date:</h1>
@@ -89,7 +89,7 @@ const Pagination = ({
                   <button
                     onClick={() => {
                       setOpenModal(true),
-                        setTransactionId(transaction?.order_id),
+                        setTransactionId(transaction?.orderId),
                         setSubmit((prev) => !prev);
                     }}
                     className="px-4 py-2 bg-gray-100 text-[#333] rounded-md hover:bg-gray-200"
@@ -127,7 +127,7 @@ const Pagination = ({
                 <h1 className="font-semibold">Name:</h1>
               </div>
               <div className="ml-3">
-                <p className="font-[500]">{transaction?.customer?.username}</p>
+                <p className="font-[500]">{transaction?.user?.username}</p>
               </div>
             </div>
             <div className="flex p-4 border">
@@ -135,7 +135,7 @@ const Pagination = ({
                 <h1 className="font-semibold">Email:</h1>
               </div>
               <div className="ml-3">
-                <p className="font-[500]">{transaction?.customer?.email}</p>
+                <p className="font-[500]">{transaction?.user?.email}</p>
               </div>
             </div>
             <div className="flex p-4 border">
@@ -143,7 +143,7 @@ const Pagination = ({
                 <h1 className="font-semibold">Phone:</h1>
               </div>
               <div className="ml-3">
-                <p className="font-[500]">{transaction?.customer?.phone}</p>
+                <p className="font-[500]">{transaction?.user?.phone}</p>
               </div>
             </div>
             <div className="flex p-4 border">
@@ -214,7 +214,7 @@ const Pagination = ({
                   <>
                     <button
                       onClick={() => {
-                        setTransactionId(transaction.order_id), updateStatus(4);
+                        setTransactionId(transaction.orderId), updateStatus(4);
                         setOpenModal(false);
                       }}
                       className="mx-3 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-500"
@@ -241,7 +241,7 @@ const Pagination = ({
         <Modal.Header>Payment Proof</Modal.Header>
         <Modal.Body>
           <div className="h-full w-full object-cover">
-            <img src={transaction?.payment_proof} alt="payment" />
+            <img src={transaction?.paymentProof} alt="payment" />
           </div>
         </Modal.Body>
       </Modal>
@@ -264,7 +264,7 @@ const Pagination = ({
             className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-500"
             onClick={(e) => {
               handleReasonChange(e),
-                setTransactionId(transaction.order_id),
+                setTransactionId(transaction.orderId),
                 updateStatus(6);
               setCancel(false), setOpenModal(false);
             }}
@@ -284,7 +284,7 @@ const Pagination = ({
             <div className="flex justify-center gap-4">
               <button
                 onClick={() => {
-                  setTransactionId(transaction.order_id), updateStatus(3);
+                  setTransactionId(transaction.orderId), updateStatus(3);
                   setOpenModal(false), setAccept(false);
                 }}
                 className="mx-3 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-500"
@@ -315,7 +315,7 @@ const Pagination = ({
             <div className="flex justify-center gap-4">
               <button
                 onClick={() => {
-                  setTransactionId(transaction.order_id), updateStatus(1);
+                  setTransactionId(transaction.orderId), updateStatus(1);
                   setOpenModal(false), setDecline(false);
                 }}
                 className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-500 mt-2"

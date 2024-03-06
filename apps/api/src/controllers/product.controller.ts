@@ -37,15 +37,15 @@ export class ProductController {
 
   async getProductById(req: Request, res: Response, next: NextFunction) {
     try {
-      const { id } = req.params;
-      const result = await getProductByIdAction(parseInt(id, 0));
+      const id = parseInt(req.params.id, 10);
+      const result = await getProductByIdAction(id);
       return res.status(result.status).send(result);
     } catch (error) {
       next(error);
     }
   }
 
-  async getProductByIdProduct (req: Request, res: Response, next: NextFunction) {
+  async getProductByIdProduct(req: Request, res: Response, next: NextFunction) {
     try {
       const id = parseInt(req.params.id, 10);
       const result = await getProductByIdAction(id);
@@ -53,7 +53,6 @@ export class ProductController {
     } catch (error) {
       next(error);
     }
-   
   }
 
   async createProduct(req: Request, res: Response, next: NextFunction) {

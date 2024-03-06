@@ -20,7 +20,7 @@ export const getTransactionByDate = async (
         },
       },
       include: {
-        orderItem: {
+        orderItems: {
           include: {
             product: {
               select: {
@@ -32,7 +32,7 @@ export const getTransactionByDate = async (
             },
           },
         },
-        customer: true,
+        user: true,
         status: true,
       },
     });

@@ -46,7 +46,7 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ orderId }) => {
   }, [countdown, orderId]);
 
   return (
-    <div className="text-center">
+    <div className="text-center text-xl border-b-2 pb-10">
       {!cancel ? (
         <>
           <p className="font-bold mb-2">Waktu Tersisa</p>

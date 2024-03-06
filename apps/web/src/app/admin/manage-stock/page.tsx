@@ -4,7 +4,7 @@ import StockPage from './components/StockPage';
 
 const ManageStockPage = () => {
   return (
-    <div className='flex'>
+    <div className="flex">
       <SidebarAdmin />
       <StockPage />
     </div>

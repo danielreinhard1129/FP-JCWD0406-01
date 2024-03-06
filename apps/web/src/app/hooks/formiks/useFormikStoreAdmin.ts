@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 
 import { useFormik } from 'formik';
 import axios from 'axios';
-import toast from 'react-hot-toast';
+// import toast from 'react-hot-toast';
 
 const useFormikStoreAdmin = (
   method: string,
@@ -50,14 +50,14 @@ const useFormikStoreAdmin = (
               storeId: values.storeId,
             });
 
-        toast.success('Successfully toasted!', { duration: 1000 });
+        // toast.success('Successfully toasted!', { duration: 1000 });
         setOpenModal(false);
         refreshData();
         resetForm();
       } catch (error: any) {
         console.log(error);
 
-        toast.error(error.response.data.message);
+        // toast.error(error.response.data.message);
       }
     },
   });

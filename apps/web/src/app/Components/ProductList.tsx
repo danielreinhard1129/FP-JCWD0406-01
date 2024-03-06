@@ -1,5 +1,5 @@
 'use client';
-import { Splide, SplideSlide } from '@splidejs/react-splide';
+// import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/splide/dist/css/themes/splide-default.min.css';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -72,7 +72,7 @@ const ProductList = () => {
           </Link>
         </div>
 
-        <Splide
+        {/* <Splide
           options={{
             perPage: 4,
             perMove: 1,
@@ -125,7 +125,7 @@ const ProductList = () => {
               </div>
             </SplideSlide>
           ))}
-        </Splide>
+        </Splide> */}
       </div>
     </div>
   );

@@ -3,7 +3,7 @@ import { Button, Table } from 'flowbite-react';
 import React, { useState } from 'react';
 import { CiEdit } from 'react-icons/ci';
 import { MdDelete } from 'react-icons/md';
-import ModalDelete from '../../components/ModalDelete';
+// import ModalDelete from '../../components/ModalDelete';
 import useFormikStoreAdmin from '@/app/hooks/formiks/useFormikStoreAdmin';
 import ModalInput from '../../components/ModalInput';
 import FormStoreAdmin from './FormStoreAdmin';
@@ -45,7 +45,7 @@ export const TableRow = ({ index, storeAdmin, refreshData }: any) => {
           delete <MdDelete />
         </Button>
       </Table.Cell>
-      <ModalDelete
+      {/* <ModalDelete
         url={
           `http://localhost:8000/api/store-admins/` + storeAdmin.id
         }
@@ -53,7 +53,7 @@ export const TableRow = ({ index, storeAdmin, refreshData }: any) => {
         title={'Store Admin'}
         setOpenModal={setOpenDelete}
         refreshData={refreshData}
-      />
+      /> */}
       <ModalInput
         product={storeAdmin}
         openModal={openUpdate}

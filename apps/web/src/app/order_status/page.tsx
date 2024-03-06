@@ -1,10 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
-import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import CountdownTimer from './components/CountDown';
-import { Button, Modal, Spinner } from 'flowbite-react';
-import { HiOutlineExclamationCircle } from 'react-icons/hi';
+import { Button, Modal } from 'flowbite-react';
 import { useSearchParams } from 'next/navigation';
 import Dropzone from './components/Dropzone';
 import { useGetTransactionById } from '@/hooks/transaction/useGetTransactionById';
@@ -22,7 +20,7 @@ const ConfirmPayment = () => {
     transactionId: getTransactionId,
   });
 
-  const transactionId: ItransactionId = transaction?.order_id;
+  const transactionId: ItransactionId = transaction?.orderId;
   const { updateStatus } = useUpdateStatusTransactionById({
     transactionId,
     getTransactionById,
@@ -39,13 +37,16 @@ const ConfirmPayment = () => {
 
   return (
     <div className="container mx-auto max-w-7xl mt-1">
+      {/* <div className='my-10'>
+          <CountdownTimer orderId={transaction?.orderId}/>
+        </div> */}
       <div className="mt-8 border">
         <div className="flex bg-gray-100 flex-col md:flex-row md:justify-around border md:h-[100px] md:items-center">
           <div className="flex justify-between md:flex-col md:text-base flex-shrink-0 md:w-1/5 p-4">
             <h1 className="text-gray-600">transactionId:</h1>
             <p className="font-semibold">
               {' '}
-              {transaction?.order_id ? `# ${transaction?.order_id}` : ''}
+              {transaction?.orderId ? `# ${transaction?.orderId}` : ''}
             </p>
           </div>
           <div className="flex justify-between md:flex-col md:text-base flex-shrink-0 md:w-1/5 p-4 md:p-3 lg:p-4">
@@ -76,7 +77,7 @@ const ConfirmPayment = () => {
           <h1 className="font-semibold">Customer Name:</h1>
         </div>
         <div className="ml-3 md:w-1/2">
-          <p className="font-[500]">{transaction?.customer.username}</p>
+          <p className="font-[500]">{transaction?.user.username}</p>
         </div>
       </div>
       <div className="flex p-4 border">
@@ -84,7 +85,7 @@ const ConfirmPayment = () => {
           <h1 className="font-semibold">Customer Email:</h1>
         </div>
         <div className="ml-3 md:w-1/2">
-          <p className="font-[500]">{transaction?.customer.email}</p>
+          <p className="font-[500]">{transaction?.user.email}</p>
         </div>
       </div>
       <div className="flex p-4 border">
@@ -92,7 +93,7 @@ const ConfirmPayment = () => {
           <h1 className="font-semibold">Customer Phone:</h1>
         </div>
         <div className="ml-3 md:w-1/2">
-          <p className="font-[500]">{transaction?.customer.phone}</p>
+          <p className="font-[500]">{transaction?.user.phone}</p>
         </div>
       </div>
       {transaction?.orderItem?.map((product: any) => (
@@ -138,40 +139,40 @@ const ConfirmPayment = () => {
             </div>
           </div>
           <Dropzone
-            transaction_id={transaction?.order_id}
+            transaction_id={transaction?.orderId}
             className="p-16 text-center mx-auto my-10 border border-neutral-200 md:w-[800px] md:h-[400px] md:flex items-center justify-center"
             getTransactionById={getTransactionById}
           />
         </>
       )}
       <div className="mt-5 mb-20 flex justify-center md:justify-end gap-5 md:mr-2">
-        <Link href={'/order_history'}>
-          <button className="min-w-[150px] px-6 py-3.5 text-sm bg-gray-100 text-[#333] font-semibold rounded-md hover:bg-gray-200">
-            History
-          </button>
-        </Link>
-
-        {transaction?.status.id !== 1 ? (
-          transaction?.status.id !== 5 &&
-          transaction?.status.id !== 6 && (
-            <button
-              // onClick={() => setOpen(true)}
-              disabled={transaction?.status.id === 5 ? true : false}
-              onClick={() => updateStatus(5)}
-              className={`min-w-[150px] px-6 py-3.5 text-sm text-white rounded-md hover:bg-[#111] ${
-                transaction?.status.id === 5 ? 'bg-[#444]' : 'bg-[#111]'
-              }`}
-            >
-              Order confirmed
-            </button>
-          )
-        ) : (
+        {transaction?.status.id === 1 && (
           <button
-            // onClick={() => setOpen(true)}
             onClick={() => updateStatus(6)}
             className="min-w-[150px] px-6 py-3.5 text-sm bg-[#333] text-white rounded-md hover:bg-[#111]"
           >
             Cancel order
+          </button>
+        )}
+
+        {(transaction?.status.id === 2 ||
+          transaction?.status.id === 3 ||
+          transaction?.status.id === 5 ||
+          transaction?.status.id === 6) && (
+          <button className="min-w-[150px] px-6 py-3.5 text-sm bg-gray-100 text-[#333] font-semibold rounded-md hover:bg-gray-200">
+            History
+          </button>
+        )}
+
+        {transaction?.status.id === 4 && (
+          <button
+            disabled={transaction?.status.id === 5}
+            onClick={() => updateStatus(5)}
+            className={`min-w-[150px] px-6 py-3.5 text-sm text-white rounded-md hover:bg-[#111] ${
+              transaction?.status.id === 5 ? 'bg-[#444]' : 'bg-[#111]'
+            }`}
+          >
+            Order confirmed
           </button>
         )}
       </div>

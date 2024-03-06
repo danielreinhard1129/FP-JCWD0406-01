@@ -63,11 +63,11 @@ const Dropzone = ({ className, transaction_id, getTransactionById }: any) => {
 
     const URL: any = process.env.NEXT_PUBLIC_CLOUDINARY_URL;
 
-    let payment_proof;
+    let paymentProof;
     try {
       setIsLoading(true);
       const response = await axios.post(URL, formData);
-      payment_proof = response.data.url.toString();
+      paymentProof = response.data.url.toString();
     } catch (error) {
       console.log(error);
     } finally {
@@ -77,7 +77,7 @@ const Dropzone = ({ className, transaction_id, getTransactionById }: any) => {
     const { data } = await axiosInstance.patch(
       `/transactions/payment_proof/${transaction_id}`,
       {
-        payment_proof,
+        paymentProof,
       },
     );
     getTransactionById();

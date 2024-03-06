@@ -11,11 +11,11 @@ export async function updateProductAction(
   try {
     const isExist = await findProductByIdRepo(id);
     const findProductName = await findProductByNameRepo(body.name);
-    if (findProductName?.name === body.name && isExist?.name != body.name)
+    // if (findProductName?.name === body.name && isExist?.name != body.name)
       return { status: 400, message: 'Product name is already exist' };
     if (Object.keys(body).length === 0)
       return { status: 400, message: 'Body cannot empty' };
-    if (!isExist) return { status: 404, message: 'Product is not found' };
+    // if (!isExist) return { status: 404, message: 'Product is not found' };
     if (file) {
       body.image = `${process.env.API_URL}/media/products/${file.filename}`;
     }

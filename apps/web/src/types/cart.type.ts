@@ -22,8 +22,8 @@ export interface IStoreBranch {
   name: string;
   adminId: number;
   voucherId: number;
-  latitude: string;
-  longitude: string;
+  latitude: number;
+  longitude: number;
   cityId: number;
 }
 

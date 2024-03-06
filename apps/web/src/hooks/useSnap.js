@@ -23,11 +23,9 @@ const useSnap = () => {
       snap.embed(snap_token, {
         embedId,
         onSuccess: function (result) {
-          console.log('success', result);
           action.onSuccess(result);
         },
         onPending: function (result) {
-          console.log('pending', result);
           action.onPending(result);
         },
         onClose: function () {

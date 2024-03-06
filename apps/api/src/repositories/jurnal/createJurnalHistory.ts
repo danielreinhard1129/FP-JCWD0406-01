@@ -1,16 +1,12 @@
 import prisma from '@/prisma';
 
-export const createJurnalHistory = async ({
-  branchId,
-  notes,
-  details,
-}: any) => {
+export const createJurnalHistory = async ({ branchId, title, reason }: any) => {
   try {
-    const result = await prisma.jurnal.create({
+    const result = await prisma.journal.create({
       data: {
         branchId,
-        notes,
-        details,
+        title,
+        reason,
       },
     });
     return result;

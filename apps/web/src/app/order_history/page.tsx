@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { registerLocale } from 'react-datepicker';
@@ -8,7 +8,6 @@ import Pagination from './components/Pagination';
 import PaginationDate from './components/PaginationByDate';
 import { useGetTransactions } from '@/hooks/transaction/useGetTransactions';
 import { useGetTransactionsByDate } from '@/hooks/transaction/useGetTransactionsByDate';
-import { Spinner } from 'flowbite-react';
 import { useGetTransactionById } from '@/hooks/transaction/useGetTransactionById';
 
 registerLocale('id', id);

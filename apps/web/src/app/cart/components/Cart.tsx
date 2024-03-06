@@ -5,6 +5,8 @@ import { useContext, useEffect, useState } from 'react';
 import CartContext from '@/context/CartContext';
 import { IAddToCart } from '@/types/cart.type';
 import Link from 'next/link';
+
+
 const Cart = () => {
   const [subtotal, setSubtotal] = useState(0);
   const { addItemToCart, deleteItemFromCart, cart } = useContext(CartContext);

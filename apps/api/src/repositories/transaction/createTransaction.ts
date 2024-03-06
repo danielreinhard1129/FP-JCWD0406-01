@@ -6,22 +6,22 @@ export const createTransaction = async (
   amount: number,
   statusId: number,
   address: string,
-  customerId: number,
-  snap_token: string,
-  snap_redirect_url: string,
+  userId: number,
+  snapToken: string,
+  snapRedirectUrl: string,
   message: string,
 ) => {
   try {
     const result = await prisma.order.create({
       data: {
-        order_id: transactionId,
+        orderId: transactionId,
         branchId,
         amount,
         address,
-        customerId,
+        userId,
         statusId,
-        snap_token,
-        snap_redirect_url,
+        snapToken,
+        snapRedirectUrl,
         message,
       },
     });

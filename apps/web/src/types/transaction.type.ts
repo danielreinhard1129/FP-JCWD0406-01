@@ -39,17 +39,17 @@ export interface IStatus {
 
 export interface ITransaction {
   id: number;
-  order_id: string;
+  orderId: string;
   branchId: number;
   amount: number | any;
   message: string;
-  snap_token: string;
-  snap_redirect_url: string;
-  payment_proof: null;
+  snapToken: string;
+  snapRedirectUrl: string;
+  paymentProof: null;
   address: string;
   createdAt: Date | any;
   updatedAt: Date;
-  customerId: number;
+  userId: number;
   statusId: number;
   orderItem: IOrderItem[];
   customer: ICustomer;

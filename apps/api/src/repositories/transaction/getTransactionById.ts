@@ -3,9 +3,9 @@ import prisma from '@/prisma';
 export const getTransactionById = async (transactionId: string) => {
   try {
     const result = await prisma.order.findUnique({
-      where: { order_id: transactionId },
+      where: { orderId: transactionId },
       include: {
-        orderItem: {
+        orderItems: {
           include: {
             product: {
               select: {
@@ -17,7 +17,7 @@ export const getTransactionById = async (transactionId: string) => {
             },
           },
         },
-        customer: true,
+        user: true,
         status: true,
       },
     });

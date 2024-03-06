@@ -35,7 +35,7 @@ const Pagination = ({ data, setPage, totalPage, itemPerPage }: any) => {
           <div key={transaction.id}>
             <div className="flex justify-around border mt-5 h-[80px] items-center bg-gray-100">
               <div className="text-[12.5px] p-4 md:text-base font-bold flex-shrink-0 lg:w-1/5 text-center">
-                # {transaction?.order_id}
+                # {transaction?.orderId}
               </div>
               <div className="text-[12.5px] md:text-base flex-shrink-0 lg:w-1/5 p-4 text-center">
                 {transaction?.createdAt}
@@ -48,7 +48,7 @@ const Pagination = ({ data, setPage, totalPage, itemPerPage }: any) => {
               </div>
               <div className="text-[12.5px] md:text-base flex-shrink-0 w-1/5 p-4 text-center mr-5">
                 <Link
-                  href={`/order_status?transaction_id=${transaction?.order_id}`}
+                  href={`/order_status?transaction_id=${transaction?.orderId}`}
                 >
                   <button className="px-4 py-2 bg-gray-100 text-[#333] rounded-md hover:bg-gray-200">
                     Detail

@@ -1,26 +1,8 @@
 'use client';
-import { axiosInstance } from '@/libs/axios';
-import { useAppSelector } from '@/libs/hooks';
-import React, { useEffect, useState } from 'react';
+import { useGetUserAddress } from '@/hooks/user/useGetUserAddress';
 
 const SelectAddress = ({ selectedAddress, setSelectedAddress }: any) => {
-  const [addresses, setAddresses]: any = useState();
-
-  const user = useAppSelector((state) => state.user);
-
-  const getUserAddress = async () => {
-    try {
-      const response = await axiosInstance.get(`/customers/filter/${user.id}`);
-      setAddresses(response.data.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    getUserAddress();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { addresses } = useGetUserAddress();
 
   const handleAddressChange = (address: any) => {
     setSelectedAddress(address);
@@ -39,7 +21,7 @@ const SelectAddress = ({ selectedAddress, setSelectedAddress }: any) => {
             } cursor-pointer`}
             onClick={() => handleAddressChange(address)}
           >
-            <h3 className="text-lg font-semibold">Alamat {index + 1}</h3>
+            <h3 className="text-lg font-semibold">{address.label}</h3>
             <p>{address.detail}</p>
           </div>
         ))}

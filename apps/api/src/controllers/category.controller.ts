@@ -26,12 +26,12 @@ export class CategoryController {
   async updateCategory(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
-      const result = await updateCategoryAction(
-        parseInt(id, 0),
-        req.body,
-        req.file,
-      );
-      res.status(result.status).send(result);
+      // const result = await updateCategoryAction(
+      //   parseInt(id, 0),
+      //   req.body,
+      //   req.file,
+      // );
+      // res.status(result.status).send(result);
     } catch (error) {
       next(error);
     }

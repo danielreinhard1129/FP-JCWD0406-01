@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { IProduct } from '@/app/type.web/product.type';
 import axios from 'axios';
-import toast from 'react-hot-toast';
+// import toast from 'react-hot-toast';
 
 const useFormikProductForm = (
   product: any,
@@ -65,12 +65,12 @@ const useFormikProductForm = (
                 },
               );
 
-        toast.success('Successfully toasted!', { duration: 1000 });
+        // toast.success('Successfully toasted!', { duration: 1000 });
         setOpenModal(false);
         refreshData();
         resetForm();
       } catch (error: any) {
-        toast.error(error.response.data.message || error.response.data);
+        // toast.error(error.response.data.message || error.response.data);
       }
     },
   });

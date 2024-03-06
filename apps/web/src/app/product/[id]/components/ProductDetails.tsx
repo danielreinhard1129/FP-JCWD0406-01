@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 
-import { useRef, useContext, useState, useEffect } from 'react';
+import { useRef, useContext, useState } from 'react';
 import CartContext from '@/context/CartContext';
 import { useAppSelector } from '@/libs/hooks';
 import { useRouter } from 'next/navigation';
@@ -19,11 +19,11 @@ const ProductDetails = ({ product }: any) => {
   const readyStock = stock >= 1;
 
   setTimeout(() => {
-    if (product?.stock?.length) {
+    if (product?.stocks?.length) {
       function calculateTotalAmount(product: any) {
         let totalAmount = 0;
 
-        for (const stockItem of product?.stock) {
+        for (const stockItem of product?.stocks) {
           totalAmount += stockItem.amount;
         }
         return totalAmount;
@@ -35,19 +35,16 @@ const ProductDetails = ({ product }: any) => {
   });
 
   const addToCartHandler = () => {
-    // validasi user jika sudah login
     if (!user.id) {
       return router.push('/login');
     }
 
-    // valiadsi user jika belum diverifikasi
     if (!user.isVerified) {
       return toast.info('Your account is not yet verified.');
     }
 
     const cartItem = {
       productId: product.id,
-      branchStoreId: product.stock[0].branchId,
       name: product.name,
       price: product.price,
       image: product.image,

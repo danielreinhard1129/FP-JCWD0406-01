@@ -35,27 +35,27 @@ export async function getOrdersRepo(
       AND.push({ product });
     }
 
-    const result = await prisma.order.findMany({
-      where: {
-        AND,
-      },
+    // const result = await prisma.order.findMany({
+    //   where: {
+    //     AND,
+    //   },
 
-      include: {
-        customer: {
-          include: {
-            profile: true,
-          },
-        },
-        product: {
-          include: {
-            category: true,
-          },
-        },
-        status: true,
-        StoreBranch: true,
-      },
-    });
-    return result;
+    //   include: {
+    //     customer: {
+    //       include: {
+    //         profile: true,
+    //       },
+    //     },
+    //     product: {
+    //       include: {
+    //         category: true,
+    //       },
+    //     },
+    //     status: true,
+    //     StoreBranch: true,
+    //   },
+    // });
+    // return result;
   } catch (error) {
     throw error;
   }

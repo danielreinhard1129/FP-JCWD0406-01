@@ -19,15 +19,15 @@ export async function createProductAction(req: Request) {
     const findIdCategory = await findCategoryByIdRepo(categoryId);
     const stores = await getStoresRepo();;
 
-    if ( stores && stores?.length <= 0 ) {
-      return { status: 400, message: 'there are no branch stores' };
-    }
+    // if ( stores && stores?.length <= 0 ) {
+    //   return { status: 400, message: 'there are no branch stores' };
+    // }
 
-    if (findByName)
-      return { message: 'product name already exists', status: 400 };
+    // if (findByName)
+    //   return { message: 'product name already exists', status: 400 };
     if (!findIdCategory)
       return { message: 'Category is not found', status: 400 };
-    if (!req.file) return { status: 400, message: 'No file chosen' };
+    // if (!req.file) return { status: 400, message: 'No file chosen' };
 
     if (unitWeight === 'GRAM' && weight >= 1000)
       return {
@@ -35,7 +35,7 @@ export async function createProductAction(req: Request) {
         message: 'The unit weight in grams cannot be more than 1000',
       };
 
-    image = `${process.env.API_URL}/media/products/${req.file.filename}`;
+    // image = `${process.env.API_URL}/media/products/${req.file.filename}`;
     price = parseInt(String(price), 0);
     categoryId = parseInt(String(categoryId), 0);
     weight = parseInt(String(weight), 0);
@@ -48,7 +48,7 @@ export async function createProductAction(req: Request) {
       unitWeight,
       categoryId,
     };
-    await createProductRepo(data, stores as IStore[]);
+    // await createProductRepo(data, stores as IStore[]);
 
     return { message: 'Success add product', status: 200 };
   } catch (error) {

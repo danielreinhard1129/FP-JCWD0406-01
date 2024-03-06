@@ -38,7 +38,9 @@ const FormProduct = ({ setOpenModal, formik }: any) => {
           })}
         </select>
         {formik.touched.categoryId && formik.errors.categoryId && (
-          <p className="text-red-500 text-xs mt-1">{formik.errors.categoryId}</p>
+          <p className="text-red-500 text-xs mt-1">
+            {formik.errors.categoryId}
+          </p>
         )}
       </div>
       <div className="mt-3 w-[80%]">
@@ -56,7 +58,9 @@ const FormProduct = ({ setOpenModal, formik }: any) => {
           onBlur={formik.handleBlur}
         ></textarea>
         {formik.touched.description && formik.errors.description && (
-          <p className="text-red-500 text-xs mt-1">{formik.errors.description}</p>
+          <p className="text-red-500 text-xs mt-1">
+            {formik.errors.description}
+          </p>
         )}
       </div>
       <div className="mt-3 flex mx-12 w-[80%]">

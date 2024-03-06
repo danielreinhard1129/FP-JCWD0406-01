@@ -68,7 +68,7 @@ export const usePaymentByMidtrans = ({
       const response = await axiosInstance.post('/transactions', {
         address: selectedAddress?.detail,
         amount: total,
-        customerId: user.id,
+        userId: user.id,
         message,
         branchId,
         products: cart?.cartItems?.map((item: any) => ({
@@ -83,27 +83,25 @@ export const usePaymentByMidtrans = ({
         setSelectedAddress('');
 
         setSnapShow(true);
-        snapEmbed(response.data.transaction.snap_token, 'snap-container', {
+        snapEmbed(response.data.transaction.snapToken, 'snap-container', {
           onSuccess: function (result: string) {
-            console.log('success', result);
             setMidtrans(JSON.parse(result));
             router.push(
-              `/order_status?transaction_id=${response.data.transaction.order_id}`,
+              `/order_status?transaction_id=${response.data.transaction.orderId}`,
             );
             setSnapShow(false);
           },
           onPending: function (result: string) {
-            console.log('pending', result);
             setMidtrans(result);
             router.push(
-              `/order_status?transaction_id=${response.data.transaction.order_id}`,
+              `/order_status?transaction_id=${response.data.transaction.orderId}`,
             );
             setSnapShow(false);
           },
           onClose: function (result: string) {
             setMidtrans(result);
             router.push(
-              `/order_status?transaction_id=${response.data.transaction.order_id}`,
+              `/order_status?transaction_id=${response.data.transaction.orderId}`,
             );
             setSnapShow(false);
           },

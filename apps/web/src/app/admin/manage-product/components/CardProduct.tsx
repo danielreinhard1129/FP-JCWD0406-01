@@ -1,11 +1,11 @@
 'use client';
 import { CiEdit } from 'react-icons/ci';
 import { MdDelete } from 'react-icons/md';
-import { FormatRupiah } from '@arismun/format-rupiah';
+// import { FormatRupiah } from '@arismun/format-rupiah';
 import { Card } from 'flowbite-react';
 import React, { useState } from 'react';
 import FormProduct from './FormProduct';
-import ModalDelete from '../../components/ModalDelete';
+// import ModalDelete from '../../components/ModalDelete';
 import useFormikProductForm from '@/app/hooks/formiks/useFormikProductForm';
 import ModalInput from '../../components/ModalInput';
 
@@ -34,7 +34,7 @@ const CardProduct = ({ product, refreshData }: any) => {
       </p>
       <div className="flex justify-between">
         <p className="font-bold">
-          <FormatRupiah value={product?.price} /> /{' '}
+          {/* <FormatRupiah value={product?.price} /> /{' '} */}
           <span className="opacity-80 font-normal">
             {product.weight} {product.unitWeight.toLowerCase()}
           </span>
@@ -57,13 +57,13 @@ const CardProduct = ({ product, refreshData }: any) => {
           delete <MdDelete />
         </p>
       </div>
-      <ModalDelete
+      {/* <ModalDelete
         url={`http://localhost:8000/api/products/delete-product/` + product.id}
         openModal={openDelete}
         title={'Product'}
         setOpenModal={setOpenDelete}
         refreshData={refreshData}
-      />
+      /> */}
       <ModalInput
         product={product}
         openModal={openUpdate}

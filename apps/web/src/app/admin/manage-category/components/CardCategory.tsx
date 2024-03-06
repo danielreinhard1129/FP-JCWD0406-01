@@ -4,7 +4,7 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import { CiEdit } from 'react-icons/ci';
 import { MdDelete } from 'react-icons/md';
-import ModalDelete from '../../components/ModalDelete';
+// import ModalDelete from '../../components/ModalDelete';
 import FormCategory from './FormCategory';
 import useFormikCategoryForm from '@/app/hooks/formiks/useFormikCategoryForm';
 import ModalInput from '../../components/ModalInput';
@@ -45,13 +45,13 @@ const CardCategory = ({ category, refreshData }: any) => {
           delete <MdDelete />
         </p>
       </div>
-      <ModalDelete
+      {/* <ModalDelete
         url={`http://localhost:8000/api/products/delete-product/` + category.id}
         openModal={openDelete}
         title={'Category'}
         setOpenModal={setOpenDelete}
         refreshData={refreshData}
-      />
+      /> */}
 
       <ModalInput
         category={category}

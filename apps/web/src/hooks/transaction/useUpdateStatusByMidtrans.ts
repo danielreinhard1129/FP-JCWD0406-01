@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 import { axiosInstance } from '@/libs/axios';
 
 interface UpdateStatusParams {
-  transaction_id: string | null;
-  transaction_status: string | null;
+  transactionId: string | null;
+  transactionStatus: string | null;
 }
 
 export const useUpdateStatusByMidtrans = ({
-  transaction_id,
-  transaction_status,
+  transactionId,
+  transactionStatus,
 }: UpdateStatusParams) => {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -16,9 +16,9 @@ export const useUpdateStatusByMidtrans = ({
     setIsLoading(true);
     try {
       await axiosInstance.post(
-        `/transactions/status/midtrans/${transaction_id}`,
+        `/transactions/status/midtrans/${transactionId}`,
         {
-          transaction_status,
+          transactionStatus,
         },
       );
       setIsLoading(false);
@@ -30,7 +30,7 @@ export const useUpdateStatusByMidtrans = ({
   useEffect(() => {
     handleUpdateStatus();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [transaction_id, transaction_status]);
+  }, [transactionId, transactionStatus]);
 
   return {
     isLoading,

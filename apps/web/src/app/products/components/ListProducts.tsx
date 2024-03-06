@@ -1,6 +1,6 @@
 'use client';
 import useGetAllProduct from '@/app/hooks/products/useGetAllProduct';
-import { FormatRupiah } from '@arismun/format-rupiah';
+// import { FormatRupiah } from '@arismun/format-rupiah';
 import { Button } from 'flowbite-react';
 import { Poppins } from 'next/font/google';
 import Image from 'next/image';
@@ -64,7 +64,7 @@ const ListProducts = ({filterCategory}: any) => {
                         </div>
                         <div className="flex mb-3 items-center justify-between">
                           <p className="text-base font-bold  mr-6 text-[#b1bf4c]">
-                            <FormatRupiah value={product?.price} />
+                            {/* <FormatRupiah value={product?.price} /> */}
                           </p>
                           <Link href={'/cart'}>
                             <Button

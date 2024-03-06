@@ -10,13 +10,13 @@ type TransactionStatus = string | null;
 
 const ConfirmPayment = () => {
   const searchParams = useSearchParams();
-  const transaction_id: TransactionId = searchParams.get('order_id');
-  const transaction_status: TransactionStatus =
+  const transactionId: TransactionId = searchParams.get('order_id');
+  const transactionStatus: TransactionStatus =
     searchParams.get('transaction_status');
 
   const { isLoading } = useUpdateStatusByMidtrans({
-    transaction_id,
-    transaction_status,
+    transactionId,
+    transactionStatus,
   });
 
   if (isLoading) {
@@ -29,16 +29,16 @@ const ConfirmPayment = () => {
 
   return (
     <div className="min-h-screen flex flex-col gap-10 items-center justify-center">
-      {transaction_status == 'capture' || transaction_status == 'settlement' ? (
+      {transactionStatus == 'capture' || transactionStatus == 'settlement' ? (
         <div className="max-w-xl">
           <h1 className="text-center">
             Great news! Your payment has been successfully received and
             processed. Thank you for choosing our services.
           </h1>
         </div>
-      ) : transaction_status == 'cancel' ||
-        transaction_status == 'deny' ||
-        transaction_status == 'expire' ? (
+      ) : transactionStatus == 'cancel' ||
+        transactionStatus == 'deny' ||
+        transactionStatus == 'expire' ? (
         <div className="max-w-xl">
           <h1 className="text-center">
             We regret to inform you that the payment for your recent transaction
@@ -46,7 +46,7 @@ const ConfirmPayment = () => {
             If the issue persists, contact our customer support for assistance.
           </h1>
         </div>
-      ) : transaction_status == 'pending' ? (
+      ) : transactionStatus == 'pending' ? (
         <div className="max-w-xl">
           <div className="text-center flex flex-col">
             <span>
@@ -60,7 +60,7 @@ const ConfirmPayment = () => {
           </div>
         </div>
       ) : null}
-      <Link href={`/order_status/?transaction_id=${transaction_id}`}>
+      <Link href={`/order_status/?transaction_id=${transactionId}`}>
         <button className="px-5 py-2 bg-green-500 rounded-md text-white">
           Order Status
         </button>

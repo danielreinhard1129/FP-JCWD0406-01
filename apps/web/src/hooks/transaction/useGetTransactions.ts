@@ -1,6 +1,5 @@
 import { axiosInstance } from '@/libs/axios';
 import { useEffect, useState } from 'react';
-import { FaLess } from 'react-icons/fa6';
 
 interface ITransactionsParams {
   setTotalPage: (input: number) => void;

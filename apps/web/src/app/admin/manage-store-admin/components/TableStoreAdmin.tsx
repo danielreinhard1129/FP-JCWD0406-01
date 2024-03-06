@@ -4,7 +4,7 @@ import { Button, Spinner, Table } from 'flowbite-react';
 import React, { useState } from 'react';
 import { CiEdit } from 'react-icons/ci';
 import { MdDelete } from 'react-icons/md';
-import ModalDelete from '../../components/ModalDelete';
+// import ModalDelete from '../../components/ModalDelete';
 import ModalInput from '../../components/ModalInput';
 import FormStoreAdmin from './FormStoreAdmin';
 import useFormikStoreAdmin from '@/app/hooks/formiks/useFormikStoreAdmin';
@@ -40,7 +40,7 @@ const TableStoreAdmin = ({ data, loading, refreshData }: IParam) => {
           </Table.HeadCell>
         </Table.Head>
         <Table.Body className="divide-y">
-          {data.map((storeAdmin, index) => {
+          {/* {data.map((storeAdmin, index) => {
             return (
               <TableRow
                 storeAdmin={storeAdmin}
@@ -48,7 +48,7 @@ const TableStoreAdmin = ({ data, loading, refreshData }: IParam) => {
                 refreshData={refreshData}
               />
             );
-          })}
+          })} */}
         </Table.Body>
       </Table>
     </div>

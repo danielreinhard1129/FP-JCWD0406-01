@@ -7,7 +7,7 @@ export const updateTransactionStatus = async (
   try {
     const result = await prisma.order.update({
       where: {
-        order_id: transactionId,
+        orderId: transactionId,
       },
       data: {
         statusId,

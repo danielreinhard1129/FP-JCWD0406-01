@@ -1,5 +1,4 @@
 'use client';
-import { Spinner } from 'flowbite-react';
 import ProductDetails from './components/ProductDetails';
 import { useGetProductById } from '@/hooks/product/useGetProductById';
 

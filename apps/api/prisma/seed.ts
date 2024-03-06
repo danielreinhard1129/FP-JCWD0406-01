@@ -2,13 +2,13 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-  const result = await prisma.store_Branch.create({
-    data: {
-      name: 'Serjon Store',
-      latitude: 'dqdqd',
-      longitude: 'dqdqw',
-    },
-  });
+  // const result = await prisma.store_Branch.create({
+  //   data: {
+  //     name: 'Serjon Store',
+  //     latitude: 'dqdqd',
+  //     longitude: 'dqdqw',
+  //   },
+  // });
 
   // -- store branch Data
   // name: "Jaya Store",
@@ -45,7 +45,7 @@ async function main() {
   //     },
   //   });
 
-  console.log({ result });
+  // console.log({ result });
 }
 main()
   .then(async () => {

@@ -15,15 +15,15 @@ export const updateStockRepo = async (
       data: body,
     });
 
-    const history = prisma.stock_Change.create({
-      data: {
-        stockId: id,
-        StockAfter: body.amount,
-        StockBefore,
-      },
-    });
+    // const history = prisma.stock_Change.create({
+    //   data: {
+    //     stockId: id,
+    //     StockAfter: body.amount,
+    //     StockBefore,
+    //   },
+    // });
 
-    return await prisma.$transaction([update, history]);
+    // return await prisma.$transaction([update, history]);
   } catch (error) {
     throw error
   }

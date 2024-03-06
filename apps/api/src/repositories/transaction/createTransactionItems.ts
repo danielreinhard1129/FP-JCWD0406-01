@@ -13,7 +13,7 @@ export const createTransactionItems = async ({
   }));
 
   try {
-    const result = await prisma.order_Item.createMany({
+    const result = await prisma.orderItem.createMany({
       data: data,
     });
     return result;

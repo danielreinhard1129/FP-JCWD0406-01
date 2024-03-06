@@ -1,5 +1,4 @@
 import { axiosInstance } from '@/libs/axios';
-import { useState } from 'react';
 
 interface IBranchsParams {
   setBranches: (input: string[]) => void;

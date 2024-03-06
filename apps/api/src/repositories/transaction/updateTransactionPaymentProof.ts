@@ -1,13 +1,14 @@
 import prisma from '@/prisma';
+
 export const updateTransactionPaymentProof = async (
   transactionId: string,
-  payment_proof: any,
+  paymentProof: any,
 ) => {
   try {
     const result = await prisma.order.update({
-      where: { order_id: transactionId },
+      where: { orderId: transactionId },
       data: {
-        payment_proof,
+        paymentProof,
       },
     });
     return result;

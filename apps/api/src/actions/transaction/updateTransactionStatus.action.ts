@@ -15,9 +15,9 @@ export const updateTransactionStatusAction = async (
 ) => {
   try {
     if (statusId === 1) {
-      const payment_proof = null;
+      const paymentProof = null;
       try {
-        await updateTransactionPaymentProof(transactionId, payment_proof);
+        await updateTransactionPaymentProof(transactionId, paymentProof);
       } catch (error) {
         throw new Error('update transaction failled');
       }
@@ -56,7 +56,7 @@ export const updateTransactionStatusAction = async (
               (mutation) => mutation.productId === orderItem.productId,
             );
             if (stockMutation) {
-              orderItem.quantity -= stockMutation.qty;
+              orderItem.quantity -= stockMutation.quantity;
             }
           }
 
@@ -75,9 +75,9 @@ export const updateTransactionStatusAction = async (
         const monthName = formatDate.split(',')[0];
         const createdAt = `${transactionDate.getFullYear()} ${monthName}`;
 
-        const notes = `The transaction with ID ${transactionId} has been cancelled.`;
+        const title = `The transaction with ID ${transactionId} has been cancelled.`;
         const details = `Pada tanggal ${createdAt}, transaksi dengan ID ${transactionId} telah dibatalkan. Pembatalan ini dilakukan karena ${reason}, `;
-        await createJurnalHistory({ branchId, notes, details });
+        await createJurnalHistory({ branchId, title, reason: details });
       } catch (error) {
         throw new Error('cancel order Failed');
       }
