@@ -16,13 +16,13 @@ export class ProductRouter {
   private initializeRoutes(): void {
     this.router.post(
       '/create-product',
-      upload(),
+      // upload(),
       productValidation,
       this.productController.createProduct,
     );
     this.router.put(
       '/update-product/:id',
-      upload(),
+      // upload(),
       productValidation,
       this.productController.editProduct,
     );

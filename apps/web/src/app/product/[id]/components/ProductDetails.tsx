@@ -76,7 +76,7 @@ const ProductDetails = ({ product }: any) => {
                 <img
                   ref={imgRef}
                   className="object-cover inline-block"
-                  src={product.image}
+                  src={product?.image}
                   alt="product title"
                   width="340"
                   height="340"
@@ -84,7 +84,7 @@ const ProductDetails = ({ product }: any) => {
               </div>
             </aside>
             <main>
-              <h2 className="font-semibold text-2xl mb-4">{product.name}</h2>
+              <h2 className="font-semibold text-2xl mb-4">{product?.name}</h2>
               <div className="flex flex-wrap items-center space-x-2 mb-2">
                 <svg
                   width="6px"
@@ -141,7 +141,7 @@ const ProductDetails = ({ product }: any) => {
                   {' '}
                   <b className="font-medium w-36 inline-block">Category:</b>
                   <span className="text-gray-500">
-                    {product.category?.name}
+                    {product?.category?.name}
                   </span>
                 </li>
               </ul>
