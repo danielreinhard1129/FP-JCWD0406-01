@@ -12,7 +12,7 @@ export function SidebarAdmin({ isOpen, onClose }: any) {
         onClick={onClose}
         className="fixed z-90 bottom-10 right-10 bg-teal-800 w-10 h-10 rounded-full drop-shadow-lg flex justify-center items-center text-white text-4xl hover:bg-teal-800 duration-300"
       >
-         <span className="text-white">
+        <span className="text-white">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="currentColor"

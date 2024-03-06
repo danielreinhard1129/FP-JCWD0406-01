@@ -4,7 +4,7 @@ import { Spinner } from 'flowbite-react';
 import { Roboto } from 'next/font/google';
 import React, { useState } from 'react';
 import { TableProducts } from './TableProducts';
-import StoreList from './StoreList';
+import StoreList from '../../components/StoreList';
 
 const roboto = Roboto({
   weight: '900',
@@ -12,7 +12,7 @@ const roboto = Roboto({
 });
 
 const StockPage = () => {
-  const [storeId, setStoreId] = useState(1);
+  const [storeId, setStoreId] = useState(0);
   const { data, loading, refreshData } = useGetStockByIdStore(storeId);
 
   if (loading) {

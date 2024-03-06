@@ -1,8 +1,8 @@
-import { getProductById } from '@/repositories/product/getProductById';
+import { findProductByIdRepo } from '@/repositories/product/findProductByIdRepo';
 
 export const getProductByIdAction = async (id: number) => {
   try {
-    const result = await getProductById(id);
+    const result = await findProductByIdRepo(id)
     return {
       message: 'get product by id success',
       status: 200,

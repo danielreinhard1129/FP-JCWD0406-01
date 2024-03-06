@@ -37,7 +37,7 @@ const ConfirmPayment = () => {
 
   return (
     <div className="container mx-auto max-w-7xl mt-1">
-        {/* <div className='my-10'>
+      {/* <div className='my-10'>
           <CountdownTimer orderId={transaction?.orderId}/>
         </div> */}
       <div className="mt-8 border">

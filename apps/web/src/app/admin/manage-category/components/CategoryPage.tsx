@@ -2,8 +2,8 @@
 import { Button, Spinner } from 'flowbite-react';
 import { Roboto } from 'next/font/google';
 import React, { useState } from 'react';
-import { Toaster } from 'react-hot-toast';
-import CardCategory from './CardCategory';
+// import { Toaster } from 'react-hot-toast';
+// import CardCategory from './CardCategory';
 import useGetAllCategory from '@/app/hooks/categories/useGetAllCategory';
 import ModalInput from '../../components/ModalInput';
 import FormCategory from './FormCategory';
@@ -33,7 +33,7 @@ const CategoryPage = () => {
   }
   return (
     <section className="bg-[#272c2f] px-10 py-10 text-white w-full">
-      <Toaster />
+      {/* <Toaster /> */}
       <div className="flex justify-between top-0 sticky bg-[#272c2f] py-4">
         <h1 className={`${roboto.className} text-3xl`}>Manage Category</h1>
         <Button size={'sm'} color="success" onClick={() => setOpenAdd(true)}>
@@ -41,7 +41,7 @@ const CategoryPage = () => {
         </Button>
       </div>
       <div className="grid grid-cols-5 gap-2">
-        {data &&
+        {/* {data &&
           data.map((category) => {
             return (
               <CardCategory
@@ -50,7 +50,7 @@ const CategoryPage = () => {
                 refreshData={refreshData}
               />
             );
-          })}
+          })} */}
       </div>
       <ModalInput
         openModal={openAdd}

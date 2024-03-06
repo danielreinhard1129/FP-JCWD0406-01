@@ -1,11 +1,10 @@
 import React from 'react';
-import InputFields from '../../manage-product/components/InputFields';
+import InputFields from '../../components/InputFields';
 import { Button } from 'flowbite-react';
 
 const FormStock = ({ setOpenModal, formik }: any) => {
   return (
     <form onSubmit={formik.handleSubmit}>
-        
       <InputFields
         label="amount"
         type="number"

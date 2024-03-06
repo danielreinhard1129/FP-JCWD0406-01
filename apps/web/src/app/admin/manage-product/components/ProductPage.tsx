@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Roboto } from 'next/font/google';
 import { Button, Spinner } from 'flowbite-react';
-import CardProduct from './CardProduct';
+// import CardProduct from './CardProduct';
 import useGetAllProduct from '@/app/hooks/products/useGetAllProduct';
 import ModalInput from '../../components/ModalInput';
 import FormProduct from './FormProduct';
@@ -44,7 +44,7 @@ const ProductPage = () => {
 
       {data ? (
         <div className="grid grid-cols-2 mt-8 gap-2">
-          {data.map((product) => {
+          {/* {data.map((product) => {
             return (
               <CardProduct
                 key={product.id}
@@ -52,7 +52,7 @@ const ProductPage = () => {
                 refreshData={refreshData}
               />
             );
-          })}
+          })} */}
         </div>
       ) : (
         <></>

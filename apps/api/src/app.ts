@@ -9,6 +9,7 @@ import express, {
 import cors from 'cors';
 import { PORT } from './config';
 import { ProductRouter } from './routers/product.router';
+import { CategoryRouter } from './routers/category.router';
 import { TransactionRouter } from './routers/transaction.router';
 import { UserRouter } from './routers/user.router';
 import { BranchRouter } from './routers/branch.router';
@@ -53,6 +54,7 @@ export default class App {
 
   private routes(): void {
     const productRouter = new ProductRouter();
+    const categoryRouter = new CategoryRouter();
     const transactionRouter = new TransactionRouter();
     const userRouter = new UserRouter();
     const branchRouter = new BranchRouter();

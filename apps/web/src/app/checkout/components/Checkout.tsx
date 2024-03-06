@@ -2,7 +2,7 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 import CartContext from '@/context/CartContext';
-import { useContext,useState } from 'react';
+import { useContext, useState } from 'react';
 import SelectAddress from './SelectAddress';
 import { useAppSelector } from '@/libs/hooks';
 import PaymentMethod from './PaymentMethod';
