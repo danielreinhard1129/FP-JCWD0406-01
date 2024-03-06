@@ -7,6 +7,7 @@ import { useSearchParams } from 'next/navigation';
 import Dropzone from './components/Dropzone';
 import { useGetTransactionById } from '@/hooks/transaction/useGetTransactionById';
 import { useUpdateStatusTransactionById } from '@/hooks/transaction/useUpdateStatusTransactionById';
+import Link from 'next/link';
 
 type ItransactionId = string | any;
 
@@ -159,9 +160,11 @@ const ConfirmPayment = () => {
           transaction?.status.id === 3 ||
           transaction?.status.id === 5 ||
           transaction?.status.id === 6) && (
-          <button className="min-w-[150px] px-6 py-3.5 text-sm bg-gray-100 text-[#333] font-semibold rounded-md hover:bg-gray-200">
-            History
-          </button>
+          <Link href="/order_history">
+            <button className="min-w-[150px] px-6 py-3.5 text-sm bg-gray-100 text-[#333] font-semibold rounded-md hover:bg-gray-200">
+              History
+            </button>
+          </Link>
         )}
 
         {transaction?.status.id === 4 && (

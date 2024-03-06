@@ -1,6 +1,6 @@
 'use client';
 // import { Splide, SplideSlide } from '@splidejs/react-splide';
-import '@splidejs/splide/dist/css/themes/splide-default.min.css';
+// import '@splidejs/splide/dist/css/themes/splide-default.min.css';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Poppins } from 'next/font/google';

@@ -1,4 +1,3 @@
-
 import { CategoryController } from '@/controllers/category.controller';
 import { upload } from '@/helper/multer';
 import { createCategoryValidation } from '@/validation/category.validation';
@@ -18,13 +17,13 @@ export class CategoryRouter {
     this.router.get('/', this.categoriesController.getAllCategory);
     this.router.post(
       '/create-category',
-      upload('categories'),
+      // upload('categories'),
       createCategoryValidation,
       this.categoriesController.createCategory,
     );
     this.router.put(
       '/update-category/:id',
-      upload('categories'),
+      // upload('categories'),
       this.categoriesController.updateCategory,
     );
     this.router.delete(
