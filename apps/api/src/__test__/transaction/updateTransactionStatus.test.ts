@@ -1,11 +1,11 @@
+import { createJurnalHistory } from '@/repositories/jurnal/createJurnalHistory';
+import { getStockMutationByOrderId } from '@/repositories/mutation/getStockMutationByOrderId';
+import { returnStock } from '@/repositories/stock/returnStock';
+import { returnStockById } from '@/repositories/stock/returnStockById';
 import { getTransactionById } from '@/repositories/transaction/getTransactionById';
+import { getTransactionDetailByOrderId } from '@/repositories/transaction/getTransactionDetailByOrderId';
 import { updateTransactionPaymentProof } from '@/repositories/transaction/updateTransactionPaymentProof';
 import { updateTransactionStatus } from '@/repositories/transaction/updateTransactionStatus';
-import { getStockMutationByOrderId } from '@/repositories/mutation/getStockMutationByOrderId';
-import { getTransactionDetailByOrderId } from '@/repositories/transaction/getTransactionDetailByOrderId';
-import { returnStockById } from '@/repositories/Stock/returnStockById';
-import { returnStock } from '@/repositories/Stock/returnStock';
-import { createJurnalHistory } from '@/repositories/jurnal/createJurnalHistory';
 
 import App from '@/app';
 import request from 'supertest';
@@ -15,8 +15,8 @@ jest.mock('@/repositories/transaction/updateTransactionPaymentProof.ts');
 jest.mock('@/repositories/transaction/updateTransactionStatus.ts');
 jest.mock('@/repositories/mutation/getStockMutationByOrderId.ts');
 jest.mock('@/repositories/transaction/getTransactionDetailByOrderId.ts');
-jest.mock('@/repositories/Stock/returnStockById.ts');
-jest.mock('@/repositories/Stock/returnStock.ts');
+jest.mock('@/repositories/stock/returnStockById.ts');
+jest.mock('@/repositories/stock/returnStock.ts');
 jest.mock('@/repositories/jurnal/createJurnalHistory.ts');
 jest.mock('fs/promises', () => ({
   readFile: jest.fn().mockResolvedValue('mockedTemplateContent'),
