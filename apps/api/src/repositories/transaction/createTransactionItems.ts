@@ -1,14 +1,10 @@
 import { IProductDB } from '@/types/product.type';
-import { Prisma, PrismaClient } from '@prisma/client';
-import { DefaultArgs } from '@prisma/client/runtime/library';
+import { PrismaClient } from '@prisma/client';
 
 export const createTransactionItems = async (
   products: Partial<IProductDB>[],
   transactionId: string,
-  transaction?: Omit<
-    PrismaClient<Prisma.PrismaClientOptions, never, DefaultArgs>,
-    '$connect' | '$disconnect' | '$on' | '$transaction' | '$use' | '$extends'
-  >,
+  transaction?: any,
 ) => {
   const data: any = products.map((product: Partial<IProductDB>) => ({
     orderId: transactionId,

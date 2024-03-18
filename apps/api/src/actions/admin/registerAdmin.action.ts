@@ -7,7 +7,7 @@ import { IRegisterAdmin } from '@/types/user.type';
 
 export const registerAdminAction = async (data: IRegisterAdmin) => {
   try {
-    await prisma.$transaction(async (transaction) => {
+    await prisma.$transaction(async (transaction: any) => {
       try {
         const { email, username, password } = data;
         const admins = await findAdminByEmailAndUsername(email, username);

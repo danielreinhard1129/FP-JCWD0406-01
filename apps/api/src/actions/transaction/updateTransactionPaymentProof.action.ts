@@ -11,9 +11,9 @@ export const updateTransactionPaymentProofAction = async (
   paymentProof: string,
 ) => {
   try {
-    await prisma.$transaction(async (transaction) => {
+    await prisma.$transaction(async (transaction: any) => {
       try {
-        const transactionById: ITransaction | any =
+        const transactionById: any =
           await getTransactionById(transactionId);
 
         if (!transactionById) {

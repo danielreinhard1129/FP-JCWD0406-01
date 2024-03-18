@@ -1,5 +1,4 @@
-import { Prisma, PrismaClient } from '@prisma/client';
-import { DefaultArgs } from '@prisma/client/runtime/library';
+import { PrismaClient } from '@prisma/client';
 
 interface IUser {
   email: string;
@@ -10,10 +9,7 @@ interface IUser {
 
 export const createUser = async (
   data: IUser,
-  transaction?: Omit<
-    PrismaClient<Prisma.PrismaClientOptions, never, DefaultArgs>,
-    '$connect' | '$disconnect' | '$on' | '$transaction' | '$use' | '$extends'
-  >,
+  transaction?: any
 ) => {
   try {
     const prisma = transaction || new PrismaClient();
