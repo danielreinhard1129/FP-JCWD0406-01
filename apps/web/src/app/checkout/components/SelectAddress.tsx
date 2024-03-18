@@ -1,17 +1,24 @@
 'use client';
 import { useGetUserAddress } from '@/hooks/user/useGetUserAddress';
+import { ISelectedAddress } from '@/types/address.type';
+import { ISelectAddressProps } from '@/types/props.type';
+import { toast } from 'sonner';
 
-const SelectAddress = ({ selectedAddress, setSelectedAddress }: any) => {
+const SelectAddress = ({
+  selectedAddress,
+  setSelectedAddress,
+}: ISelectAddressProps) => {
   const { addresses } = useGetUserAddress();
 
-  const handleAddressChange = (address: any) => {
+  const handleAddressChange = (address: ISelectedAddress) => {
     setSelectedAddress(address);
+    toast.success('the address you selected was successful');
   };
 
   return (
     <div>
       <div className="grid grid-cols-1 gap-4">
-        {addresses?.addresses.map((address: any, index: any) => (
+        {addresses?.addresses.map((address: ISelectedAddress) => (
           <div
             key={address.id}
             className={`p-4 border ${

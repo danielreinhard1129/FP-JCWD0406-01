@@ -1,4 +1,4 @@
-import { prisma } from '@/helper/prisma';
+import { prisma } from '@/helpers/prisma';
 import { ICategory } from '@/type.api/category.type';
 
 export async function createCategoryRepo(data: ICategory) {

@@ -10,9 +10,9 @@ const useGetAllProduct = (
 
   const [data, setData] = useState<IProduct[]>();
   const [loading, setLoading] = useState<boolean>(false);
-  useEffect(() => {
-    fetch();
-  }, [search, filterCategory]);
+  // useEffect(() => {
+  //   fetch();
+  // }, [search, filterCategory]);
   const fetch = async () => {
     try {
       setLoading(true);
@@ -29,7 +29,7 @@ const useGetAllProduct = (
             : ''
         }`.replaceAll(',', ''),
       );
-      console.log(data);
+      // console.log(data);
 
       setData(data.data);
     } catch (error) {

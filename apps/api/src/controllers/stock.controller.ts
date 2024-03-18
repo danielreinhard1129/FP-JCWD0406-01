@@ -18,7 +18,7 @@ export class StockController {
     try {
       const { id } = req.params;
       const result = await updateStockAction(parseInt(id, 0), req.body);
-      res.status(result.status).send(result);
+      // res.status(result.status).send(result);
     } catch (error) {
       next(error);
     }

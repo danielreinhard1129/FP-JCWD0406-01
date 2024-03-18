@@ -4,7 +4,6 @@ import './globals.css';
 import StoreProvider from './StoreProvider';
 import { Toaster } from 'sonner';
 import { GlobalProvider } from './GlobalProvider';
-import { Header } from '@/components/Header';
 import { QueryProvider } from './QueryClientProvider';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -25,10 +24,9 @@ export default function RootLayout({
         <QueryProvider>
           <GlobalProvider>
             <StoreProvider>
-              <Header />
               {children}
               <Toaster
-                duration={1000}
+                duration={1500}
                 expand={false}
                 richColors
                 position="top-right"

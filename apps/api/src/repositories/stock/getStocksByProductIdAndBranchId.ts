@@ -1,14 +1,16 @@
 import prisma from '@/prisma';
+import { IGetStocksByProductIdAndBranchIdParams } from '@/types/params.type';
+import { IProductRequest } from '@/types/product.type';
 
 export const getStocksByProductIdAndBranchId = async ({
   products,
   branchId,
-}: any) => {
+}: IGetStocksByProductIdAndBranchIdParams) => {
   try {
     const result = await prisma.stock.findMany({
       where: {
         productId: {
-          in: products.map((product: any) => product.id),
+          in: products.map((product: IProductRequest) => product.id),
         },
         branchId,
       },

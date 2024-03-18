@@ -1,6 +1,7 @@
 'use client';
 
 import { createContext, useState, useEffect } from 'react';
+import { toast } from 'sonner';
 
 const CartContext = createContext();
 
@@ -63,6 +64,13 @@ export const CartProvider = ({ children }) => {
 
     localStorage.setItem('cart', JSON.stringify({ cartItems: newCartItems }));
     setCartToState();
+
+    toast.success("product removed successfully")
+  };
+
+  const clearCart = () => {
+    localStorage.removeItem('cart');
+    setCart([]);
   };
 
   return (
@@ -71,6 +79,7 @@ export const CartProvider = ({ children }) => {
         cart,
         addItemToCart,
         deleteItemFromCart,
+        clearCart
       }}
     >
       {children}

@@ -1,12 +1,12 @@
 import React from 'react'
 import { SidebarAdmin } from '../components/SideBarAdmin'
-import ManageStoreAdminPage from './components/ManageStoreAdminPage'
+// import ManageStoreAdminPage from './components/ManageStoreAdminPage'
 
 const ManageStoreAdmin = () => {
   return (
     <div className='flex'>
-        <SidebarAdmin />
-        <ManageStoreAdminPage />
+        {/* <SidebarAdmin /> */}
+        {/* <ManageStoreAdminPage /> */}
     </div>
   )
 }

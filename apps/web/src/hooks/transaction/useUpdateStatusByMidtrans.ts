@@ -1,16 +1,12 @@
 import { useEffect, useState } from 'react';
 import { axiosInstance } from '@/libs/axios';
-
-interface UpdateStatusParams {
-  transactionId: string | null;
-  transactionStatus: string | null;
-}
+import { IUseUpdateStatusByMidtransParams } from '@/types/params.type';
 
 export const useUpdateStatusByMidtrans = ({
   transactionId,
   transactionStatus,
-}: UpdateStatusParams) => {
-  const [isLoading, setIsLoading] = useState(false);
+}: IUseUpdateStatusByMidtransParams) => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleUpdateStatus = async () => {
     setIsLoading(true);

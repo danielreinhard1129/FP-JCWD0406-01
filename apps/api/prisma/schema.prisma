@@ -12,14 +12,15 @@ model User {
   email      String    @unique
   phone      Int
   password   String
-  username   String
+  username   String    @unique
   isVerified Boolean   @default(false)
+  image      String
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
   addresses  Address[]
   orders     Order[]
 
-  @@map("user")
+  @@map("users")
 }
 
 model Address {
@@ -33,7 +34,7 @@ model Address {
   cityId    Int
   city      City    @relation(fields: [cityId], references: [id])
 
-  @@map("address")
+  @@map("addresses")
 }
 
 model City {
@@ -41,11 +42,11 @@ model City {
   name         String
   postalCode   Int
   provinceId   Int
-  province     Province      @relation(fields: [provinceId], references: [id], onDelete: Cascade)
+  province     Province      @relation(fields: [provinceId], references: [id])
   addresses    Address[]
   storeBranchs StoreBranch[]
 
-  @@map("city")
+  @@map("cities")
 }
 
 model Province {
@@ -53,7 +54,7 @@ model Province {
   name   String
   cities City[]
 
-  @@map("province")
+  @@map("provinces")
 }
 
 model StoreBranch {
@@ -62,26 +63,27 @@ model StoreBranch {
   latitude       Decimal
   longitude      Decimal
   address        String
-  adminId        Int
-  admin          Admin           @relation(fields: [adminId], references: [id], onDelete: Cascade)
   cityId         Int
   city           City            @relation(fields: [cityId], references: [id])
   stocks         Stock[]
   stockMutations StockMutation[]
   journals       Journal[]
+  admins         Admin[]
 
-  @@map("store_branch")
+  @@map("store_branches")
 }
 
 model Admin {
-  id           Int           @id @default(autoincrement())
-  name         String
-  email        String
+  id           Int         @id @default(autoincrement())
+  username     String      @unique
+  email        String      @unique
   password     String
-  isSuperAdmin Boolean       @default(false)
-  storeBranchs StoreBranch[]
+  image        String
+  isSuperAdmin Boolean     @default(false)
+  branchId     Int         @unique
+  storeBranch  StoreBranch @relation(fields: [branchId], references: [id])
 
-  @@map("admin")
+  @@map("admins")
 }
 
 model Product {
@@ -97,7 +99,7 @@ model Product {
   stocks      Stock[]
   orderItems  OrderItem[]
 
-  @@map("product")
+  @@map("products")
 }
 
 model Category {
@@ -105,7 +107,7 @@ model Category {
   name     String
   products Product[]
 
-  @@map("category")
+  @@map("categories")
 }
 
 model Stock {
@@ -119,7 +121,7 @@ model Stock {
   storeBranch    StoreBranch     @relation(fields: [branchId], references: [id])
   stockMutations StockMutation[]
 
-  @@map("stock")
+  @@map("stocks")
 }
 
 model Order {
@@ -140,7 +142,7 @@ model Order {
   status          Status      @relation(fields: [statusId], references: [id])
   orderItems      OrderItem[]
 
-  @@map("order")
+  @@map("orders")
 }
 
 model OrderItem {
@@ -157,7 +159,7 @@ model OrderItem {
 
   @@index([productId], map: "productId")
   @@index([orderId], map: "orderId")
-  @@map("order_item")
+  @@map("order_items")
 }
 
 model Status {
@@ -165,7 +167,7 @@ model Status {
   title  String
   orders Order[]
 
-  @@map("status")
+  @@map("statuses")
 }
 
 model StockMutation {
@@ -180,7 +182,7 @@ model StockMutation {
   destinationBranchId Int
   storeBranch         StoreBranch @relation(fields: [destinationBranchId], references: [id])
 
-  @@map("stock_mutation")
+  @@map("stock_mutations")
 }
 
 model Journal {
@@ -192,5 +194,5 @@ model Journal {
   updatedAt   DateTime    @updatedAt
   storeBranch StoreBranch @relation(fields: [branchId], references: [id])
 
-  @@map("journal")
+  @@map("journals")
 }

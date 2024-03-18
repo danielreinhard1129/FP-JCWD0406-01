@@ -1,54 +1,33 @@
 import { useEffect, useState } from 'react';
-import { IAddToCart } from '@/types/cart.type';
-
-interface IProduct {
-  branchId: number;
-  image: string;
-  name: string;
-  price: number;
-  productId: number;
-  quantity: number;
-  seller: string;
-  stock: number;
-}
-
-interface Icart {
-  cartItems: IProduct[];
-}
-
-interface ICalculateParams {
-  cart: Icart;
-  shipping: number;
-  tax: number;
-  setTotal: (input: number) => void;
-}
+import { ICartItem } from '@/types/cart.type';
+import { IUseCalculateTotalsParams } from '@/types/params.type';
 
 export const useCalculateTotals = ({
   cart,
   shipping,
   tax,
   setTotal,
-}: ICalculateParams) => {
-  const [subtotal, setSubtotal] = useState(0);
-  const [item, setItem] = useState(0);
+}: IUseCalculateTotalsParams) => {
+  const [subtotal, setSubtotal] = useState<number>(0);
+  const [item, setItem] = useState<number>(0);
 
   useEffect(() => {
     const calculateTotals = () => {
-      let subTotal = 0;
+      let subTotal: number = 0;
 
-      cart?.cartItems?.forEach((cartItem: IAddToCart) => {
+      cart?.cartItems?.forEach((cartItem: ICartItem) => {
         subTotal += cartItem.price * cartItem.quantity;
       });
 
       let total = 0;
-      cart?.cartItems?.forEach((cartItem: IAddToCart) => {
+      cart?.cartItems?.forEach((cartItem: ICartItem) => {
         total += cartItem.quantity;
       });
 
       setItem(total);
 
-      const newSubtotal = subTotal.toFixed(2);
-      const newTotal = (subTotal + shipping + tax).toFixed(2);
+      const newSubtotal: string = subTotal.toFixed(2);
+      const newTotal: string = (subTotal + shipping + tax).toFixed(2);
 
       setSubtotal(Number(newSubtotal));
       setTotal(Number(newTotal));

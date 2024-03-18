@@ -4,71 +4,33 @@
 import { useRef, useContext, useState } from 'react';
 import CartContext from '@/context/CartContext';
 import { useAppSelector } from '@/libs/hooks';
-import { useRouter } from 'next/navigation';
-import { IProduct } from '@/types/cart.type';
-import { toast } from 'sonner';
+import { numberToRupiah } from '@/app/utils/numberToRupiah';
+import { calculateTotalAmount } from '@/app/utils/calculateTotalAmount ';
+import { addToCartHandler } from '@/app/utils/addToCartHandler';
+import { IUserState } from '@/types/userState.type';
+import { IProductDetailProps } from '@/types/props.type';
 
-const ProductDetails = ({ product }: any) => {
-  const user = useAppSelector((state) => state.user);
-  const router = useRouter();
-  const [stock, setStock] = useState(0);
-
+const ProductDetails = ({ product }: IProductDetailProps) => {
+  const user: IUserState = useAppSelector((state) => state.user);
+  const [stock, setStock] = useState<number>(0);
   const { addItemToCart, cart } = useContext(CartContext);
-  const imgRef = useRef(null);
-
-  const readyStock = stock >= 1;
+  const imgRef = useRef<HTMLImageElement | null>(null);
+  const readyStock: boolean = stock >= 1;
 
   setTimeout(() => {
     if (product?.stocks?.length) {
-      function calculateTotalAmount(product: any) {
-        let totalAmount = 0;
-
-        for (const stockItem of product?.stocks) {
-          totalAmount += stockItem.amount;
-        }
-        return totalAmount;
-      }
-
       const totalAmount = calculateTotalAmount(product);
       setStock(totalAmount);
     }
   });
 
-  const addToCartHandler = () => {
-    if (!user.id) {
-      return router.push('/login');
-    }
-
-    if (!user.isVerified) {
-      return toast.info('Your account is not yet verified.');
-    }
-
-    const cartItem = {
-      productId: product.id,
-      name: product.name,
-      price: product.price,
-      image: product.image,
-      stock: stock,
-    };
-
-    const itemExist = cart?.cartItems?.find(
-      (i: IProduct) => i.productId === product.id,
-    );
-
-    if (itemExist) {
-      const newQuantity = itemExist.quantity + 1;
-      const item = { ...itemExist, quantity: newQuantity };
-
-      if (newQuantity > Number(itemExist.stock)) return;
-      addItemToCart(item);
-    } else {
-      addItemToCart(cartItem);
-    }
+  const handleAddToCart = () => {
+    addToCartHandler(user, product, stock, cart, addItemToCart);
   };
 
   return (
     <>
-      <section className="bg-white py-10">
+      <section className="bg-white md:py-20">
         <div className="container max-w-screen-xl mx-auto px-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-5">
             <aside>
@@ -97,12 +59,7 @@ const ProductDetails = ({ product }: any) => {
                 <span className="text-green-500">Verified</span>
               </div>
               <p className="mb-4 font-semibold text-xl">
-                {product?.price
-                  ? new Intl.NumberFormat('id-ID', {
-                      style: 'currency',
-                      currency: 'IDR',
-                    }).format(product.price)
-                  : ''}
+                {product?.price ? numberToRupiah(product.price) : ''}
               </p>
               <p className="mb-4 text-gray-500">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -119,7 +76,7 @@ const ProductDetails = ({ product }: any) => {
               <div className="flex flex-wrap gap-2 mb-5">
                 <button
                   className="px-4 py-2 inline-block text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700"
-                  onClick={addToCartHandler}
+                  onClick={handleAddToCart}
                   disabled={!readyStock}
                 >
                   <i className="fa fa-shopping-cart mr-2"></i>

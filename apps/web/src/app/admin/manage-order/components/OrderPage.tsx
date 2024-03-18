@@ -4,24 +4,28 @@ import Pagination from './Pagination';
 import { useGetTransactions } from '@/hooks/transaction/useGetTransactions';
 import { useGetTransactionsByBranchId } from '@/hooks/transaction/useGetTransactionsByBranchId';
 import { useGetBranchs } from '@/hooks/branch/useGetBranchs';
+import NavbarAdmin from '../../components/NavbarAdmin';
+import { useAppSelector } from '@/libs/hooks';
+import { IAdminState } from '@/types/admin.type';
+import { IOrderPageProps } from '@/types/props.type';
+import { IStoreBranch } from '@/types/branch.type';
 
-const OrderPage = () => {
-  const [totalPage, setTotalPage]: any = useState(0);
-  const [branches, setBranches]: any = useState([]);
-  const [selectedBranch, setSelectedBranch] = useState(0);
-  const [update, setUpdate] = useState(false);
-
-  const [page, setPage]: any = useState(1);
-  const itemPerPage = 6;
-
-  const branchId = 2;
-  const LoginAdmin: number = 2;
+const OrderPage = ({ isOpen, onClose }: IOrderPageProps) => {
+  const [totalPage, setTotalPage] = useState<number>(0);
+  const [branches, setBranches] = useState<IStoreBranch[]>([]);
+  const [selectedBranch, setSelectedBranch] = useState<number>(0);
+  const [update, setUpdate] = useState<boolean>(false);
+  const admin: IAdminState = useAppSelector((state) => state.admin);
+  const [page, setPage] = useState<number>(1);
+  const itemPerPage: number = 6;
+  const branchId: number = admin?.branchId;
+  const isSuperAdmin: boolean = admin?.isSuperAdmin;
 
   const {
     data: transactions,
     setTransactions,
     getTransactions,
-  } = useGetTransactions({ setTotalPage, page, itemPerPage });
+  } = useGetTransactions({ setTotalPage, page, itemPerPage, isSuperAdmin });
 
   const { getTransactionsByBranchId } = useGetTransactionsByBranchId({
     setTotalPage,
@@ -36,12 +40,12 @@ const OrderPage = () => {
     setBranches,
   });
 
-  const handleBranchChange = (event: any) => {
-    setSelectedBranch(event.target.value);
+  const handleBranchChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedBranch(parseInt(event.target.value, 10));
   };
 
   useEffect(() => {
-    if (LoginAdmin === 1) {
+    if (isSuperAdmin) {
       if (selectedBranch) {
         getTransactionsByBranchId();
       } else {
@@ -54,12 +58,15 @@ const OrderPage = () => {
     getBranchs();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, LoginAdmin, selectedBranch, update]);
+  }, [page, isSuperAdmin, selectedBranch, update, branchId]);
 
   return (
     <div className="container max-w-7xl mt-1 md:mx-3 lg:mx-10">
-      {LoginAdmin === 1 && (
-        <div className="mb-2">
+      <div className="mb-10">
+        <NavbarAdmin isOpen={isOpen} onClose={onClose} />
+      </div>
+      {isSuperAdmin && (
+        <div className="mb-2 ml-2">
           <select
             id="branch"
             name="branch"
@@ -96,13 +103,19 @@ const OrderPage = () => {
             <h1 className="text-gray-600">Action</h1>
           </div>
         </div>
-        <Pagination
-          data={transactions}
-          setPage={setPage}
-          totalPage={totalPage}
-          itemPerPage={itemPerPage}
-          setUpdate={setUpdate}
-        />
+        {!transactions.length ? (
+          <div className="my-10">
+            <h1 className="font-bold text-center text-xl">Data Empty</h1>
+          </div>
+        ) : (
+          <Pagination
+            data={transactions}
+            setPage={setPage}
+            totalPage={totalPage}
+            itemPerPage={itemPerPage}
+            setUpdate={setUpdate}
+          />
+        )}
       </div>
     </div>
   );

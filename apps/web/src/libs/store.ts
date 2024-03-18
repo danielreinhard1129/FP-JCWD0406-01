@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userSlice from './features/userSlice';
+import adminSlice from './features/adminSlice';
 
 export const makeStore = () => {
   return configureStore({
-    reducer: { user: userSlice },
+    reducer: { user: userSlice, admin: adminSlice },
   });
 };
 

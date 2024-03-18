@@ -1,4 +1,4 @@
-import { prisma } from '@/helper/prisma';
+import { prisma } from '@/helpers/prisma';
 import { IHistoryStock, IStock } from '@/type.api/stock.type';
 import React from 'react';
 

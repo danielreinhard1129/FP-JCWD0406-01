@@ -1,27 +1,62 @@
+/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 'use client';
 import CartContext from '@/context/CartContext';
-import { loginAction } from '@/libs/features/userSlice';
-import { useAppDispatch } from '@/libs/hooks';
+import { axiosInstance } from '@/libs/axios';
+import { loginAction, logoutAction } from '@/libs/features/userSlice';
+import { useAppDispatch, useAppSelector } from '@/libs/hooks';
+import { ICartItem } from '@/types/cart.type';
+import { IUser } from '@/types/user.type';
+import { IUserState } from '@/types/userState.type';
+import { Avatar, Dropdown } from 'flowbite-react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useContext, useEffect, useState } from 'react';
 import { FaRegHeart } from 'react-icons/fa';
 import { IoBagHandle } from 'react-icons/io5';
-import { IoPersonOutline } from 'react-icons/io5';
+import { toast } from 'sonner';
 
 export const Header = () => {
+  const router = useRouter();
+  const user: IUserState = useAppSelector((state) => state.user);
   const { cart } = useContext(CartContext);
-  const cartItems = cart?.cartItems;
+  const cartItems: ICartItem[] = cart?.cartItems;
+  const dispatch = useAppDispatch();
 
-  const login: any = {
-    id: 1,
-    name: 'step',
-    email: 'step@gmail.com',
-    role: 'admin',
-    isVerified: true,
+  const handleLogout = async () => {
+    try {
+      localStorage.removeItem('token_auth');
+      dispatch(logoutAction());
+      router.push('/');
+      toast.success('Logout success');
+    } catch (error) {
+      console.log(error);
+    }
   };
-  const dispach = useAppDispatch();
-  dispach(loginAction(login));
+
+  const keepLogin = async () => {
+    const token: string = localStorage.getItem('token_auth') as string;
+    try {
+      if (!token) return;
+
+      const data = await axiosInstance.get('/users/keeplogin', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const response: IUser = data?.data.data;
+      response.id;
+      dispatch(loginAction(response));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    keepLogin();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
   // const [countdown, setCountdown] = useState<number>(parseInt(
   //   localStorage.getItem('countdown') || '0',
@@ -36,7 +71,7 @@ export const Header = () => {
   //         return prevCountdown;
   //       }
 
-  //       const newCountdown = prevCountdown - 1;
+  //       const newCountdown: number = prevCountdown - 1;
   //       localStorage.setItem('countdown', newCountdown.toString());
 
   //       if (newCountdown <= 0) {
@@ -51,12 +86,11 @@ export const Header = () => {
   // }, [countdown]);
 
   return (
-    <header className="py-4 shadow-sm bg-white">
+    <div className="py-4 shadow-sm bg-white border-2">
       <div className="container flex items-center justify-around">
         <a href="">
-          <img src="/shop.png" className="w-10" alt="" />
+          <img src="/shop.png" className="w-8 md:w-10" alt="" />
         </a>
-
         <div className="hidden md:flex gap-2">
           <div className="relative w-full">
             <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -109,22 +143,40 @@ export const Header = () => {
             <div className="text-2xl mx-3">
               <IoBagHandle />
             </div>
-            <div className="text-xs leading-3">Wish List</div>
+            <div className="text-xs leading-3 text-center">Cart</div>
             <span className="absolute right-1 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-green-500 text-white text-xs">
               {cartItems?.length || 0}
             </span>
           </Link>
-          <a
-            href="#"
-            className=" text-gray-700 hover:text-green-500 transition relative"
+          <Dropdown
+            arrowIcon={false}
+            inline
+            label={
+              !user.image ? (
+                <Avatar rounded />
+              ) : (
+                <img
+                  src={user.image}
+                  className="h-10 w-10 rounded-full object-cover"
+                />
+              )
+            }
           >
-            <div className="text-2xl mx-3">
-              <IoPersonOutline />
-            </div>
-            <div className="text-xs leading-3">Wish List</div>
-          </a>
+            <Dropdown.Header>
+              <span className="block truncate text-sm font-medium">
+                {user.email}
+              </span>
+            </Dropdown.Header>
+            {!user.email ? (
+              <Link href="/login">
+                <Dropdown.Item>Log in</Dropdown.Item>
+              </Link>
+            ) : (
+              <Dropdown.Item onClick={handleLogout}>Sign out</Dropdown.Item>
+            )}
+          </Dropdown>
         </div>
       </div>
-    </header>
+    </div>
   );
 };

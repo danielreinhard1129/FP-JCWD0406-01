@@ -7,8 +7,8 @@ const ProductsPage = ({ categoryId }: any) => {
   const [filterCategory, setFilterCategory] = useState<[]>([]);
   return (
     <div className="flex bg-[url('/background.png')] bg-no-repeat bg-cover ">
-      <SidebarProducts setFilterCategory={setFilterCategory} />
-      <ListProducts filterCategory={filterCategory}/>
+      {/* <SidebarProducts setFilterCategory={setFilterCategory} />
+      <ListProducts filterCategory={filterCategory}/> */}
     </div>
   );
 };

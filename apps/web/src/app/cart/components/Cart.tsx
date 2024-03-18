@@ -1,56 +1,34 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
-
 import { useContext, useEffect, useState } from 'react';
 import CartContext from '@/context/CartContext';
 import { IAddToCart } from '@/types/cart.type';
 import Link from 'next/link';
-
+import { numberToRupiah } from '@/app/utils/numberToRupiah';
+import { useIncrementQty } from '@/hooks/cart/useIncrementQty';
+import { useDecrementQty } from '@/hooks/cart/useDecrementQty';
+import { calculateTotals } from '@/app/utils/calculateTotals';
 
 const Cart = () => {
-  const [subtotal, setSubtotal] = useState(0);
-  const { addItemToCart, deleteItemFromCart, cart } = useContext(CartContext);
+  const [subtotal, setSubtotal] = useState<number>(0);
+  const { deleteItemFromCart, cart } = useContext(CartContext);
   useEffect(() => {
-    const calculateTotals = () => {
-      let subTotal = 0;
-
-      cart?.cartItems?.forEach((cartItem: IAddToCart) => {
-        subTotal += cartItem.price * cartItem.quantity;
-      });
-
-      const newSubtotal = subTotal.toFixed(2);
-      setSubtotal(Number(newSubtotal));
-    };
-
-    calculateTotals();
+    calculateTotals({ cart, setSubtotal });
   }, [cart]);
 
-  const incrementQty = (cartItem: IAddToCart) => {
-    const newQuantity = cartItem?.quantity + 1;
-    const item = { ...cartItem, quantity: newQuantity };
+  const { incrementQty } = useIncrementQty();
 
-    if (newQuantity > Number(cartItem.stock)) return;
-
-    addItemToCart(item);
-  };
-
-  const decrementQty = (cartItem: IAddToCart) => {
-    const newQuantity = cartItem.quantity - 1;
-    const item = { ...cartItem, quantity: newQuantity };
-
-    if (newQuantity <= 0) return;
-    addItemToCart(item);
-  };
+  const { decrementQty } = useDecrementQty();
 
   return (
     <>
-      <div className="font-[sans-serif] bg-white py-4">
+      <div className="font-[sans-serif] bg-white">
         <div className="max-w-7xl mx-auto">
           {cart?.cartItems?.length > 0 ? (
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto ">
               {cart?.cartItems?.map((cartItem: IAddToCart, index: number) => (
-                <div key={index} className="mb-4 pb-4">
-                  <div className="flex flex-col md:flex-row items-center mb-2 border p-4">
+                <div key={index} className="md:mb-4 pb-4">
+                  <div className="flex flex-col md:flex-row items-center md:mb-2 border p-4 lg:py-9">
                     <div className="md:w-1/3 md:mr-4 mb-4 md:mb-0">
                       <img
                         src={cartItem.image}
@@ -64,12 +42,7 @@ const Cart = () => {
                       </p>
                       <div className="flex items-center mb-2">
                         <div className="font-bold mr-4">Price:</div>
-                        <div>
-                          {new Intl.NumberFormat('id-ID', {
-                            style: 'currency',
-                            currency: 'IDR',
-                          }).format(cartItem.price)}
-                        </div>
+                        <div>{numberToRupiah(cartItem.price)}</div>
                       </div>
                       <div className="flex items-center mb-2">
                         <div className="font-bold mr-4">Quantity:</div>
@@ -117,10 +90,7 @@ const Cart = () => {
                       <div className="flex items-center mb-2">
                         <div className="font-bold mr-4">Total:</div>
                         <div className="text-lg font-bold text-[#333]">
-                          {new Intl.NumberFormat('id-ID', {
-                            style: 'currency',
-                            currency: 'IDR',
-                          }).format(cartItem.price * cartItem.quantity)}
+                          {numberToRupiah(cartItem.price * cartItem.quantity)}
                         </div>
                       </div>
                       <div className="mb-4">
@@ -149,7 +119,7 @@ const Cart = () => {
               ))}
             </div>
           ) : (
-            <div className="flex justify-center items-center border px-10 py-20">
+            <div className="flex justify-center items-center border px-10 py-44">
               <h1 className="text-3xl font-bold text-gray-600">Cart Empty</h1>
             </div>
           )}
@@ -158,17 +128,17 @@ const Cart = () => {
               <li className="flex flex-wrap gap-4 text-md py-3">
                 Subtotal{' '}
                 <span className="ml-auto font-bold">
-                  {new Intl.NumberFormat('id-ID', {
-                    style: 'currency',
-                    currency: 'IDR',
-                  }).format(subtotal)}
+                  {numberToRupiah(subtotal)}
                 </span>
               </li>
             </ul>
             <Link href="/checkout">
               <button
+                disabled={!subtotal && true}
                 type="button"
-                className="mt-6 text-md px-6 py-2.5 w-full bg-blue-600 hover:bg-blue-700 text-white rounded"
+                className={`mt-8 text-md px-6 py-2.5 w-full ${
+                  !subtotal ? 'bg-blue-400' : 'bg-blue-600'
+                } hover:bg-blue-700 text-white rounded`}
               >
                 Check out
               </button>

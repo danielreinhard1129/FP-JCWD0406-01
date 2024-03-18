@@ -1,4 +1,5 @@
 import { BranchController } from '@/controllers/branch.controller';
+import { validateGetBranchByGeolocation } from '@/middleware/validateGetBranchByGeolocation';
 import { Router } from 'express';
 
 export class BranchRouter {
@@ -15,6 +16,7 @@ export class BranchRouter {
     this.router.get('/', this.branchController.getBranchs);
     this.router.post(
       '/select/branch',
+      validateGetBranchByGeolocation,
       this.branchController.getBranchByGeolocation,
     );
   }

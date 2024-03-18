@@ -1,10 +1,13 @@
-import prisma from '@/prisma';
+import { PrismaClient } from '@prisma/client';
 
 export const updateTransactionPaymentProof = async (
   transactionId: string,
-  paymentProof: any,
+  paymentProof: string,
+  transaction?: any,
 ) => {
   try {
+    const prisma = transaction || new PrismaClient();
+
     const result = await prisma.order.update({
       where: { orderId: transactionId },
       data: {

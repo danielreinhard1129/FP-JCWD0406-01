@@ -11,9 +11,9 @@ const Products = () => {
 
   return (
     <div>
-      <NavbarComp />
+      {/* <NavbarComp />
       <ProductsPage categoryId={categoryId} />
-      <MobileNavBar />
+      <MobileNavBar /> */}
     </div>
   );
 };

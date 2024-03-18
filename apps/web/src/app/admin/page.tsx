@@ -4,7 +4,7 @@ import { SidebarAdmin } from './components/SideBarAdmin';
 const AdminPage = () => {
   return (
     <section>
-      <SidebarAdmin />
+      {/* <SidebarAdmin /> */}
     </section>
   );
 };

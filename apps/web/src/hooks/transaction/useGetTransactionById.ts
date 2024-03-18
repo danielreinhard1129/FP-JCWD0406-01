@@ -2,21 +2,16 @@ import { useEffect, useState } from 'react';
 import { axiosInstance } from '@/libs/axios';
 import { ITransaction } from '@/types/transaction.type';
 import { toast } from 'sonner';
-
-interface ItransactionByIdParams {
-  transactionId: string | null;
-  setTransactions?: (input: string[]) => void;
-  setTotalPage?: (input: number) => void;
-  submit?: boolean;
-}
+import { IUseGetTransactionByIdParams } from '@/types/params.type';
 
 export const useGetTransactionById = ({
   transactionId,
+  setTransactionId,
   setTransactions,
   setTotalPage,
   submit,
-}: ItransactionByIdParams) => {
-  const [transaction, setTransaction] = useState<ITransaction | any>();
+}: IUseGetTransactionByIdParams) => {
+  const [transaction, setTransaction] = useState<ITransaction | null>(null);
 
   const getTransactionById = async () => {
     try {
@@ -28,10 +23,14 @@ export const useGetTransactionById = ({
       }
 
       const response = await axiosInstance.get(
-        `/transactions/filter/${transactionId}`,
+        `/transactions/${transactionId}`,
       );
 
       setTransaction(response.data.data);
+
+      if (setTransactionId) {
+        setTransactionId('');
+      }
 
       let transactionData = response.data.data;
 

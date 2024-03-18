@@ -1,5 +1,5 @@
 import { CategoryController } from '@/controllers/category.controller';
-import { upload } from '@/helper/multer';
+import { upload } from '@/helpers/multer';
 import { createCategoryValidation } from '@/validation/category.validation';
 import { Router } from 'express';
 

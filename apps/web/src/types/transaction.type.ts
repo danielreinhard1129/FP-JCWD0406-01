@@ -17,7 +17,7 @@ export interface IOrderItem {
   product: IProduct;
 }
 
-export interface ICustomer {
+export interface IUser {
   id: number;
   email: string;
   phone: number;
@@ -33,7 +33,7 @@ export interface ICustomer {
 }
 
 export interface IStatus {
-  id: number;
+  id: number 
   title: string;
 }
 
@@ -52,6 +52,6 @@ export interface ITransaction {
   userId: number;
   statusId: number;
   orderItem: IOrderItem[];
-  customer: ICustomer;
+  user: IUser;
   status: IStatus;
 }
