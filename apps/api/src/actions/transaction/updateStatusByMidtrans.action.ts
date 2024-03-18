@@ -5,16 +5,15 @@ import prisma from '@/prisma';
 import { getTransactionById } from '@/repositories/transaction/getTransactionById';
 import { updateTransactionStatus } from '@/repositories/transaction/updateTransactionStatus';
 import { updateStatusByMidtransParams } from '@/types/params.type';
-import { ITransaction } from '@/types/transaction.type';
 
 export const updateStatusByMidtransAction = async ({
   transactionId,
   transactionStatus,
 }: updateStatusByMidtransParams) => {
   try {
-    await prisma.$transaction(async (transaction) => {
+    await prisma.$transaction(async (transaction: any) => {
       try {
-        const transactionById: ITransaction | any=
+        const transactionById: any =
           await getTransactionById(transactionId)
 
         let status = 0;

@@ -37,7 +37,7 @@ export const createTransactionAction = async (
   body: ICreateTransactionParams,
 ) => {
   try {
-    const transaction = await prisma.$transaction(async (transaction) => {
+    const transaction = await prisma.$transaction(async (transaction: any) => {
       const { products, address, amount, userId, message, branchId } = body;
 
       if (!products.length) {
@@ -48,7 +48,7 @@ export const createTransactionAction = async (
 
       const totalStock: Record<string, number> = {};
 
-      getProducts.forEach((item) => {
+      getProducts.forEach((item: any) => {
         if (totalStock[item.productId]) {
           totalStock[item.productId] += item.amount;
         } else {
@@ -142,7 +142,7 @@ export const createTransactionAction = async (
         branchId: closestBranch?.nearestBranch?.id,
       });
 
-      nearestBranch?.insufficientProducts.forEach((item) => {
+      nearestBranch?.insufficientProducts.forEach((item:any) => {
         const { id, quantity } = item;
         const stockItem = getStockLendingStore.find(
           (item) => item.productId === id,

@@ -7,7 +7,7 @@ import { IRegisterUser } from '@/types/user.type';
 
 export const registerUserAction = async (data: IRegisterUser) => {
   try {
-    await prisma.$transaction(async (transaction) => {
+    await prisma.$transaction(async (transaction: any) => {
       try {
         const { email, username, password } = data;
         const users = await findUserByEmailAndUsername(email, username);
