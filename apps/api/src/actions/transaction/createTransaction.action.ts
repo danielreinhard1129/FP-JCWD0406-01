@@ -8,12 +8,12 @@ import { getTransactionById } from '@/repositories/transaction/getTransactionByI
 import { getBranchById } from '@/repositories/branchs/getBranchById';
 import { getBranchesExcluding } from '@/repositories/branchs/getBranchesExcluding';
 import { createMutationStock } from '@/repositories/mutation/createMutationStock';
-import { getStocksByProductId } from '@/repositories/Stock/getStocksByProductId';
-import { getStocksByProductIdAndBranchId } from '@/repositories/Stock/getStocksByProductIdAndBranchId';
-import { updateStockDecrementByProductIdAndBranchId } from '@/repositories/Stock/updateStockDecrementByProductIdAndBranchId';
-import { updateStockByProductIdAndBranchId } from '@/repositories/Stock/updateStockByProductIdAndBranchId';
-import { updateReturnStockByProductIdAndBranchId } from '@/repositories/Stock/updateReturnStockByProductIdAndBranchId';
-import { updateStockIncrementByProductIdAndBranchId } from '@/repositories/Stock/updateStockIncrementByProductIdAndBranchId';
+import { getStocksByProductId } from '@/repositories/stock/getStocksByProductId';
+import { getStocksByProductIdAndBranchId } from '@/repositories/stock/getStocksByProductIdAndBranchId';
+import { updateStockDecrementByProductIdAndBranchId } from '@/repositories/stock/updateStockDecrementByProductIdAndBranchId';
+import { updateStockByProductIdAndBranchId } from '@/repositories/stock/updateStockByProductIdAndBranchId';
+import { updateReturnStockByProductIdAndBranchId } from '@/repositories/stock/updateReturnStockByProductIdAndBranchId';
+import { updateStockIncrementByProductIdAndBranchId } from '@/repositories/stock/updateStockIncrementByProductIdAndBranchId';
 import {
   MIDTRANS_SERVER_KEY,
   MIDTRANS_APP_URL,

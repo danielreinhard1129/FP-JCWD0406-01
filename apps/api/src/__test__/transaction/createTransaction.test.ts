@@ -1,20 +1,14 @@
 import App from '@/app';
+import { getStocksByProductId } from '@/repositories/stock/getStocksByProductId';
+import { createTransaction } from '@/repositories/transaction/createTransaction';
 import request from 'supertest';
-import { getStocksByProductId } from '@/repositories/Stock/getStocksByProductId';
-import { updateStockByProductIdAndBranchId } from '@/repositories/Stock/updateStockByProductIdAndBranchId'; 
-import { getBranchById } from '@/repositories/branchs/getBranchById'; 
-import { getBranchesExcluding } from '@/repositories/branchs/getBranchesExcluding';
-import { getStocksByProductIdAndBranchId } from '@/repositories/Stock/getStocksByProductIdAndBranchId';
-import { createMutationStock } from '@/repositories/mutation/createMutationStock';
-import { createTransaction } from '@/repositories/transaction/createTransaction'; 
-import { createTransactionItems } from '@/repositories/transaction/createTransactionItems'; 
 
 
-jest.mock('@/repositories/Stock/getStocksByProductId.ts');
-jest.mock('@/repositories/Stock/updateStockByProductIdAndBranchId.ts');
+jest.mock('@/repositories/stock/getStocksByProductId.ts');
+jest.mock('@/repositories/stock/updateStockByProductIdAndBranchId.ts');
 jest.mock('@/repositories/branchs/getBranchById.ts');
 jest.mock('@/repositories/branchs/getBranchesExcluding.ts');
-jest.mock('@/repositories/Stock/getStocksByProductIdAndBranchId.ts');
+jest.mock('@/repositories/stock/getStocksByProductIdAndBranchId.ts');
 jest.mock('@/repositories/mutation/createMutationStock.ts');
 jest.mock('@/repositories/transaction/createTransaction.ts');
 jest.mock('@/repositories/transaction/createTransactionItems.ts');

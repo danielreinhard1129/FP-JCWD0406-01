@@ -1,7 +1,7 @@
 import App from '@/app';
-import { updateTransactionStatus } from '@/repositories/transaction/updateTransactionStatus';
-import { sendMailPaymentConfirmed } from '@/helpers/sendmail/payment-confirmed';
 import { sendMailInvalidPaymentProof } from '@/helpers/sendmail/invalid-payment-proof';
+import { sendMailPaymentConfirmed } from '@/helpers/sendmail/payment-confirmed';
+import { updateTransactionStatus } from '@/repositories/transaction/updateTransactionStatus';
 import request from 'supertest';
 
 jest.mock('@/repositories/transaction/updateTransactionStatus.ts');

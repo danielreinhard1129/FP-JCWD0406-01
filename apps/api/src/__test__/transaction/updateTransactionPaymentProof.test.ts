@@ -2,7 +2,6 @@ import App from '@/app';
 import { getTransactionById } from '@/repositories/transaction/getTransactionById';
 import { updateTransactionPaymentProof } from '@/repositories/transaction/updateTransactionPaymentProof';
 import { updateTransactionStatus } from '@/repositories/transaction/updateTransactionStatus';
-import { sendMailPaymentReceivedVerification } from '@/helpers/sendmail/payment-received-verification';
 import request from 'supertest';
 
 jest.mock('@/repositories/transaction/getTransactionById.ts');
