@@ -1,10 +1,14 @@
 import { IProductRequest } from '@/types/product.type';
-import { PrismaClient } from '@prisma/client';
+import { Prisma, PrismaClient } from '@prisma/client';
+import { DefaultArgs } from '@prisma/client/runtime/library';
 
 export const updateStockDecrementByProductIdAndBranchId = async (
   branchId: number,
   products: IProductRequest[],
-  transaction?: any,
+  transaction?: Omit<
+    PrismaClient<Prisma.PrismaClientOptions, never, DefaultArgs>,
+    '$connect' | '$disconnect' | '$on' | '$transaction' | '$use' | '$extends'
+  >,
 ) => {
   try {
     const result = products.map(async (product: IProductRequest) => {

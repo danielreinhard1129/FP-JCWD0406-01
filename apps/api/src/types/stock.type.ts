@@ -3,4 +3,6 @@ export interface IStock {
     productId: number;
     amount: number;
     branchId: number;
+    createdAt: Date
+    updatedAt: Date
 }

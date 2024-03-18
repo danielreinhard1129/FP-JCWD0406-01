@@ -11,3 +11,15 @@ export interface IBranchStore {
   address: string;
   cityId: number;
 }
+
+export interface INearestBranch {
+  nearestBranch: {
+    id: number;
+    name: string;
+    latitude: number;
+    longitude: number;
+    address: string;
+    cityId: number;
+  };
+  distance: string;
+}
