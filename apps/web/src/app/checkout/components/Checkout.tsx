@@ -2,7 +2,7 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 import CartContext from '@/context/CartContext';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import SelectAddress from './SelectAddress';
 import { useAppSelector } from '@/libs/hooks';
 import PaymentMethod from './PaymentMethod';
@@ -11,20 +11,25 @@ import { usePaymentByManual } from '@/hooks/payment/usePaymentByManual';
 import { useCalculateTotals } from '@/hooks/calculate/useCalculateTotals';
 import BranchService from './BranchService';
 import { useGetBranchByGeolocation } from '@/hooks/branch/useGetBranchByGeolocation';
+import { numberToRupiah } from '@/app/utils/numberToRupiah';
+import { IUserState } from '@/types/userState.type';
+import { redirect } from 'next/navigation';
+import { ISelectedAddress } from '@/types/address.type';
 
 const Checkout = () => {
-  const user = useAppSelector((state) => state.user);
+  const user: IUserState = useAppSelector((state) => state.user);
   const { cart } = useContext(CartContext);
-  const [shipping, setShipping] = useState(25000);
-  const [tax, setTax] = useState(10000);
-  const [message, setMessage] = useState('');
-  const [selectedAddress, setSelectedAddress]: any = useState(null);
-  const [total, setTotal]: any = useState(0);
+  const [shipping, setShipping] = useState<number>(25000);
+  const [tax, setTax] = useState<number>(10000);
+  const [message, setMessage] = useState<string>('');
+  const [selectedAddress, setSelectedAddress] =
+    useState<ISelectedAddress | null>(null);
+  const [total, setTotal] = useState<number>(0);
 
   const { branchService } = useGetBranchByGeolocation({ selectedAddress });
 
   const { snapShow, handlePaymentByMidtrans } = usePaymentByMidtrans({
-    branchId: branchService?.nearestBranch?.id,
+    branchId: branchService?.nearestBranch?.id as number,
     total,
     selectedAddress,
     setSelectedAddress,
@@ -35,7 +40,7 @@ const Checkout = () => {
   });
 
   const { handlePaymentByManual } = usePaymentByManual({
-    branchId: branchService?.nearestBranch?.id,
+    branchId: branchService?.nearestBranch?.id as number,
     selectedAddress,
     total,
     user,
@@ -51,6 +56,11 @@ const Checkout = () => {
     tax,
     setTotal,
   });
+
+  useEffect(() => {
+    if (!cart?.cartItems?.length) redirect('/');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
@@ -79,9 +89,9 @@ const Checkout = () => {
                       Select Your Nearest Branch
                     </h3>
                     <BranchService
-                      branchName={branchService?.nearestBranch?.name}
-                      address={branchService?.nearestBranch?.address}
-                      distance={branchService?.distance}
+                      branchName={branchService?.nearestBranch?.name as string}
+                      address={branchService?.nearestBranch?.address as string}
+                      distance={branchService?.distance as string}
                     />
                   </div>
                   <div className="text-[#333] mt-14 mb-4">
@@ -107,10 +117,7 @@ const Checkout = () => {
                           </div>
                         </div>
                         <div className="font-semibold flex items-center">
-                          {new Intl.NumberFormat('id-ID', {
-                            style: 'currency',
-                            currency: 'IDR',
-                          }).format(product.price)}
+                          {numberToRupiah(product.price)}
                         </div>
                       </div>
                     ))}
@@ -126,6 +133,7 @@ const Checkout = () => {
                       name="pesan"
                       rows={4}
                       className="mt-1 p-2 w-full border rounded-md"
+                      style={{ resize: 'none' }}
                     />
                   </div>
                   <div>
@@ -147,42 +155,25 @@ const Checkout = () => {
                         <div className="font-semibold">Items({item}):</div>
                         <div className="text-end">
                           {' '}
-                          {new Intl.NumberFormat('id-ID', {
-                            style: 'currency',
-                            currency: 'IDR',
-                          }).format(subtotal)}
+                          {numberToRupiah(subtotal)}
                         </div>
                       </div>
                       <div className="grid grid-cols-2 items-start gap-6">
                         <div className="">Fee Shipping:</div>
                         <div className="text-end">
-                          {new Intl.NumberFormat('id-ID', {
-                            style: 'currency',
-                            currency: 'IDR',
-                          }).format(shipping)}
+                          {numberToRupiah(shipping)}
                         </div>
                       </div>
                       <div className="grid grid-cols-2 items-start gap-6">
                         <div className="">Tax</div>
-                        <div className="text-end">
-                          {' '}
-                          {new Intl.NumberFormat('id-ID', {
-                            style: 'currency',
-                            currency: 'IDR',
-                          }).format(tax)}
-                        </div>
+                        <div className="text-end"> {numberToRupiah(tax)}</div>
                       </div>
                     </div>
                   </div>
                   <div className="absolute left-0 bottom-0 w-full p-4 mb-2">
                     <h4 className="flex flex-wrap gap-4 text-base text-[#333] font-semibold">
                       Total{' '}
-                      <span className="ml-auto">
-                        {new Intl.NumberFormat('id-ID', {
-                          style: 'currency',
-                          currency: 'IDR',
-                        }).format(total)}
-                      </span>
+                      <span className="ml-auto">{numberToRupiah(total)}</span>
                     </h4>
                   </div>
                 </div>

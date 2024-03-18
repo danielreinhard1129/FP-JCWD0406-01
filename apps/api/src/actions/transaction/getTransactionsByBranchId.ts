@@ -1,3 +1,4 @@
+import { logger } from '@/logger';
 import { getTotalTransactionsByBranchId } from '@/repositories/transaction/getTotalTransactionsByBranchId';
 import { getTransactionsByBranchId } from '@/repositories/transaction/getTransactionsByBranchId';
 
@@ -11,8 +12,9 @@ export const getTransactionsByBranchIdAction = async (
     const result = await getTransactionsByBranchId(branchId, skip, perPage);
     const getTotalTransactions = await getTotalTransactionsByBranchId(branchId);
 
+    logger.info(`get transaction by branch id ${branchId} was success`)
     return {
-      message: 'get transaction by branch id success',
+      message: `get transaction by branch id ${branchId} was success`,
       status: 200,
       data: result,
       total: getTotalTransactions,

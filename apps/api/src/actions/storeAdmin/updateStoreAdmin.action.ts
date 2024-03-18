@@ -1,8 +1,8 @@
 import { getStoreAdminByIdRepo } from "@/repositories/storeAdmin/getStoreAdminByIdRepo"
 import { updateStoreAdminRepo } from "@/repositories/storeAdmin/updateStoreAdminRepo"
-import { IStoreAdmin } from "@/type.api/storeAdmin.type"
+// import { IStoreAdmin } from "@/type.api/storeAdmin.type"
 
-export const updateStoreAdminAction = async (id:number,body:IStoreAdmin) => {
+export const updateStoreAdminAction = async (id:number,body:any) => {
   try {
 
     const isExist = await getStoreAdminByIdRepo(id)

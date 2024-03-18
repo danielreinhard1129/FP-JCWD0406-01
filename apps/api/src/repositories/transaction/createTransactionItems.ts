@@ -1,10 +1,12 @@
-import prisma from '@/prisma';
+import { IProductDB } from '@/types/product.type';
+import { PrismaClient } from '@prisma/client';
 
-export const createTransactionItems = async ({
-  products,
-  transactionId,
-}: any) => {
-  const data = products.map((product: any) => ({
+export const createTransactionItems = async (
+  products: IProductDB[],
+  transactionId: string,
+  transaction?: any,
+) => {
+  const data = products.map((product: IProductDB) => ({
     orderId: transactionId,
     productId: product?.product.id,
     productName: product?.product?.name,
@@ -13,9 +15,12 @@ export const createTransactionItems = async ({
   }));
 
   try {
+    const prisma = transaction || new PrismaClient();
+
     const result = await prisma.orderItem.createMany({
       data: data,
     });
+
     return result;
   } catch (error) {
     throw error;

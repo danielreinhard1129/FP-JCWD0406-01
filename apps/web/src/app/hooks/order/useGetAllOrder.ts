@@ -18,28 +18,28 @@ export const useGetAllOrder = (
 
   const fetch = async () => {
     try {
-      setLoading(true);
-      const { data } = await axios.get(
-        'http://localhost:8000/api/orders/' +
-          id +
-          `?${
-            startDate && endDate
-              ? `startDate=${startDate}&endDate=${endDate}&${
-                  categoryId
-                    ? `categoryId=${categoryId}`
-                    : `${search ? `search=${search}` : ''}`
-                }`
-              : `${
-                  categoryId
-                    ? `categoryId=${categoryId}&${
-                        search ? `search=${search}` : ''
-                      }`
-                    : `${search ? `search=${search}` : ''}`
-                }`
-          }`,
-      );
+      // setLoading(true);
+      // const { data } = await axios.get(
+      //   'http://localhost:8000/api/orders/' +
+      //     id +
+      //     `?${
+      //       startDate && endDate
+      //         ? `startDate=${startDate}&endDate=${endDate}&${
+      //             categoryId
+      //               ? `categoryId=${categoryId}`
+      //               : `${search ? `search=${search}` : ''}`
+      //           }`
+      //         : `${
+      //             categoryId
+      //               ? `categoryId=${categoryId}&${
+      //                   search ? `search=${search}` : ''
+      //                 }`
+      //               : `${search ? `search=${search}` : ''}`
+      //           }`
+      //     }`,
+      // );
 
-      setData(data.data);
+      // setData(data.data);
     } catch (error) {
       throw error;
     } finally {

@@ -1,5 +1,5 @@
 'use client';
-import { IStoreAdmin } from '@/app/type.web/storeAdmin.type';
+// import { IStoreAdmin } from '@/app/type.web/storeAdmin.type';
 import { Button, Spinner, Table } from 'flowbite-react';
 import React, { useState } from 'react';
 import { CiEdit } from 'react-icons/ci';
@@ -11,7 +11,7 @@ import useFormikStoreAdmin from '@/app/hooks/formiks/useFormikStoreAdmin';
 import { TableRow } from './TableRow';
 
 interface IParam {
-  data: IStoreAdmin[];
+  data: any
   loading: boolean;
   formik: any;
   refreshData: CallableFunction;

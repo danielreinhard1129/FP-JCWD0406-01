@@ -1,4 +1,4 @@
-import prisma from '@/prisma';
+import { PrismaClient } from '@prisma/client';
 
 export const createTransaction = async (
   transactionId: string,
@@ -10,8 +10,12 @@ export const createTransaction = async (
   snapToken: string,
   snapRedirectUrl: string,
   message: string,
+  transaction? : any
 ) => {
   try {
+
+    const prisma = transaction || new PrismaClient();
+
     const result = await prisma.order.create({
       data: {
         orderId: transactionId,

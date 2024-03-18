@@ -3,15 +3,14 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 export const useGetStockByIdStore = (id: number) => {
-  console.log(id);
 
   const [data, setData] = useState<IStock>();
   const [loading, setLoading] = useState<boolean>(false);
-  useEffect(() => {
-    if (id > 0) {
-      fetch();
-    }
-  }, [id]);
+  // useEffect(() => {
+  //   if (id > 0) {
+  //     fetch();
+  //   }
+  // }, [id]);
   const fetch = async () => {
     try {
       setLoading(true);

@@ -4,7 +4,7 @@ import React from 'react';
 import InputFields from '../../components/InputFields';
 
 const FormProduct = ({ setOpenModal, formik }: any) => {
-  const { data } = useGetAllCategory();
+  // const { data } = useGetAllCategory();
   return (
     <form
       className="flex flex-col items-center text-sm"
@@ -29,13 +29,13 @@ const FormProduct = ({ setOpenModal, formik }: any) => {
           onBlur={formik.handleBlur}
         >
           <option value="0">Select Category</option>
-          {data?.map((value) => {
+          {/* {data?.map((value) => {
             return (
               <option value={`${value.id}`} key={value.id}>
                 {value.name}
               </option>
             );
-          })}
+          })} */}
         </select>
         {formik.touched.categoryId && formik.errors.categoryId && (
           <p className="text-red-500 text-xs mt-1">

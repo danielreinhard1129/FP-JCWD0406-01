@@ -1,4 +1,4 @@
-import { prisma } from '@/helper/prisma';
+import { prisma } from '@/helpers/prisma';
 import { IProduct } from '@/type.api/product.type';
 
 export async function updateProductRepo(data: IProduct, id: number) {

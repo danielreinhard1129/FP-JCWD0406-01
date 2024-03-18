@@ -13,11 +13,11 @@ export const useGetHistoriesStock = (
   const [data, setData] = useState<IHistoryStock[]>();
   const [loading, setLoading] = useState<boolean>(false);
 
-  useEffect(() => {
-    if(id > 0){
-      fetch();
-    }
-  }, [id, categoryId, startDate, endDate,search]);
+  // useEffect(() => {
+  //   if(id > 0){
+  //     fetch();
+  //   }
+  // }, [id, categoryId, startDate, endDate,search]);
 
   const fetch = async () => {
     try {

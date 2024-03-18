@@ -1,10 +1,10 @@
 
-import { IStoreAdmin } from '@/app/type.web/storeAdmin.type';
+// import { IStoreAdmin } from '@/app/type.web/storeAdmin.type';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 
 const useGetStoreAdmins = () => {
-    const [data, setData] = useState<IStoreAdmin[]>();
+    const [data, setData] = useState<any[]>();
     const [loading, setLoading] = useState<boolean>(false);
     useEffect(() => {
       fetch();

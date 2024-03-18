@@ -54,13 +54,13 @@ const FilterReport = ({
             onChange={(e) => setCategoryId(parseInt(e.target.value, 0))}
           >
             <option value={0}>All</option>
-            {category.data?.map((value) => {
+            {/* {category.data?.map((value) => {
               return (
                 <option value={value.id} key={value.id}>
                   {value.name}
                 </option>
               );
-            })}
+            })} */}
           </select>
         </div>
       </div>

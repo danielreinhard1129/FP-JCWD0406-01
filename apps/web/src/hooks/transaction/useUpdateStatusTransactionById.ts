@@ -1,21 +1,16 @@
 import { axiosInstance } from '@/libs/axios';
-
-interface ITransactionParams {
-  transactionId: string;
-  getTransactionById?: () => void;
-  reason?: string;
-  setUpdate?: (input: any) => void;
-}
+import { IUseUpdateStatusTransactionByIdParams } from '@/types/params.type';
+import { toast } from 'sonner';
 
 export const useUpdateStatusTransactionById = ({
   transactionId,
   getTransactionById,
   reason,
   setUpdate,
-}: ITransactionParams) => {
+}: IUseUpdateStatusTransactionByIdParams) => {
   const updateStatus = async (statusId: number) => {
     try {
-      await axiosInstance.patch(`/transactions/status/${transactionId}`, {
+      await axiosInstance.patch(`/transactions/${transactionId}/status`, {
         statusId,
         reason,
       });
@@ -27,6 +22,10 @@ export const useUpdateStatusTransactionById = ({
       if (setUpdate) {
         setUpdate((prev: any) => !prev);
       }
+
+      if (statusId == 6) toast.success('your order has been canceled');
+
+      if (statusId == 5) toast.success('your order has been received');
     } catch (error) {
       console.log(error);
     }

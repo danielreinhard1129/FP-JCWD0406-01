@@ -1,11 +1,11 @@
-import { prisma } from '@/helper/prisma';
-import { IStoreAdmin } from '@/type.api/storeAdmin.type';
+import { prisma } from '@/helpers/prisma';
+// import { IStoreAdmin } from '@/type.api/storeAdmin.type';
 
-export const addStoreAdminRepo = async (data: IStoreAdmin) => {
+export const addStoreAdminRepo = async (data: any) => {
   try {
-    return await prisma.admin.create({
-      data,
-    });
+    // return await prisma.admin.create({
+    //   data,
+    // });
   } catch (error) {
     throw error;
   }

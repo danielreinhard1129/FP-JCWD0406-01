@@ -1,4 +1,9 @@
-const PaymentMethod = ({ handlePay, handlePaymentByManual }: any) => {
+import { IPaymentMethodProps } from '@/types/props.type';
+
+const PaymentMethod = ({
+  handlePay,
+  handlePaymentByManual,
+}: IPaymentMethodProps) => {
   return (
     <div className="flex gap-4 mt-3  md:mt-12 p-1 justify-center text-xs lg:text-base">
       <button

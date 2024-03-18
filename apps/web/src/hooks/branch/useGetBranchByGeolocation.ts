@@ -1,8 +1,14 @@
 import { axiosInstance } from '@/libs/axios';
+import { IBranchService } from '@/types/branch.type';
+import { IUseGetBranchByGeolocationParams } from '@/types/params.type';
 import { useEffect, useState } from 'react';
 
-export const useGetBranchByGeolocation = ({ selectedAddress }: any) => {
-  const [branchService, setBranchService]: any = useState();
+export const useGetBranchByGeolocation = ({
+  selectedAddress,
+}: IUseGetBranchByGeolocationParams) => {
+  const [branchService, setBranchService] = useState<IBranchService | null>(
+    null,
+  );
 
   const getBranch = async () => {
     try {

@@ -2,19 +2,18 @@ import Delivered from './Components/Delivered';
 import Carousel from './Components/Hero';
 import Category from './Components/Category';
 import ProductList from './Components/ProductList';
-import NavbarComp from '@/components/NavbarComp';
-import FooterComp from '@/components/FooterComp';
 import MobileNavBar from '@/components/MobileNavBar';
+import { Header } from '@/components/Header';
 
 const Home = () => {
   return (
     <main>
-      <NavbarComp />
+      <Header/>
+      {/* <NavbarComp /> */}
       <Delivered />
       <Carousel />
       <Category />
       <ProductList />
-      <FooterComp />
       <MobileNavBar />
     </main>
   );

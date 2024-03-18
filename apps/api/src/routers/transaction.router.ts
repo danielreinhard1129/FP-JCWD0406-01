@@ -1,4 +1,8 @@
 import { TransactionController } from '@/controllers/transaction.controller';
+import { validateCreateTransaction } from '@/middleware/validateCreateTransaction';
+import { validatePaymentProof } from '@/middleware/validatePaymentProof';
+import { validateUpdateStatusByMidtrans } from '@/middleware/validateUpdateStatusByMidtrans';
+import { validateUpdateTransactionStatus } from '@/middleware/validateUpdateTransactionStatus';
 import { Router } from 'express';
 
 export class TransactionRouter {
@@ -12,30 +16,39 @@ export class TransactionRouter {
   }
 
   private initializeRoutes(): void {
-    this.router.post('/', this.transactionController.createTransaction);
-    this.router.get('/', this.transactionController.getTransactions);
-    this.router.get(
-      '/filter/:transaction_id',
-      this.transactionController.getTransactionById,
+    this.router.post(
+      '/',
+      validateCreateTransaction,
+      this.transactionController.createTransaction,
     );
+    this.router.get('/', this.transactionController.getTransactions);
+    this.router.get('/:id', this.transactionController.getTransactionById);
+
     this.router.patch(
-      '/status/:transaction_id',
+      '/:id/status',
+      validateUpdateTransactionStatus,
       this.transactionController.updateTransactionStatus,
     );
+
     this.router.patch(
-      '/payment_proof/:transaction_id',
+      '/:id/payment-proof',
+      validatePaymentProof,
       this.transactionController.updateTransactionPaymentProof,
     );
-    this.router.post(
+
+    this.router.get(
       '/filter/date',
       this.transactionController.getTransactionByDate,
     );
+
     this.router.post(
-      '/status/midtrans/:transaction_id',
+      '/status/midtrans/:id',
+      validateUpdateStatusByMidtrans,
       this.transactionController.updateStatusByMidtrans,
     );
-    this.router.post(
-      '/filter/branchId',
+
+    this.router.get(
+      '/filter/branch',
       this.transactionController.getTransactionByBranchId,
     );
   }

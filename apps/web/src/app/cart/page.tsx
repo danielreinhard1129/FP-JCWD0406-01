@@ -1,14 +1,19 @@
 'use client';
+import { Header } from '@/components/Header';
 import Cart from './components/Cart';
+import isAuthUser from '@/components/isAuthUser';
+import Footer from '@/components/Footer';
 
 const Cartpage = () => {
   return (
     <div>
-      <div className="container max-w-7xl mx-auto py-10 px-5">
+      <Header />
+      <div className="container max-w-7xl mx-auto">
         <Cart />
       </div>
+      <Footer />
     </div>
   );
 };
 
-export default Cartpage;
+export default isAuthUser(Cartpage);

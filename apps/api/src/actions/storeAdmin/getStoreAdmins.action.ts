@@ -1,4 +1,4 @@
-import { excludeFields } from '@/helper/excludeFields';
+import { excludeFields } from '@/helpers/excludeFields';
 import { getStoreAdminRepo } from '@/repositories/storeAdmin/getStoreAdminsRepo';
 
 export const getStoreAdminAction = async () => {

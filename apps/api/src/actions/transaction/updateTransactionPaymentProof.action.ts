@@ -1,21 +1,52 @@
 import { updateTransactionPaymentProof } from '@/repositories/transaction/updateTransactionPaymentProof';
 import { updateTransactionStatus } from '@/repositories/transaction/updateTransactionStatus';
+import { getTransactionById } from '@/repositories/transaction/getTransactionById';
+import { logger } from '@/logger';
+import prisma from '@/prisma';
+import { sendMailPaymentReceivedVerification } from '@/helpers/sendmail/payment-received-verification';
+import { ITransaction } from '@/types/transaction.type';
 
 export const updateTransactionPaymentProofAction = async (
   transactionId: string,
   paymentProof: string,
 ) => {
   try {
-    const statusId = 2;
-    const result = await updateTransactionPaymentProof(
-      transactionId,
-      paymentProof,
-    );
-    const updateStatus = await updateTransactionStatus(transactionId, statusId);
+    await prisma.$transaction(async (transaction) => {
+      try {
+        const transactionById: ITransaction | any =
+          await getTransactionById(transactionId);
+
+        if (!transactionById) {
+          logger.error(`transaction with id ${transactionId} not found`);
+          throw new Error(`transaction with id ${transactionId} not found`);
+        }
+
+        const statusId = 2;
+        await updateTransactionPaymentProof(
+          transactionId,
+          paymentProof,
+          transaction,
+        );
+
+        await updateTransactionStatus(transactionId, statusId, transaction);
+
+        sendMailPaymentReceivedVerification({
+          user: transactionById?.user.username,
+          orderId: transactionById?.orderId,
+          to: transactionById?.user.email,
+        });
+
+        logger.info(
+          `update transaction payment proof success with transaction id ${transactionId}`,
+        );
+      } catch (error) {
+        throw error;
+      }
+    });
+
     return {
-      message: 'update transaction payment proof success',
+      message: `update transaction payment proof success with transaction id ${transactionId}`,
       status: 200,
-      data: { result, updateStatus },
     };
   } catch (error) {
     throw error;

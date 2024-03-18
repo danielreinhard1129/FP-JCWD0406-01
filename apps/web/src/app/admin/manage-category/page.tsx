@@ -1,12 +1,12 @@
 import React from 'react';
 import { SidebarAdmin } from '../components/SideBarAdmin';
-import CategoryPage from './components/CategoryPage';
+// import CategoryPage from './components/CategoryPage';
 
 const ManageCategoryPage = () => {
   return (
     <div className="flex">
-      <SidebarAdmin />
-      <CategoryPage />
+      {/* <SidebarAdmin /> */}
+      {/* <CategoryPage /> */}
     </div>
   );
 };
