@@ -10,7 +10,6 @@ import schedule from 'node-schedule';
 import { logger } from '@/logger';
 import prisma from '@/prisma';
 import { sendMailInvalidPaymentProof } from '@/helpers/sendmail/invalid-payment-proof';
-import { ITransaction } from '@/types/transaction.type';
 import { sendMailPaymentConfirmed } from '@/helpers/sendmail/payment-confirmed';
 import { sendMailOrderSend } from '@/helpers/sendmail/order-send';
 import { sendMailOrderDelivered } from '@/helpers/sendmail/order-delivered';
@@ -23,9 +22,9 @@ export const updateTransactionStatusAction = async (
   reason: string,
 ) => {
   try {
-    await prisma.$transaction(async (transaction) => {
+    await prisma.$transaction(async (transaction: any) => {
       try {
-        const transactionById: ITransaction | any =
+        const transactionById: any =
           await getTransactionById(id);
 
         if (!transactionById) {
@@ -128,7 +127,7 @@ export const updateTransactionStatusAction = async (
 
               for (const orderItem of getOrderItem) {
                 const stockMutation = getStockMutation.find(
-                  (mutation) => mutation.productId === orderItem.productId,
+                  (mutation: any) => mutation.productId === orderItem.productId,
                 );
                 if (stockMutation) {
                   orderItem.quantity -= stockMutation.quantity;

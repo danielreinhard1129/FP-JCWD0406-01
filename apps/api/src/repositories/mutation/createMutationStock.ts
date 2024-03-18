@@ -1,14 +1,10 @@
 import { IStock } from '@/types/stock.type';
-import { Prisma, PrismaClient } from '@prisma/client';
-import { DefaultArgs } from '@prisma/client/runtime/library';
+import { PrismaClient } from '@prisma/client';
 
 export const createMutationStock = async (
   transactionId: string,
   stocks: IStock[],
-  transaction?: Omit<
-    PrismaClient<Prisma.PrismaClientOptions, never, DefaultArgs>,
-    '$connect' | '$disconnect' | '$on' | '$transaction' | '$use' | '$extends'
-  >,
+  transaction?: any,
 ) => {
   const data = stocks.map((stock: IStock) => ({
     orderId: transactionId,
