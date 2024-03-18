@@ -14,8 +14,8 @@ export const updateStatusByMidtransAction = async ({
   try {
     await prisma.$transaction(async (transaction) => {
       try {
-        const transactionById: ITransaction | any =
-          await getTransactionById(transactionId);
+        const transactionById: ITransaction | any=
+          await getTransactionById(transactionId)
 
         let status = 0;
 
