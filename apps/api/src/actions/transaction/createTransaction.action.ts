@@ -100,17 +100,12 @@ export const createTransactionAction = async (
       let closestBranch: INearestBranch | any;
       let lendingStore;
 
-      console.log({closestBranch})
-
       if (nearestBranch?.insufficientProducts.length > 0) {
         closestBranch = FindNearestBranch(
           branchLatitude,
           branchLongitude,
           getBranchAll,
         );
-
-        console.log({closestBranch})
-
         const checkstockNearestBranch = await getStocksByProductIdAndBranchId({
           products: nearestBranch?.insufficientProducts,
           branchId: closestBranch?.nearestBranch?.id,
@@ -145,7 +140,7 @@ export const createTransactionAction = async (
       nearestBranch?.insufficientProducts.forEach((item:any) => {
         const { id, quantity } = item;
         const stockItem = getStockLendingStore.find(
-          (item) => item.productId === id,
+          (item: any) => item.productId === id,
         );
 
         if (stockItem) {
