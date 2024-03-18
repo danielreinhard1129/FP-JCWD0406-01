@@ -1,5 +1,5 @@
-import { returnStock } from '@/repositories/Stock/returnStock';
-import { returnStockById } from '@/repositories/Stock/returnStockById';
+import { returnStock } from '@/repositories/stock/returnStock';
+import { returnStockById } from '@/repositories/stock/returnStockById';
 import { createJurnalHistory } from '@/repositories/jurnal/createJurnalHistory';
 import { getStockMutationByOrderId } from '@/repositories/mutation/getStockMutationByOrderId';
 import { getTransactionById } from '@/repositories/transaction/getTransactionById';
