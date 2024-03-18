@@ -30,7 +30,7 @@ const SidebarProducts = ({ setFilterCategory }: any) => {
   };
 
   const [dropDown, setDropdown] = useState(false);
-  const { data } = useGetAllCategory();
+  // const { data } = useGetAllCategory();
   return (
     <div className="p-10 h-max bg-[#4a5765] text-white">
       <div className="flex">
@@ -59,7 +59,7 @@ const SidebarProducts = ({ setFilterCategory }: any) => {
         <span className="ml-2 text-xl font-bold">{dropDown ? '+' : '-'}</span>
       </h1>
 
-      <div className={`  ${dropDown ? 'hidden' : 'block'}`}>
+      {/* <div className={`  ${dropDown ? 'hidden' : 'block'}`}>
         {data &&
           data.map((value) => {
             return (
@@ -83,7 +83,7 @@ const SidebarProducts = ({ setFilterCategory }: any) => {
               </div>
             );
           })}
-      </div>
+      </div> */}
       <h2 className={`${poppins.className} mt-5`}>
         Filter <span className="text-[#b1bf4c]">Price</span>
       </h2>

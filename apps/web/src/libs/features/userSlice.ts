@@ -3,17 +3,17 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 
 interface UserState {
   id: number;
-  name: string;
-  role: string;
+  username: string;
   email: string;
+  image: string
   isVerified: boolean;
 }
 
 const initialState: UserState = {
   id: 0,
-  name: '',
+  username: '',
   email: '',
-  role: '',
+  image: '',
   isVerified: false,
 };
 
@@ -23,16 +23,16 @@ export const userSlice = createSlice({
   reducers: {
     loginAction: (state, action: PayloadAction<UserState>) => {
       state.id = action.payload.id;
-      state.name = action.payload.name;
+      state.username = action.payload.username;
       state.email = action.payload.email;
-      state.role = action.payload.role;
+      state.image = action.payload.image
       state.isVerified = action.payload.isVerified;
     },
     logoutAction: (state) => {
       state.id = 0;
-      state.name = '';
+      state.username = '';
       state.email = '';
-      state.role = '';
+      state.image = ''
       state.isVerified = false;
     },
   },

@@ -37,3 +37,28 @@ export interface IProduct {
   product: IItemProduct;
   storeBranch: IStoreBranch;
 }
+
+
+export interface ICartItem {
+  productId: number
+  name: string
+  price: number
+  image: string
+  quantity: number
+  stock: number
+}
+
+export interface ICart {
+  cartItems: ICartItem[]
+}
+
+export interface IAddItemToCart {
+  productId: number
+  name: string
+  price: number
+  image: string
+  stock: number
+  branchId: number
+  seller: string
+  quantity: number
+}

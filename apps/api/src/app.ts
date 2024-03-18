@@ -9,10 +9,11 @@ import express, {
 import cors from 'cors';
 import { PORT } from './config';
 import { ProductRouter } from './routers/product.router';
-import { CategoryRouter } from './routers/category.router';
 import { TransactionRouter } from './routers/transaction.router';
 import { UserRouter } from './routers/user.router';
 import { BranchRouter } from './routers/branch.router';
+import { AdminRouter } from './routers/admin.router';
+import { JournalRouter } from './routers/journal.router';
 
 export default class App {
   // private app: Express;
@@ -54,14 +55,18 @@ export default class App {
 
   private routes(): void {
     const productRouter = new ProductRouter();
-    const categoryRouter = new CategoryRouter();
     const transactionRouter = new TransactionRouter();
     const userRouter = new UserRouter();
     const branchRouter = new BranchRouter();
-    this.app.use('/api/customers', userRouter.getRouter());
+    const adminRouter = new AdminRouter();
+    const journalRouter = new JournalRouter();
+
+    this.app.use('/api/users', userRouter.getRouter());
     this.app.use('/api/products', productRouter.getRouter());
     this.app.use('/api/transactions', transactionRouter.getRouter());
     this.app.use('/api/branchs', branchRouter.getRouter());
+    this.app.use('/api/admins', adminRouter.getRouter());
+    this.app.use('/api/journals', journalRouter.getRouter());
   }
 
   public start(): void {

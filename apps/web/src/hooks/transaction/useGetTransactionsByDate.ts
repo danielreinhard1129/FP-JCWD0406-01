@@ -1,13 +1,7 @@
 import { axiosInstance } from '@/libs/axios';
+import { IUseGetTransactionsByDateParams } from '@/types/params.type';
+import { ITransaction } from '@/types/transaction.type';
 import { useEffect, useState } from 'react';
-
-interface ITransactionByDateParams {
-  pageOfDate: string;
-  itemPerPage: number;
-  selectedDate: string;
-  setTransactions: (input: string[]) => void;
-  setTotalPage: (input: number) => void;
-}
 
 export const useGetTransactionsByDate = ({
   pageOfDate,
@@ -15,18 +9,17 @@ export const useGetTransactionsByDate = ({
   selectedDate,
   setTransactions,
   setTotalPage,
-}: ITransactionByDateParams) => {
-  const [transactionByDate, setTransactionByDate]: any = useState([]);
+}: IUseGetTransactionsByDateParams) => {
+  const [transactionByDate, setTransactionByDate] = useState<ITransaction[]>(
+    [],
+  );
 
   const getTransactionByDate = async () => {
     try {
       setTransactions([]);
       setTotalPage(0);
-      const response = await axiosInstance.post(
-        `/transactions/filter/date?page=${pageOfDate}&perPage=${itemPerPage}`,
-        {
-          date: selectedDate,
-        },
+      const response = await axiosInstance.get(
+        `/transactions/filter/date?date=${selectedDate}&page=${pageOfDate}&perPage=${itemPerPage}`,
       );
       setTransactionByDate(response.data.data);
       setTotalPage(response.data.total);
@@ -38,7 +31,7 @@ export const useGetTransactionsByDate = ({
   useEffect(() => {
     getTransactionByDate();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pageOfDate]);
+  }, [pageOfDate, selectedDate]);
 
   return {
     data: transactionByDate,

@@ -16,7 +16,6 @@ const NavbarComp = () => {
   const router =  useRouter()
   const handleSearch = (e: any) => {
     e.preventDefault()
-    console.log(search);
     router.push(`/products?search=${search}`)
   }
   return (

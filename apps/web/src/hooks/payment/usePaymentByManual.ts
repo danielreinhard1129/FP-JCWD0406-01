@@ -1,44 +1,9 @@
+import CartContext from '@/context/CartContext';
 import { axiosInstance } from '@/libs/axios';
+import { IUsePaymnetByManualParams } from '@/types/params.type';
 import { useRouter } from 'next/navigation';
-
-interface IAddress {
-  id: number;
-  name: string;
-  detail: string;
-}
-
-interface Iuser {
-  id: number;
-  name: string;
-  email: string;
-  role: string;
-}
-
-interface IProduct {
-  branchId: number;
-  image: string;
-  name: string;
-  price: number;
-  productId: number;
-  quantity: number;
-  seller: string;
-  stock: number;
-}
-
-interface Icart {
-  cartItems: IProduct[];
-}
-
-interface IPaymnetByManualParams {
-  branchId: number;
-  selectedAddress: IAddress;
-  total: number;
-  user: Iuser;
-  cart: Icart;
-  message: string;
-  setMessage: (input: string) => void;
-  setSelectedAddress: (input: string) => void;
-}
+import { useContext } from 'react';
+import { toast } from 'sonner';
 
 export const usePaymentByManual = ({
   branchId,
@@ -49,16 +14,17 @@ export const usePaymentByManual = ({
   message,
   setMessage,
   setSelectedAddress,
-}: IPaymnetByManualParams) => {
+}: IUsePaymnetByManualParams) => {
   const router = useRouter();
+  const { clearCart } = useContext(CartContext);
 
   const handlePaymentByManual = async () => {
     try {
       if (selectedAddress === null) {
-        return alert('Select your address');
+        return toast.info('Select your address');
       }
       const response = await axiosInstance.post('/transactions', {
-        address: selectedAddress.detail,
+        address: selectedAddress?.detail,
         amount: total,
         userId: user.id,
         branchId,
@@ -70,12 +36,12 @@ export const usePaymentByManual = ({
       });
 
       if (response && response.status === 200) {
-        await localStorage.removeItem('cart');
+        clearCart();
         router.push(
-          `/order_status/?transaction_id=${response.data.transaction.orderId}`,
+          `/order-status/?transaction_id=${response.data.transaction.orderId}`,
         );
         setMessage('');
-        setSelectedAddress('');
+        setSelectedAddress(null);
       }
     } catch (error) {
       console.log(error);

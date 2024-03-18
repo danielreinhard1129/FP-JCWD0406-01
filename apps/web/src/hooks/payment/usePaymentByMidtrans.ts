@@ -1,48 +1,11 @@
 import { axiosInstance } from '@/libs/axios';
 import { AxiosError } from 'axios';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { toast } from 'sonner';
 import useSnap from '@/hooks/useSnap';
 import { useRouter } from 'next/navigation';
-
-interface Iuser {
-  id: number;
-  name: string;
-  email: string;
-  role: string;
-}
-
-interface IProduct {
-  branchId: number;
-  image: string;
-  name: string;
-  price: number;
-  productId: number;
-  quantity: number;
-  seller: string;
-  stock: number;
-}
-
-interface Icart {
-  cartItems: IProduct[];
-}
-
-interface IAddress {
-  id: number;
-  name: string;
-  detail: string;
-}
-
-interface IPaymentByMidtransParams {
-  branchId: number;
-  total: number;
-  selectedAddress: IAddress;
-  setSelectedAddress: (input: string) => void;
-  user: Iuser;
-  message: string;
-  cart: Icart;
-  setMessage: (input: string) => void;
-}
+import CartContext from '@/context/CartContext';
+import { IUsePaymentByMidtransParams } from '@/types/params.type';
 
 export const usePaymentByMidtrans = ({
   branchId,
@@ -53,16 +16,17 @@ export const usePaymentByMidtrans = ({
   message,
   cart,
   setMessage,
-}: IPaymentByMidtransParams) => {
+}: IUsePaymentByMidtransParams) => {
   const { snapEmbed } = useSnap();
-  const [snapShow, setSnapShow] = useState(false);
-  const [midtrans, setMidtrans]: any = useState(null);
+  const [snapShow, setSnapShow] = useState<boolean>(false);
+  const [midtrans, setMidtrans] = useState<string>();
   const router = useRouter();
+  const { clearCart } = useContext(CartContext);
 
   const handlePaymentByMidtrans = async () => {
     try {
       if (selectedAddress === null) {
-        return alert('Select your address');
+        return toast.info('Select your address');
       }
 
       const response = await axiosInstance.post('/transactions', {
@@ -78,30 +42,30 @@ export const usePaymentByMidtrans = ({
       });
 
       if (response && response.status === 200) {
-        await localStorage.removeItem('cart');
+        clearCart();
         setMessage('');
-        setSelectedAddress('');
+        setSelectedAddress(null);
 
         setSnapShow(true);
         snapEmbed(response.data.transaction.snapToken, 'snap-container', {
           onSuccess: function (result: string) {
             setMidtrans(JSON.parse(result));
             router.push(
-              `/order_status?transaction_id=${response.data.transaction.orderId}`,
+              `/order-status?transaction_id=${response.data.transaction.orderId}`,
             );
             setSnapShow(false);
           },
           onPending: function (result: string) {
             setMidtrans(result);
             router.push(
-              `/order_status?transaction_id=${response.data.transaction.orderId}`,
+              `/order-status?transaction_id=${response.data.transaction.orderId}`,
             );
             setSnapShow(false);
           },
           onClose: function (result: string) {
             setMidtrans(result);
             router.push(
-              `/order_status?transaction_id=${response.data.transaction.orderId}`,
+              `/order-status?transaction_id=${response.data.transaction.orderId}`,
             );
             setSnapShow(false);
           },

@@ -31,7 +31,6 @@ const useFormikStoreAdmin = (
     validationSchema,
     onSubmit: async (values, { resetForm }) => {
       try {
-        console.log(values);
         
         method === 'put'
           ? await axios.patch(

@@ -1,0 +1,76 @@
+Mon Mar 18 2024 11:29:47 GMT+0700 (Indochina Time) : INFO : get branchs by Geolocation success
+Mon Mar 18 2024 11:30:07 GMT+0700 (Indochina Time) : INFO : get branchs success
+Mon Mar 18 2024 11:30:16 GMT+0700 (Indochina Time) : INFO : get branchs success
+Mon Mar 18 2024 11:30:46 GMT+0700 (Indochina Time) : INFO : get journals success
+Mon Mar 18 2024 11:30:53 GMT+0700 (Indochina Time) : INFO : get journals success
+Mon Mar 18 2024 11:33:16 GMT+0700 (Indochina Time) : INFO : get journals by branch id 2 was success
+Mon Mar 18 2024 11:34:33 GMT+0700 (Indochina Time) : INFO : get product by id 1 was success
+Mon Mar 18 2024 11:34:42 GMT+0700 (Indochina Time) : INFO : get product by id 1 was success
+Mon Mar 18 2024 11:37:57 GMT+0700 (Indochina Time) : ERROR : transaction with id GRC-zRzh-jiO not found
+Mon Mar 18 2024 11:37:57 GMT+0700 (Indochina Time) : ERROR : update transaction with GRC-zRzh-jiO failed
+Mon Mar 18 2024 11:37:57 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Mon Mar 18 2024 11:37:57 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Mon Mar 18 2024 11:37:57 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Mon Mar 18 2024 11:37:57 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Mon Mar 18 2024 11:37:57 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Mon Mar 18 2024 11:38:38 GMT+0700 (Indochina Time) : ERROR : transaction with id GRC-zRzh-jiO not found
+Mon Mar 18 2024 11:38:51 GMT+0700 (Indochina Time) : ERROR : update transaction with GRC-zRzh-jiO failed
+Mon Mar 18 2024 11:39:08 GMT+0700 (Indochina Time) : ERROR : update transaction with GRC-zRzh-jiO failed
+Mon Mar 18 2024 11:39:19 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Mon Mar 18 2024 11:40:24 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Mon Mar 18 2024 11:41:33 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Mon Mar 18 2024 11:42:01 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Mon Mar 18 2024 11:42:23 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Mon Mar 18 2024 11:42:37 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Mon Mar 18 2024 11:42:45 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Mon Mar 18 2024 11:42:53 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Mon Mar 18 2024 11:43:20 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Mon Mar 18 2024 11:43:34 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Mon Mar 18 2024 11:43:52 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Mon Mar 18 2024 11:45:29 GMT+0700 (Indochina Time) : ERROR : update transaction with GRC-zRzh-jiO failed
+Mon Mar 18 2024 11:45:29 GMT+0700 (Indochina Time) : ERROR : update transaction with GRC-zRzh-jiO failed
+Mon Mar 18 2024 11:46:28 GMT+0700 (Indochina Time) : ERROR : update transaction with GRC-zRzh-jiO failed
+Mon Mar 18 2024 11:46:28 GMT+0700 (Indochina Time) : ERROR : update transaction with GRC-zRzh-jiO failed
+Mon Mar 18 2024 11:47:11 GMT+0700 (Indochina Time) : ERROR : transaction with id GRC-zRzh-jiO not found
+Mon Mar 18 2024 11:47:11 GMT+0700 (Indochina Time) : ERROR : update transaction with GRC-zRzh-jiO failed
+Mon Mar 18 2024 11:47:11 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Mon Mar 18 2024 11:47:11 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Mon Mar 18 2024 11:47:11 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Mon Mar 18 2024 11:47:11 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Mon Mar 18 2024 11:47:11 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Mon Mar 18 2024 11:50:02 GMT+0700 (Indochina Time) : INFO : update transaction payment proof success with transaction id GRC-zRzh-jiO
+Mon Mar 18 2024 11:50:44 GMT+0700 (Indochina Time) : INFO : update transaction payment proof success with transaction id GRC-zRzh-jiO
+Mon Mar 18 2024 11:51:20 GMT+0700 (Indochina Time) : INFO : update transaction payment proof success with transaction id GRC-zRzh-jiO
+Mon Mar 18 2024 11:51:47 GMT+0700 (Indochina Time) : ERROR : transaction with id GRC-zRzh-jiO not found
+Mon Mar 18 2024 11:54:29 GMT+0700 (Indochina Time) : INFO : update transaction payment proof success with transaction id GRC-zRzh-jiO
+Mon Mar 18 2024 11:54:29 GMT+0700 (Indochina Time) : ERROR : transaction with id GRC-zRzh-jiO not found
+Mon Mar 18 2024 11:54:37 GMT+0700 (Indochina Time) : INFO : update transaction payment proof success with transaction id GRC-zRzh-jiO
+Mon Mar 18 2024 11:54:37 GMT+0700 (Indochina Time) : ERROR : transaction with id GRC-zRzh-jiO not found
+Mon Mar 18 2024 13:22:01 GMT+0700 (Indochina Time) : INFO : update status by midtrans success with transactionId GRC-zRzh-jiO
+Mon Mar 18 2024 13:22:01 GMT+0700 (Indochina Time) : INFO : update status by midtrans success with transactionId GRC-zRzh-jiO
+Mon Mar 18 2024 13:22:15 GMT+0700 (Indochina Time) : INFO : update status by midtrans success with transactionId GRC-zRzh-jiO
+Mon Mar 18 2024 13:22:36 GMT+0700 (Indochina Time) : INFO : update status by midtrans success with transactionId GRC-zRzh-jiO
+Mon Mar 18 2024 13:22:44 GMT+0700 (Indochina Time) : INFO : update status by midtrans success with transactionId GRC-zRzh-jiO
+Mon Mar 18 2024 13:23:04 GMT+0700 (Indochina Time) : INFO : update status by midtrans success with transactionId GRC-zRzh-jiO
+Mon Mar 18 2024 13:23:12 GMT+0700 (Indochina Time) : INFO : update status by midtrans success with transactionId GRC-zRzh-jiO
+Mon Mar 18 2024 13:23:38 GMT+0700 (Indochina Time) : INFO : update status by midtrans success with transactionId GRC-zRzh-jiO
+Mon Mar 18 2024 13:24:08 GMT+0700 (Indochina Time) : INFO : update status by midtrans success with transactionId GRC-zRzh-jiO
+Mon Mar 18 2024 13:24:08 GMT+0700 (Indochina Time) : INFO : update status by midtrans success with transactionId GRC-zRzh-jiO
+Mon Mar 18 2024 13:24:51 GMT+0700 (Indochina Time) : INFO : get transactions success
+Mon Mar 18 2024 13:24:58 GMT+0700 (Indochina Time) : INFO : get transactions success
+Mon Mar 18 2024 13:27:41 GMT+0700 (Indochina Time) : INFO : get transaction with id GRC-zRzh-jiO was success
+Mon Mar 18 2024 13:28:15 GMT+0700 (Indochina Time) : INFO : get transaction with id GRC-zRzh-jiO was success
+Mon Mar 18 2024 13:30:49 GMT+0700 (Indochina Time) : INFO : get transaction with date 12-12-2023 was success
+Mon Mar 18 2024 13:31:43 GMT+0700 (Indochina Time) : INFO : get transaction with date 12-12-2023 was success
+Mon Mar 18 2024 13:33:52 GMT+0700 (Indochina Time) : INFO : get transaction by branch id 2 was success
+Mon Mar 18 2024 13:34:37 GMT+0700 (Indochina Time) : INFO : get transaction by branch id 2 was success
+Mon Mar 18 2024 13:40:02 GMT+0700 (Indochina Time) : INFO : update transaction payment proof success with transaction id GRC-zRzh-jiO
+Mon Mar 18 2024 13:40:02 GMT+0700 (Indochina Time) : ERROR : transaction with id GRC-zRzh-jiO not found
+Mon Mar 18 2024 14:00:43 GMT+0700 (Indochina Time) : INFO : update transaction payment proof success with transaction id GRC-zRzh-jiO
+Mon Mar 18 2024 14:13:59 GMT+0700 (Indochina Time) : INFO : update status by midtrans success with transactionId GRC-zRzh-jiO
+Mon Mar 18 2024 14:14:06 GMT+0700 (Indochina Time) : INFO : update status by midtrans success with transactionId GRC-zRzh-jiO
+Mon Mar 18 2024 14:25:35 GMT+0700 (Indochina Time) : ERROR : the checked-out product was not found
+Mon Mar 18 2024 14:28:24 GMT+0700 (Indochina Time) : ERROR : the checked-out product was not found
+Mon Mar 18 2024 14:51:55 GMT+0700 (Indochina Time) : ERROR : Sorry, we don't have enough in stock for your order
+Mon Mar 18 2024 14:55:32 GMT+0700 (Indochina Time) : ERROR : Sorry, we don't have enough in stock for your order
+Mon Mar 18 2024 14:55:59 GMT+0700 (Indochina Time) : ERROR : Sorry, we don't have enough in stock for your order

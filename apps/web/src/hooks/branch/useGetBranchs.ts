@@ -1,10 +1,7 @@
 import { axiosInstance } from '@/libs/axios';
+import { IUseGetBranchsParams } from '@/types/params.type';
 
-interface IBranchsParams {
-  setBranches: (input: string[]) => void;
-}
-
-export const useGetBranchs = ({ setBranches }: IBranchsParams) => {
+export const useGetBranchs = ({ setBranches }: IUseGetBranchsParams) => {
   const getBranchs = async () => {
     try {
       const response = await axiosInstance.get('/branchs');

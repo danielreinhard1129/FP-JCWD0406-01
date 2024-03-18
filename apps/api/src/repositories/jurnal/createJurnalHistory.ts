@@ -1,12 +1,19 @@
-import prisma from '@/prisma';
+import { PrismaClient } from '@prisma/client';
 
-export const createJurnalHistory = async ({ branchId, title, reason }: any) => {
+export const createJurnalHistory = async (
+  branchId: number,
+  title: string,
+  details: string,
+  transaction?: any,
+) => {
   try {
+    const prisma = transaction || new PrismaClient();
+
     const result = await prisma.journal.create({
       data: {
         branchId,
         title,
-        reason,
+        reason: details,
       },
     });
     return result;

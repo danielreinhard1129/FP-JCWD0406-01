@@ -4,7 +4,7 @@ import { IFilter } from '@/type.api/filter.type';
 export const getProductsAction = async (search: string ,filter:IFilter) => {
   try {
     // const result = await getProducts(search ,filter);
-    console.log(filter);
+    // console.log(filter);
     
     return {
       message: 'get products success',

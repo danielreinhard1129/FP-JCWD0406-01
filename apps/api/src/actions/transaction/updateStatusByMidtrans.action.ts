@@ -1,37 +1,67 @@
+import { sendMailInvalidPaymentProof } from '@/helpers/sendmail/invalid-payment-proof';
+import { sendMailPaymentConfirmed } from '@/helpers/sendmail/payment-confirmed';
+import { logger } from '@/logger';
+import prisma from '@/prisma';
+import { getTransactionById } from '@/repositories/transaction/getTransactionById';
 import { updateTransactionStatus } from '@/repositories/transaction/updateTransactionStatus';
-
-interface updateStatusMidtransParams {
-  transactionId: string;
-  transactionStatus: string;
-}
+import { updateStatusByMidtransParams } from '@/types/params.type';
+import { ITransaction } from '@/types/transaction.type';
 
 export const updateStatusByMidtransAction = async ({
   transactionId,
   transactionStatus,
-}: updateStatusMidtransParams) => {
+}: updateStatusByMidtransParams) => {
   try {
-    let status = 0;
+    await prisma.$transaction(async (transaction) => {
+      try {
+        const transactionById: ITransaction | any =
+          await getTransactionById(transactionId);
 
-    if (transactionStatus == 'capture') {
-      status = 3;
-    } else if (transactionStatus == 'settlement') {
-      status = 3;
-    } else if (
-      transactionStatus == 'cancel' ||
-      transactionStatus == 'deny' ||
-      transactionStatus == 'expire'
-    ) {
-      status = 1;
-    } else if (transactionStatus == 'pending') {
-      status = 1;
-    }
+        let status = 0;
 
-    const transaction = await updateTransactionStatus(transactionId, status);
+        if (
+          transactionStatus === 'capture' ||
+          transactionStatus === 'settlement'
+        ) {
+          status = 3;
+        } else if (
+          transactionStatus === 'cancel' ||
+          transactionStatus === 'deny' ||
+          transactionStatus === 'expire' ||
+          transactionStatus === 'pending'
+        ) {
+          status = 1;
+        }
+
+        await updateTransactionStatus(transactionId, status, transaction);
+
+        if (status === 3) {
+          sendMailPaymentConfirmed({
+            user: transactionById?.user.username,
+            orderId: transactionId,
+            to: transactionById?.user.email,
+          });
+        }
+
+        if (status === 1) {
+          sendMailInvalidPaymentProof({
+            user: transactionById?.user.username,
+            orderId: transactionId,
+            to: transactionById?.user.email, 
+          });
+        }
+
+        logger.info(
+          `update status by midtrans success with transactionId ${transactionId}`,
+        );
+      } catch (error) {
+        throw error;
+      }
+    });
 
     return {
-      message: 'success',
+      message: `update status by midtrans success with transactionId ${transactionId}`,
       status: 200,
-      data: transaction,
     };
   } catch (error) {
     throw error;

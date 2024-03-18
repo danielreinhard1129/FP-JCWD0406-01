@@ -1,13 +1,5 @@
 import { axiosInstance } from '@/libs/axios';
-
-interface ITransactionByBranchId {
-  setTotalPage: (input: number) => void;
-  setTransactions: (input: string[]) => void;
-  page: number;
-  itemPerPage: number;
-  selectedBranch: number;
-  branchId: number;
-}
+import { IUseGetTransactionsByBranchIdParams } from '@/types/params.type';
 
 export const useGetTransactionsByBranchId = ({
   setTotalPage,
@@ -16,16 +8,15 @@ export const useGetTransactionsByBranchId = ({
   itemPerPage,
   selectedBranch,
   branchId,
-}: ITransactionByBranchId) => {
+}: IUseGetTransactionsByBranchIdParams) => {
   const getTransactionsByBranchId = async () => {
     try {
       setTotalPage(0);
       setTransactions([]);
-      const response = await axiosInstance.post(
-        `/transactions/filter/branchId?page=${page}&perPage=${itemPerPage}`,
-        {
-          branchId: selectedBranch ? Number(selectedBranch) : branchId,
-        },
+      const response = await axiosInstance.get(
+        `/transactions/filter/branch?branchId=${
+          !selectedBranch ? branchId : Number(selectedBranch)
+        }&page=${page}&perPage=${itemPerPage}`,
       );
       setTransactions(response.data.data);
       setTotalPage(response.data.total);

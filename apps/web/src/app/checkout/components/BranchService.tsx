@@ -1,4 +1,10 @@
-const BranchService = ({ branchName, address, distance }: any) => {
+import { IBranchServiceProps } from '@/types/props.type';
+
+const BranchService = ({
+  branchName,
+  address,
+  distance,
+}: IBranchServiceProps) => {
   return (
     <div className="bg-gray-200 p-4 rounded-md shadow-md">
       <h2 className="text-xl font-semibold mb-2">{branchName}</h2>

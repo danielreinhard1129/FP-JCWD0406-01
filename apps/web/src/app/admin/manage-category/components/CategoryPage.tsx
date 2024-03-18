@@ -14,16 +14,16 @@ const roboto = Roboto({
 });
 
 const CategoryPage = () => {
-  const [openAdd, setOpenAdd] = useState(false);
-  const { data, loading, refreshData } = useGetAllCategory();
-  const formik = useFormikCategoryForm(
-    {},
-    '/categories/create-category',
-    refreshData,
-    'add',
-    setOpenAdd,
-  );
-  if (loading) {
+  // const [openAdd, setOpenAdd] = useState(false);
+  // const { data, loading, refreshData } = useGetAllCategory();
+  // const formik = useFormikCategoryForm(
+  //   {},
+  //   '/categories/create-category',
+  //   refreshData,
+  //   'add',
+  //   setOpenAdd,
+  // );
+  // if (loading) {
     return (
       <div className="h-sceen w-full flex justify-center items-center">
         <Spinner aria-label="Extra large spinner example" size="xl" />
@@ -31,37 +31,37 @@ const CategoryPage = () => {
       </div>
     );
   }
-  return (
-    <section className="bg-[#272c2f] px-10 py-10 text-white w-full">
-      {/* <Toaster /> */}
-      <div className="flex justify-between top-0 sticky bg-[#272c2f] py-4">
-        <h1 className={`${roboto.className} text-3xl`}>Manage Category</h1>
-        <Button size={'sm'} color="success" onClick={() => setOpenAdd(true)}>
-          Add Category
-        </Button>
-      </div>
-      <div className="grid grid-cols-5 gap-2">
-        {/* {data &&
-          data.map((category) => {
-            return (
-              <CardCategory
-                key={category.id}
-                category={category}
-                refreshData={refreshData}
-              />
-            );
-          })} */}
-      </div>
-      <ModalInput
-        openModal={openAdd}
-        setOpenModal={setOpenAdd}
-        refreshData={refreshData}
-        Form={FormCategory}
-        formik={formik}
-        judul="Add Product"
-      />
-    </section>
-  );
-};
+  // return (
+  //   <section className="bg-[#272c2f] px-10 py-10 text-white w-full">
+  //     {/* <Toaster /> */}
+  //     <div className="flex justify-between top-0 sticky bg-[#272c2f] py-4">
+  //       <h1 className={`${roboto.className} text-3xl`}>Manage Category</h1>
+  //       <Button size={'sm'} color="success" onClick={() => setOpenAdd(true)}>
+  //         Add Category
+  //       </Button>
+  //     </div>
+  //     <div className="grid grid-cols-5 gap-2">
+  //       {/* {data &&
+  //         data.map((category) => {
+  //           return (
+  //             <CardCategory
+  //               key={category.id}
+  //               category={category}
+  //               refreshData={refreshData}
+  //             />
+  //           );
+  //         })} */}
+  //     </div>
+  //     <ModalInput
+  //       openModal={openAdd}
+  //       setOpenModal={setOpenAdd}
+  //       refreshData={refreshData}
+  //       Form={FormCategory}
+  //       formik={formik}
+  //       judul="Add Product"
+  //     />
+  //   </section>
+  // );
+// };
 
 export default CategoryPage;

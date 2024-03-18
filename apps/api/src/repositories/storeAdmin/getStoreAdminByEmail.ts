@@ -1,4 +1,4 @@
-import { prisma } from '@/helper/prisma';
+import { prisma } from '@/helpers/prisma';
 
 export const getStoreAdminByEmail = async (email: string) => {
   try {
