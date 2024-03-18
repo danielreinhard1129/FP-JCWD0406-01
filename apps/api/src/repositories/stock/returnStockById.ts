@@ -1,6 +1,13 @@
-import { PrismaClient } from '@prisma/client';
+import { Prisma, PrismaClient } from '@prisma/client';
+import { DefaultArgs } from '@prisma/client/runtime/library';
 
-export const returnStockById = async (stockproducts: any, transaction?: any) => {
+export const returnStockById = async (
+  stockproducts: any,
+  transaction?: Omit<
+    PrismaClient<Prisma.PrismaClientOptions, never, DefaultArgs>,
+    '$connect' | '$disconnect' | '$on' | '$transaction' | '$use' | '$extends'
+  >,
+) => {
   try {
     stockproducts.map(async (product: any) => {
       const quantity = product.quantity;

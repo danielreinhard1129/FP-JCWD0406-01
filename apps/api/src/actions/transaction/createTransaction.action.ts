@@ -30,6 +30,8 @@ import { checkAndProcessOrder } from '@/helpers/checkAndProcessOrder';
 import { reduceStockFromBorrowed } from '@/helpers/reduceStockFromBorrowed';
 import { isStockSufficient } from '@/helpers/isStockSufficient';
 import { IUser } from '@/types/user.type';
+import { INearestBranch } from '@/types/branch.type';
+import { IStock } from '@/types/stock.type';
 
 export const createTransactionAction = async (
   body: ICreateTransactionParams,
@@ -44,7 +46,7 @@ export const createTransactionAction = async (
       }
       const getProducts = await getStocksByProductId({ products });
 
-      const totalStock: any = {};
+      const totalStock: Record<string, number> = {};
 
       getProducts.forEach((item) => {
         if (totalStock[item.productId]) {
@@ -73,10 +75,12 @@ export const createTransactionAction = async (
         throw new Error("Sorry, we don't have enough in stock for your order");
       }
 
-      const productsFromDB: any = await getStocksByProductIdAndBranchId({
+      const productsFromDB: IStock[] = await getStocksByProductIdAndBranchId({
         products,
         branchId,
       });
+
+      console.log({getStocksByProductIdAndBranchId})
 
       const BeforeChange = productsFromDB;
 
@@ -93,8 +97,10 @@ export const createTransactionAction = async (
       const branchLatitude = Number(getBranch?.latitude);
       const branchLongitude = Number(getBranch?.longitude);
 
-      let closestBranch: any;
+      let closestBranch: INearestBranch | any;
       let lendingStore;
+
+      console.log({closestBranch})
 
       if (nearestBranch?.insufficientProducts.length > 0) {
         closestBranch = FindNearestBranch(
@@ -102,6 +108,8 @@ export const createTransactionAction = async (
           branchLongitude,
           getBranchAll,
         );
+
+        console.log({closestBranch})
 
         const checkstockNearestBranch = await getStocksByProductIdAndBranchId({
           products: nearestBranch?.insufficientProducts,
@@ -145,7 +153,7 @@ export const createTransactionAction = async (
         }
       });
 
-      productsFromDB.forEach((product: IProductDB) => {
+      productsFromDB.forEach((product: Partial<IProductDB>) => {
         const productFromRequest = products.find(
           (productFromRequest: IProductRequest) =>
             productFromRequest.id === product.productId,
@@ -171,7 +179,7 @@ export const createTransactionAction = async (
           order_id: transactionId,
           gross_amount: amount,
         },
-        items_details: productsFromDB.map((product: IProductDB) => ({
+        items_details: productsFromDB.map((product: Partial<IProductDB>) => ({
           id: product?.product?.id,
           price: product?.product?.price,
           quantity: product?.amount,
