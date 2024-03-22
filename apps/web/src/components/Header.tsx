@@ -58,32 +58,6 @@ export const Header = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
-  const [countdown, setCountdown] = useState<number>(
-    parseInt(localStorage.getItem('countdown') || '0', 10),
-  );
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCountdown((prevCountdown) => {
-        if (prevCountdown <= 0) {
-          clearInterval(interval);
-          return prevCountdown;
-        }
-
-        const newCountdown: number = prevCountdown - 1;
-        localStorage.setItem('countdown', newCountdown.toString());
-
-        if (newCountdown <= 0) {
-          clearInterval(interval);
-        }
-
-        return newCountdown;
-      });
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [countdown]);
-
   return (
     <div className="py-4 shadow-sm bg-white border-2">
       <div className="container flex items-center justify-around">

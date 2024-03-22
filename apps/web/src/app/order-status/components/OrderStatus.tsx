@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
 import Dropzone from './Dropzone';
-import CountdownTimer from './CountDown';
 import ModalBankTransfer from './ModalBankTransfer';
 import ModalConfirmOrderCancel from './ModalConfirmOrderCancel';
 import ModalConfirmOrderReceived from './ModalConfirmOrderReceived';
@@ -22,9 +21,6 @@ const OrderStatus = ({
   return (
     <div>
       <div className="container mx-auto max-w-7xl">
-        <div className="my-10">
-          <CountdownTimer orderId={transaction?.orderId as string} />
-        </div>
         <div className="border">
           <div className="flex bg-gray-100 py-4 flex-col md:flex-row md:justify-around border md:h-[100px] md:items-center">
             <div className="flex justify-between md:flex-col md:text-base flex-shrink-0 md:w-1/5 p-4">
