@@ -33,6 +33,7 @@ export class ProductRouter {
     // this.router.get('/', this.productController.getProducts);
 
     this.router.get('/:id', this.productController.getProductById);
+    this.router.get('/', this.productController.getProducts);
   }
 
   getRouter(): Router {

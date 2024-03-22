@@ -15,10 +15,9 @@ export const useGetBranchByGeolocation = ({
       if (selectedAddress === null) {
         return;
       }
-      const response = await axiosInstance.post('/branchs/select/branch', {
-        latitude: selectedAddress.latitude,
-        longitude: selectedAddress.longitude,
-      });
+      const response = await axiosInstance.get(
+        `/branchs/filter?latitude=${selectedAddress.latitude}&longitude=${selectedAddress.longitude}`,
+      );
       setBranchService(response.data.data);
     } catch (error) {
       console.log(error);

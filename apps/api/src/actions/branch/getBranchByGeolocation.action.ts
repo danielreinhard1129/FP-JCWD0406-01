@@ -3,10 +3,11 @@ import { logger } from '@/logger';
 import { getBranchs } from '@/repositories/branchs/getBranchs';
 import { IBranchStore, IGetBranchProps } from '@/types/branch.type';
 
-export const getBranchByGeolocationAction = async (body: IGetBranchProps) => {
+export const getBranchByGeolocationAction = async ({
+  latitude,
+  longitude,
+}: IGetBranchProps) => {
   try {
-    const { latitude, longitude } = body;
-
     const userLatitude = Number(latitude);
     const userLongitude = Number(longitude);
 

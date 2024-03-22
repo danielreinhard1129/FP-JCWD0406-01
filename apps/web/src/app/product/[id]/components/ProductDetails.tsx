@@ -61,17 +61,7 @@ const ProductDetails = ({ product }: IProductDetailProps) => {
               <p className="mb-4 font-semibold text-xl">
                 {product?.price ? numberToRupiah(product.price) : ''}
               </p>
-              <p className="mb-4 text-gray-500">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Reprehenderit tempore, quidem qui quos sed voluptas natus ex
-                vitae aperiam quaerat nostrum blanditiis sequi quasi esse nulla.
-                Tempore dignissimos quidem saepe? Odio sequi eaque, corporis
-                quisquam voluptate, dolor fugiat iste quam laborum beatae
-                tempora est. Ipsum quo sed ab non qui eius reprehenderit nulla
-                maiores eos officiis, expedita corrupti accusamus labore! Harum
-                assumenda officiis, voluptates laborum laudantium qui, pariatur
-                sint eveniet sed earum modi molestiae quaerat neque.
-              </p>
+              <p className="mb-4 text-gray-500">{product?.description}</p>
 
               <div className="flex flex-wrap gap-2 mb-5">
                 <button

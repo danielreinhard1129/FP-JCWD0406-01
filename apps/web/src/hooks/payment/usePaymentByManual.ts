@@ -1,6 +1,8 @@
 import CartContext from '@/context/CartContext';
 import { axiosInstance } from '@/libs/axios';
+import { IAddToCart } from '@/types/cart.type';
 import { IUsePaymnetByManualParams } from '@/types/params.type';
+import { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
 import { useContext } from 'react';
 import { toast } from 'sonner';
@@ -29,7 +31,7 @@ export const usePaymentByManual = ({
         userId: user.id,
         branchId,
         message,
-        products: cart?.cartItems?.map((item: any) => ({
+        products: cart?.cartItems?.map((item: Partial<IAddToCart>) => ({
           id: item.productId,
           quantity: item.quantity,
         })),
@@ -44,7 +46,10 @@ export const usePaymentByManual = ({
         setSelectedAddress(null);
       }
     } catch (error) {
-      console.log(error);
+      if (error instanceof AxiosError) {
+        const errorMsg = error?.response?.data;
+        toast.error(errorMsg);
+      }
     }
   };
 

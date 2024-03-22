@@ -15,6 +15,7 @@ import { sendMailOrderSend } from '@/helpers/sendmail/order-send';
 import { sendMailOrderDelivered } from '@/helpers/sendmail/order-delivered';
 import { formatDate } from '@/utils/formatDate';
 import { sendMailOrderCancel } from '@/helpers/sendmail/order-cancel';
+import { IStockMutation } from '@/types/stockMutation';
 
 export const updateTransactionStatusAction = async (
   statusId: number,
@@ -24,8 +25,7 @@ export const updateTransactionStatusAction = async (
   try {
     await prisma.$transaction(async (transaction: any) => {
       try {
-        const transactionById: any =
-          await getTransactionById(id);
+        const transactionById: any = await getTransactionById(id);
 
         if (!transactionById) {
           logger.error(`transaction with id ${id} not found`);
@@ -127,7 +127,8 @@ export const updateTransactionStatusAction = async (
 
               for (const orderItem of getOrderItem) {
                 const stockMutation = getStockMutation.find(
-                  (mutation: any) => mutation.productId === orderItem.productId,
+                  (mutation: IStockMutation) =>
+                    mutation.productId === orderItem.productId,
                 );
                 if (stockMutation) {
                   orderItem.quantity -= stockMutation.quantity;

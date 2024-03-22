@@ -7,4 +7,3 @@ export function numberToRupiah(number: number) {
 
   return formatter.format(number);
 }
- 

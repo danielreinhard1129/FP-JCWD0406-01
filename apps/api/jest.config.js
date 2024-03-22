@@ -6,6 +6,8 @@ module.exports = {
     '^@/(.*)$': '<rootDir>/src/$1',
   },
   coveragePathIgnorePatterns: [
+    '<rootDir>/dist',
+    '<rootDir>/dist/src/__test__',
     '<rootDir>/src/app.ts',
     '<rootDir>/src/config.ts',
     '<rootDir>/src/helpers',

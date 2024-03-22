@@ -7,7 +7,7 @@ import { IPaymentConfirmedParams } from '@/types/params.type';
 export const sendMailPaymentConfirmed = async ({
   user,
   orderId,
-  to
+  to,
 }: IPaymentConfirmedParams) => {
   const templatePath = path.join(
     __dirname,

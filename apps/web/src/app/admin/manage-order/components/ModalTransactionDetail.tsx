@@ -1,4 +1,5 @@
 import { IModalTransactionDetailProps } from '@/types/props.type';
+import { IOrderItem } from '@/types/transaction.type';
 import { Modal } from 'flowbite-react';
 import React from 'react';
 
@@ -50,7 +51,7 @@ const ModalTransactionDetail = ({
                 <p className="font-[500]">{transaction?.address}</p>
               </div>
             </div>
-            {transaction?.orderItem?.map((product: any) => (
+            {transaction?.orderItem?.map((product: IOrderItem) => (
               <div key={product.id} className="flex p-5 justify-between border">
                 <div className="flex gap-3 md:gap-20">
                   <div className="font-semibold">{product.quantity}x</div>

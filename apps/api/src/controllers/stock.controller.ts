@@ -24,18 +24,20 @@ export class StockController {
     }
   }
 
-  async getHistoriesStock(req: Request, res: Response, next: NextFunction){
+  async getHistoriesStock(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
       const { startDate, endDate, categoryId, search } = req.query;
-      const result = await getHistoryStockAction(parseInt(id, 0),
-      startDate as string,
-      endDate as string,
-      parseInt(categoryId as string, 0),
-      search as string)
-      res.status(result.status).send(result)
+      const result = await getHistoryStockAction(
+        parseInt(id, 0),
+        startDate as string,
+        endDate as string,
+        parseInt(categoryId as string, 0),
+        search as string,
+      );
+      res.status(result.status).send(result);
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
 }

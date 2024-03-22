@@ -1,4 +1,4 @@
-"use client"
+'use client';
 import { useRef, useState } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import { registerLocale } from 'react-datepicker';

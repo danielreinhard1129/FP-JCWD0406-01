@@ -8,7 +8,9 @@ jest.mock('@/repositories/transaction/getTransactionById.ts');
 jest.mock('@/repositories/transaction/updateTransactionPaymentProof.ts');
 jest.mock('@/repositories/transaction/updateTransactionStatus.ts');
 jest.mock('@/helpers/sendmail/payment-received-verification', () => ({
-  sendMailPaymentReceivedVerification: jest.fn().mockResolvedValue('mockedTemplateContent'),
+  sendMailPaymentReceivedVerification: jest
+    .fn()
+    .mockResolvedValue('mockedTemplateContent'),
 }));
 jest.mock('handlebars', () => ({
   compile: jest.fn().mockReturnValue(jest.fn()),
@@ -56,7 +58,6 @@ describe('PATCH /:id/payment-proof', () => {
   const body = {
     paymentProof: 'paymentProof.png',
   };
-
 
   it('should update status by paymentProof successfully', async () => {
     (getTransactionById as jest.Mock).mockResolvedValue(transaction);

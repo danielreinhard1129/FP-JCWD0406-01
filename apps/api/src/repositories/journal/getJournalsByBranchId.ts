@@ -14,7 +14,7 @@ export const getJournalsByBranchId = async (
         createdAt: 'desc',
       },
       include: {
-        storeBranch: true
+        storeBranch: true,
       },
     });
     return result;

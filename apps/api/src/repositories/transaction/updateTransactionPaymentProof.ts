@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 export const updateTransactionPaymentProof = async (
   transactionId: string,
   paymentProof: string,
-  transaction?: any
+  transaction?: any,
 ) => {
   try {
     const prisma = transaction || new PrismaClient();

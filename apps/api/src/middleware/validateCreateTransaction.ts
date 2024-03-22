@@ -22,9 +22,7 @@ export const validateCreateTransaction = [
     .withMessage('userId must required')
     .isInt()
     .withMessage('userId must number'),
-  body('message')
-    .isString()
-    .withMessage('message must string'),
+  body('message').isString().withMessage('message must string'),
   body('branchId')
     .notEmpty()
     .withMessage('branchId must required')

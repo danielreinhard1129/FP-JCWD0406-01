@@ -1,0 +1,115 @@
+Fri Mar 22 2024 14:16:22 GMT+0700 (Indochina Time) : INFO : get transaction with id GRC-zRzh-jiO was success
+Fri Mar 22 2024 14:16:22 GMT+0700 (Indochina Time) : INFO : get transaction by branch id 2 was success
+Fri Mar 22 2024 14:16:23 GMT+0700 (Indochina Time) : ERROR : the checked-out product was not found
+Fri Mar 22 2024 14:16:22 GMT+0700 (Indochina Time) : INFO : get transaction with date 12-12-2023 was success
+Fri Mar 22 2024 14:16:23 GMT+0700 (Indochina Time) : INFO : update transaction payment proof success with transaction id GRC-zRzh-jiO
+Fri Mar 22 2024 14:16:23 GMT+0700 (Indochina Time) : ERROR : transaction with id GRC-zRzh-jiO not found
+Fri Mar 22 2024 14:16:23 GMT+0700 (Indochina Time) : INFO : update status by midtrans success with transactionId GRC-zRzh-jiO
+Fri Mar 22 2024 14:16:23 GMT+0700 (Indochina Time) : INFO : update status by midtrans success with transactionId GRC-zRzh-jiO
+Fri Mar 22 2024 14:16:23 GMT+0700 (Indochina Time) : ERROR : transaction with id GRC-zRzh-jiO not found
+Fri Mar 22 2024 14:16:23 GMT+0700 (Indochina Time) : ERROR : Sorry, we don't have enough in stock for your order
+Fri Mar 22 2024 14:16:23 GMT+0700 (Indochina Time) : ERROR : Sorry, we don't have enough in stock for your order
+Fri Mar 22 2024 14:16:23 GMT+0700 (Indochina Time) : ERROR : update transaction with GRC-zRzh-jiO failed
+Fri Mar 22 2024 14:16:23 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Fri Mar 22 2024 14:16:23 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Fri Mar 22 2024 14:16:24 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Fri Mar 22 2024 14:16:24 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Fri Mar 22 2024 14:16:24 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Fri Mar 22 2024 14:16:25 GMT+0700 (Indochina Time) : INFO : get transactions success
+Fri Mar 22 2024 14:16:25 GMT+0700 (Indochina Time) : INFO : get journals success
+Fri Mar 22 2024 14:16:26 GMT+0700 (Indochina Time) : INFO : get branchs success
+Fri Mar 22 2024 14:16:26 GMT+0700 (Indochina Time) : INFO : get journals by branch id 2 was success
+Fri Mar 22 2024 14:16:26 GMT+0700 (Indochina Time) : INFO : get product by id 1 was success
+Fri Mar 22 2024 14:16:26 GMT+0700 (Indochina Time) : INFO : get branchs by Geolocation success
+Fri Mar 22 2024 14:22:25 GMT+0700 (Indochina Time) : INFO : get transaction with id GRC-zRzh-jiO was success
+Fri Mar 22 2024 14:22:25 GMT+0700 (Indochina Time) : INFO : update status by midtrans success with transactionId GRC-zRzh-jiO
+Fri Mar 22 2024 14:22:25 GMT+0700 (Indochina Time) : INFO : get transaction by branch id 2 was success
+Fri Mar 22 2024 14:22:25 GMT+0700 (Indochina Time) : INFO : get transaction with date 12-12-2023 was success
+Fri Mar 22 2024 14:22:25 GMT+0700 (Indochina Time) : INFO : update status by midtrans success with transactionId GRC-zRzh-jiO
+Fri Mar 22 2024 14:22:26 GMT+0700 (Indochina Time) : ERROR : transaction with id GRC-zRzh-jiO not found
+Fri Mar 22 2024 14:22:26 GMT+0700 (Indochina Time) : ERROR : the checked-out product was not found
+Fri Mar 22 2024 14:22:26 GMT+0700 (Indochina Time) : INFO : update transaction payment proof success with transaction id GRC-zRzh-jiO
+Fri Mar 22 2024 14:22:26 GMT+0700 (Indochina Time) : ERROR : update transaction with GRC-zRzh-jiO failed
+Fri Mar 22 2024 14:22:26 GMT+0700 (Indochina Time) : ERROR : transaction with id GRC-zRzh-jiO not found
+Fri Mar 22 2024 14:22:26 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Fri Mar 22 2024 14:22:26 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Fri Mar 22 2024 14:22:26 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Fri Mar 22 2024 14:22:26 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Fri Mar 22 2024 14:22:26 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Fri Mar 22 2024 14:22:26 GMT+0700 (Indochina Time) : ERROR : Sorry, we don't have enough in stock for your order
+Fri Mar 22 2024 14:22:27 GMT+0700 (Indochina Time) : ERROR : Sorry, we don't have enough in stock for your order
+Fri Mar 22 2024 14:22:28 GMT+0700 (Indochina Time) : INFO : get branchs success
+Fri Mar 22 2024 14:22:28 GMT+0700 (Indochina Time) : INFO : get transactions success
+Fri Mar 22 2024 14:22:28 GMT+0700 (Indochina Time) : INFO : get branchs by Geolocation success
+Fri Mar 22 2024 14:22:28 GMT+0700 (Indochina Time) : INFO : get journals by branch id 2 was success
+Fri Mar 22 2024 14:22:28 GMT+0700 (Indochina Time) : INFO : get journals success
+Fri Mar 22 2024 14:22:28 GMT+0700 (Indochina Time) : INFO : get product by id 1 was success
+Fri Mar 22 2024 14:32:03 GMT+0700 (Indochina Time) : ERROR : transaction with id GRC-zRzh-jiO not found
+Fri Mar 22 2024 14:32:04 GMT+0700 (Indochina Time) : ERROR : update transaction with GRC-zRzh-jiO failed
+Fri Mar 22 2024 14:32:04 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Fri Mar 22 2024 14:32:04 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Fri Mar 22 2024 14:32:04 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Fri Mar 22 2024 14:32:04 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Fri Mar 22 2024 14:32:04 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Fri Mar 22 2024 14:32:04 GMT+0700 (Indochina Time) : INFO : get transaction with date 12-12-2023 was success
+Fri Mar 22 2024 14:32:04 GMT+0700 (Indochina Time) : INFO : get transaction by branch id 2 was success
+Fri Mar 22 2024 14:32:04 GMT+0700 (Indochina Time) : INFO : update transaction payment proof success with transaction id GRC-zRzh-jiO
+Fri Mar 22 2024 14:32:04 GMT+0700 (Indochina Time) : ERROR : transaction with id GRC-zRzh-jiO not found
+Fri Mar 22 2024 14:32:04 GMT+0700 (Indochina Time) : ERROR : the checked-out product was not found
+Fri Mar 22 2024 14:32:04 GMT+0700 (Indochina Time) : INFO : update status by midtrans success with transactionId GRC-zRzh-jiO
+Fri Mar 22 2024 14:32:04 GMT+0700 (Indochina Time) : INFO : update status by midtrans success with transactionId GRC-zRzh-jiO
+Fri Mar 22 2024 14:32:05 GMT+0700 (Indochina Time) : ERROR : Sorry, we don't have enough in stock for your order
+Fri Mar 22 2024 14:32:05 GMT+0700 (Indochina Time) : ERROR : Sorry, we don't have enough in stock for your order
+Fri Mar 22 2024 14:32:05 GMT+0700 (Indochina Time) : INFO : get transaction with id GRC-zRzh-jiO was success
+Fri Mar 22 2024 14:32:05 GMT+0700 (Indochina Time) : INFO : get branchs success
+Fri Mar 22 2024 14:32:05 GMT+0700 (Indochina Time) : INFO : get transactions success
+Fri Mar 22 2024 14:32:06 GMT+0700 (Indochina Time) : INFO : get journals by branch id 2 was success
+Fri Mar 22 2024 14:32:06 GMT+0700 (Indochina Time) : INFO : get branchs by Geolocation success
+Fri Mar 22 2024 14:32:06 GMT+0700 (Indochina Time) : INFO : get journals success
+Fri Mar 22 2024 14:32:06 GMT+0700 (Indochina Time) : INFO : get product by id 1 was success
+Fri Mar 22 2024 14:36:14 GMT+0700 (Indochina Time) : ERROR : transaction with id GRC-zRzh-jiO not found
+Fri Mar 22 2024 14:36:14 GMT+0700 (Indochina Time) : INFO : get transaction with date 12-12-2023 was success
+Fri Mar 22 2024 14:36:14 GMT+0700 (Indochina Time) : INFO : get transaction by branch id 2 was success
+Fri Mar 22 2024 14:36:14 GMT+0700 (Indochina Time) : ERROR : update transaction with GRC-zRzh-jiO failed
+Fri Mar 22 2024 14:36:14 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Fri Mar 22 2024 14:36:14 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Fri Mar 22 2024 14:36:14 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Fri Mar 22 2024 14:36:14 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Fri Mar 22 2024 14:36:14 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Fri Mar 22 2024 14:36:14 GMT+0700 (Indochina Time) : INFO : update transaction payment proof success with transaction id GRC-zRzh-jiO
+Fri Mar 22 2024 14:36:14 GMT+0700 (Indochina Time) : ERROR : the checked-out product was not found
+Fri Mar 22 2024 14:36:14 GMT+0700 (Indochina Time) : ERROR : transaction with id GRC-zRzh-jiO not found
+Fri Mar 22 2024 14:36:14 GMT+0700 (Indochina Time) : INFO : update status by midtrans success with transactionId GRC-zRzh-jiO
+Fri Mar 22 2024 14:36:15 GMT+0700 (Indochina Time) : INFO : update status by midtrans success with transactionId GRC-zRzh-jiO
+Fri Mar 22 2024 14:36:15 GMT+0700 (Indochina Time) : ERROR : Sorry, we don't have enough in stock for your order
+Fri Mar 22 2024 14:36:15 GMT+0700 (Indochina Time) : ERROR : Sorry, we don't have enough in stock for your order
+Fri Mar 22 2024 14:36:17 GMT+0700 (Indochina Time) : INFO : get journals by branch id 2 was success
+Fri Mar 22 2024 14:36:17 GMT+0700 (Indochina Time) : INFO : get branchs success
+Fri Mar 22 2024 14:36:17 GMT+0700 (Indochina Time) : INFO : get transaction with id GRC-zRzh-jiO was success
+Fri Mar 22 2024 14:36:18 GMT+0700 (Indochina Time) : INFO : get transactions success
+Fri Mar 22 2024 14:36:18 GMT+0700 (Indochina Time) : INFO : get branchs by Geolocation success
+Fri Mar 22 2024 14:36:18 GMT+0700 (Indochina Time) : INFO : get journals success
+Fri Mar 22 2024 14:36:18 GMT+0700 (Indochina Time) : INFO : get product by id 1 was success
+Fri Mar 22 2024 14:38:13 GMT+0700 (Indochina Time) : INFO : get transaction with date 12-12-2023 was success
+Fri Mar 22 2024 14:38:13 GMT+0700 (Indochina Time) : INFO : get transaction by branch id 2 was success
+Fri Mar 22 2024 14:38:14 GMT+0700 (Indochina Time) : INFO : update status by midtrans success with transactionId GRC-zRzh-jiO
+Fri Mar 22 2024 14:38:14 GMT+0700 (Indochina Time) : ERROR : transaction with id GRC-zRzh-jiO not found
+Fri Mar 22 2024 14:38:14 GMT+0700 (Indochina Time) : INFO : update status by midtrans success with transactionId GRC-zRzh-jiO
+Fri Mar 22 2024 14:38:14 GMT+0700 (Indochina Time) : INFO : update transaction payment proof success with transaction id GRC-zRzh-jiO
+Fri Mar 22 2024 14:38:14 GMT+0700 (Indochina Time) : ERROR : transaction with id GRC-zRzh-jiO not found
+Fri Mar 22 2024 14:38:14 GMT+0700 (Indochina Time) : ERROR : update transaction with GRC-zRzh-jiO failed
+Fri Mar 22 2024 14:38:14 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Fri Mar 22 2024 14:38:14 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Fri Mar 22 2024 14:38:14 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Fri Mar 22 2024 14:38:14 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Fri Mar 22 2024 14:38:14 GMT+0700 (Indochina Time) : INFO : update transaction status with id GRC-zRzh-jiO was success
+Fri Mar 22 2024 14:38:14 GMT+0700 (Indochina Time) : ERROR : the checked-out product was not found
+Fri Mar 22 2024 14:38:15 GMT+0700 (Indochina Time) : INFO : get transaction with id GRC-zRzh-jiO was success
+Fri Mar 22 2024 14:38:15 GMT+0700 (Indochina Time) : INFO : get transactions success
+Fri Mar 22 2024 14:38:15 GMT+0700 (Indochina Time) : INFO : get branchs by Geolocation success
+Fri Mar 22 2024 14:38:15 GMT+0700 (Indochina Time) : ERROR : Sorry, we don't have enough in stock for your order
+Fri Mar 22 2024 14:38:15 GMT+0700 (Indochina Time) : ERROR : Sorry, we don't have enough in stock for your order
+Fri Mar 22 2024 14:38:15 GMT+0700 (Indochina Time) : INFO : get journals by branch id 2 was success
+Fri Mar 22 2024 14:38:15 GMT+0700 (Indochina Time) : INFO : get branchs success
+Fri Mar 22 2024 14:38:16 GMT+0700 (Indochina Time) : INFO : get journals success
+Fri Mar 22 2024 14:38:16 GMT+0700 (Indochina Time) : INFO : get product by id 1 was success

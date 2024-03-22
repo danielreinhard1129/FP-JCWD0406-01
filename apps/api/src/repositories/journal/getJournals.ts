@@ -1,4 +1,4 @@
-import prisma from "@/prisma";
+import prisma from '@/prisma';
 
 export const getJournals = async (skip: number, limit: number) => {
   try {
@@ -9,7 +9,7 @@ export const getJournals = async (skip: number, limit: number) => {
         createdAt: 'desc',
       },
       include: {
-        storeBranch: true
+        storeBranch: true,
       },
     });
     return result;

@@ -96,11 +96,7 @@ const Cart = () => {
                       <div className="mb-4">
                         {' '}
                         <p className="text-[#333] font-medium">
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. Suspendisse potenti. Sed tincidunt velit ac
-                          neque ultricies, vitae bibendum velit sagittis. Sed
-                          fringilla, odio et congue volutpat, lectus ligula
-                          pharetra purus, id laoreet libero ex a nisl.
+                          {cartItem?.description}
                         </p>
                       </div>
                       <div>

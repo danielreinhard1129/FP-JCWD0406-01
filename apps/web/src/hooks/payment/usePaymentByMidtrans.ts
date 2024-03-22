@@ -6,6 +6,7 @@ import useSnap from '@/hooks/useSnap';
 import { useRouter } from 'next/navigation';
 import CartContext from '@/context/CartContext';
 import { IUsePaymentByMidtransParams } from '@/types/params.type';
+import { IAddItemToCart } from '@/types/cart.type';
 
 export const usePaymentByMidtrans = ({
   branchId,
@@ -35,7 +36,7 @@ export const usePaymentByMidtrans = ({
         userId: user.id,
         message,
         branchId,
-        products: cart?.cartItems?.map((item: any) => ({
+        products: cart?.cartItems?.map((item: Partial<IAddItemToCart>) => ({
           id: item.productId,
           quantity: item.quantity,
         })),

@@ -5,7 +5,7 @@ import request from 'supertest';
 jest.mock('@/repositories/product/getProductById.ts');
 
 describe('GET /:id', () => {
-  const { app } = new App();  
+  const { app } = new App();
 
   const product = {
     id: 2,
@@ -18,12 +18,11 @@ describe('GET /:id', () => {
     categoryId: 1,
   };
 
-  const id = 1
+  const id = 1;
   it('should get product by id successfully', async () => {
-
     (getProductById as jest.Mock).mockResolvedValue(product);
 
-    const response = await request(app).get(`/api/products/${id}`)
+    const response = await request(app).get(`/api/products/${id}`);
     expect(response.status).toBe(200);
     expect(response.body).toEqual({
       message: `get product by id ${id} was success`,
@@ -32,13 +31,13 @@ describe('GET /:id', () => {
     });
   });
 
-    it('should error when get product by id', async () => {
-      (getProductById as jest.Mock).mockRejectedValue(
-        new Error('Failed to get product by id'),
-      );
+  it('should error when get product by id', async () => {
+    (getProductById as jest.Mock).mockRejectedValue(
+      new Error('Failed to get product by id'),
+    );
 
-      const response = await request(app).get(`/api/products/${id}`)
-      expect(response.status).toBe(500);
-      expect(response.text).toEqual('Failed to get product by id');
-    });
+    const response = await request(app).get(`/api/products/${id}`);
+    expect(response.status).toBe(500);
+    expect(response.text).toEqual('Failed to get product by id');
+  });
 });

@@ -7,10 +7,7 @@ interface IUser {
   phone: number;
 }
 
-export const createUser = async (
-  data: IUser,
-  transaction?: any
-) => {
+export const createUser = async (data: IUser, transaction?: any) => {
   try {
     const prisma = transaction || new PrismaClient();
 

@@ -77,7 +77,7 @@ const OrderPage = ({ isOpen, onClose }: IOrderPageProps) => {
             <option value="" selected disabled hidden>
               Choose here
             </option>
-            {branches.map((branch: any) => (
+            {branches.map((branch: IStoreBranch) => (
               <option key={branch.id} value={branch.id}>
                 {branch.name}
               </option>

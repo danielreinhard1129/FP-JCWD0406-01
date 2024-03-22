@@ -21,13 +21,13 @@ export interface IOrderStatusProps {
 }
 
 export interface ICountdownTimerProps {
-    orderId: string;
+  orderId: string;
 }
 
 export interface IDropzoneProps {
-  className: string
-  transactionId: string
-  getTransactionById : () => void
+  className: string;
+  transactionId: string;
+  getTransactionById: () => void;
 }
 
 export interface IModalBankTransferProps {
@@ -57,7 +57,7 @@ export interface IOrderHistoryProps {
   handleIconClick: () => void;
   transactions: ITransaction[];
   setPage: (input: number) => void;
-  totalPage: number
+  totalPage: number;
   itemPerPage: number;
   transactionByDate: ITransaction[];
   setPageOfDate: (input: number) => void;
@@ -87,8 +87,8 @@ export interface LoginProps {
 }
 
 export interface ISelectAddressProps {
-  selectedAddress?: ISelectedAddress | null
-  setSelectedAddress: (input: ISelectedAddress) => void
+  selectedAddress?: ISelectedAddress | null;
+  setSelectedAddress: (input: ISelectedAddress) => void;
 }
 
 export interface IBranchServiceProps {
@@ -127,12 +127,11 @@ export interface INavbarAdminProps {
 
 export interface ISidebarAdminProps {
   isOpen: boolean;
-  onClose: () => void;
 }
 
 export interface IOrderPageProps {
   isOpen: boolean;
-  onClose: () => void
+  onClose: () => void;
 }
 
 export interface IPaginationManageOrderProps {
@@ -144,14 +143,14 @@ export interface IPaginationManageOrderProps {
 }
 
 export interface IModalTransactionDetailProps {
-  openModal: boolean,
-  setOpenModal: (input: boolean) => void
-  transaction: ITransaction | null
-  setOpen: (input: boolean) => void
-  setAccept: (input: boolean) => void
-  setDecline: (input: boolean) => void
-  setOpenSent: (input: boolean) => void
-  setCancel: (input: boolean) => void
+  openModal: boolean;
+  setOpenModal: (input: boolean) => void;
+  transaction: ITransaction | null;
+  setOpen: (input: boolean) => void;
+  setAccept: (input: boolean) => void;
+  setDecline: (input: boolean) => void;
+  setOpenSent: (input: boolean) => void;
+  setCancel: (input: boolean) => void;
 }
 
 export interface IModalPaymnetProofProps {
@@ -196,4 +195,9 @@ export interface IModalConfirmShipmentProps {
   transaction: ITransaction | null;
   updateStatus: (input: number) => void;
   setOpenModal: (input: boolean) => void;
+}
+
+export interface IUseGetCategoryByTitle {
+  title: string;
+  limit: number;
 }

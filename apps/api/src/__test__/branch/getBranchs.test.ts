@@ -27,9 +27,7 @@ describe('GET /', () => {
     },
   ];
 
-
   it('should get branchs successfully', async () => {
-
     (getBranchs as jest.Mock).mockResolvedValue(branchData);
 
     const response = await request(app).get(`/api/branchs`);

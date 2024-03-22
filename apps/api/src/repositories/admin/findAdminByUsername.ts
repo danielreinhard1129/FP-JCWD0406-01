@@ -4,7 +4,7 @@ export const findAdminByUsername = async (username: string) => {
   try {
     const users = await prisma.admin.findUnique({
       where: { username },
-      include: {storeBranch: true}
+      include: { storeBranch: true },
     });
     return users;
   } catch (error) {
