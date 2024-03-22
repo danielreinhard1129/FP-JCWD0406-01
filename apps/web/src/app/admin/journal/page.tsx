@@ -9,12 +9,12 @@ const JournalPage = () => {
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
-  }; 
+  };
 
   return (
     <div className="flex justify-center">
       <SidebarAdmin isOpen={sidebarOpen} onClose={toggleSidebar} />
-      <Journal isOpen={sidebarOpen} onClose={toggleSidebar}/>
+      <Journal isOpen={sidebarOpen} onClose={toggleSidebar} />
     </div>
   );
 };

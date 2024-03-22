@@ -13,8 +13,7 @@ export const updateStatusByMidtransAction = async ({
   try {
     await prisma.$transaction(async (transaction: any) => {
       try {
-        const transactionById: any =
-          await getTransactionById(transactionId)
+        const transactionById: any = await getTransactionById(transactionId);
 
         let status = 0;
 
@@ -46,7 +45,7 @@ export const updateStatusByMidtransAction = async ({
           sendMailInvalidPaymentProof({
             user: transactionById?.user.username,
             orderId: transactionId,
-            to: transactionById?.user.email, 
+            to: transactionById?.user.email,
           });
         }
 

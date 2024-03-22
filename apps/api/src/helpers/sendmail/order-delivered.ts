@@ -7,7 +7,7 @@ import { IOrderDeliveredParams } from '@/types/params.type';
 export const sendMailOrderDelivered = async ({
   user,
   orderId,
-  to
+  to,
 }: IOrderDeliveredParams) => {
   const templatePath = path.join(
     __dirname,
@@ -20,7 +20,7 @@ export const sendMailOrderDelivered = async ({
   const compileTemplate = Handlebars.compile(templatesSource);
   const html = compileTemplate({
     user,
-    orderId
+    orderId,
   });
 
   await transporter.sendMail({

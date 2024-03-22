@@ -3,7 +3,6 @@ import { getStocksByProductId } from '@/repositories/stock/getStocksByProductId'
 import { createTransaction } from '@/repositories/transaction/createTransaction';
 import request from 'supertest';
 
-
 jest.mock('@/repositories/stock/getStocksByProductId.ts');
 jest.mock('@/repositories/stock/updateStockByProductIdAndBranchId.ts');
 jest.mock('@/repositories/branchs/getBranchById.ts');
@@ -38,15 +37,15 @@ describe('POST /', () => {
   const branch = [
     {
       id: 1,
-      name: "mawar store"
-    }
-  ]
+      name: 'mawar store',
+    },
+  ];
 
   const mutasi = {
-    id:1,
-    reason: "stock tidak mencukupi",
-    branchId: 2
-  }
+    id: 1,
+    reason: 'stock tidak mencukupi',
+    branchId: 2,
+  };
 
   const transaction = {
     id: 2,
@@ -63,17 +62,17 @@ describe('POST /', () => {
     userId: 1,
     statusId: 5,
     user: {
-        id: 1,
-        username: 'budi',
-        email:'budi@mail.com'
-    }
+      id: 1,
+      username: 'budi',
+      email: 'budi@mail.com',
+    },
   };
 
-  const transactionItems = { 
+  const transactionItems = {
     id: 1,
     name: 'semangka belah',
-    harga: 12000
-  }
+    harga: 12000,
+  };
 
   it('should error when get transactions', async () => {
     const response = await request(app).post(`/api/transactions`).send({
@@ -88,12 +87,14 @@ describe('POST /', () => {
     expect(response.text).toEqual('the checked-out product was not found');
   });
 
-  it('should error when don\'t have enough in stock', async () => {
-    (getStocksByProductId as jest.Mock).mockResolvedValue(stock)
+  it("should error when don't have enough in stock", async () => {
+    (getStocksByProductId as jest.Mock).mockResolvedValue(stock);
 
     const response = await request(app).post(`/api/transactions`).send(body);
-    expect(response.status).toBe(500)
-    expect(response.text).toEqual('Sorry, we don\'t have enough in stock for your order')
+    expect(response.status).toBe(500);
+    expect(response.text).toEqual(
+      "Sorry, we don't have enough in stock for your order",
+    );
   });
 
   it('should success when create transaction ', async () => {
@@ -103,15 +104,14 @@ describe('POST /', () => {
     // (getBranchesExcluding as jest.Mock).mockResolvedValue(branch)
     // (getStocksByProductIdAndBranchId as jest.Mock).mockResolvedValue(stock)
     // (createMutationStock as jest.Mock).mockResolvedValue(mutasi)
-    (createTransaction as jest.Mock).mockResolvedValue(transaction)
+    (createTransaction as jest.Mock).mockResolvedValue(transaction);
     // (createTransactionItems as jest.Mock).mockResolvedValue(transactionItems)
 
     const response = await request(app).post(`/api/transactions`).send(body);
-   
+
     // expect(response.status).toBe(200);
   });
 
-  
   // it('should error when create transaction', async () => {
   //   (createTransaction as jest.Mock).mockRejectedValue(
   //     new Error('Failed to create transaction'),
@@ -121,6 +121,4 @@ describe('POST /', () => {
   //   expect(response.status).toBe(500);
   //   expect(response.text).toEqual('Failed to create transaction');
   // });
-
 });
-

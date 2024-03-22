@@ -2,7 +2,7 @@ import { IStoreBranch } from './store.type';
 
 export interface IStoreAdmin {
   id?: number;
-  name:string
+  name: string;
   email: string;
   password?: string;
   storeId: string;

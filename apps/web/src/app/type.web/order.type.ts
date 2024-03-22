@@ -17,5 +17,5 @@ export interface IOrder {
   statusId: number;
   product: IProduct;
   StoreBranch: IStoreBranch;
-  customer: ICostumer
+  customer: ICostumer;
 }

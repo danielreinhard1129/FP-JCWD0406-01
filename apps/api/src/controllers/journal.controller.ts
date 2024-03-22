@@ -1,6 +1,5 @@
 import { getJournalsAction } from '@/actions/journal/getJournals.action';
 import { getJournalsByBranchIdAction } from '@/actions/journal/getJournalsByBranchId.action';
-import { getTransactionsByBranchIdAction } from '@/actions/transaction/getTransactionsByBranchId';
 import { NextFunction, Request, Response } from 'express';
 
 export class JournalController {

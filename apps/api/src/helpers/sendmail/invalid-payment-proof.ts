@@ -7,7 +7,7 @@ import { InvalidPaymentProofParams } from '@/types/params.type';
 export const sendMailInvalidPaymentProof = async ({
   user,
   orderId,
-  to
+  to,
 }: InvalidPaymentProofParams) => {
   const templatePath = path.join(
     __dirname,

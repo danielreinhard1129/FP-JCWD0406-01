@@ -4,7 +4,6 @@ import { getTransactionById } from '@/repositories/transaction/getTransactionByI
 import { logger } from '@/logger';
 import prisma from '@/prisma';
 import { sendMailPaymentReceivedVerification } from '@/helpers/sendmail/payment-received-verification';
-import { ITransaction } from '@/types/transaction.type';
 
 export const updateTransactionPaymentProofAction = async (
   transactionId: string,
@@ -13,8 +12,7 @@ export const updateTransactionPaymentProofAction = async (
   try {
     await prisma.$transaction(async (transaction: any) => {
       try {
-        const transactionById: any =
-          await getTransactionById(transactionId);
+        const transactionById: any = await getTransactionById(transactionId);
 
         if (!transactionById) {
           logger.error(`transaction with id ${transactionId} not found`);

@@ -5,7 +5,7 @@ export const getUserByIdAction = async (id: number) => {
   try {
     const result = await getUserById(id);
 
-    logger.info(`get customer by id ${id} was success`)
+    logger.info(`get customer by id ${id} was success`);
     return {
       message: `get customer by id ${id} was success`,
       status: 200,

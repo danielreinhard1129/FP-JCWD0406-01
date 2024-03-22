@@ -11,9 +11,9 @@ const config: Config = {
     extend: {
       boxShadow: {
         '3xl': '0px 0px 0px 0px rgba(0, 0, 0, 0.3)',
-      }
-    }
-  }
+      },
+    },
+  },
 };
 
 export default config;

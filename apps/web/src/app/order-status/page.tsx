@@ -13,13 +13,15 @@ import { TransactionId } from '@/types/params.type';
 
 const ConfirmPayment = () => {
   const searchParams = useSearchParams();
-  const getTransactionId: TransactionId = searchParams.get('transaction_id') as TransactionId
+  const getTransactionId: TransactionId = searchParams.get(
+    'transaction_id',
+  ) as TransactionId;
 
   const { data: transaction, getTransactionById } = useGetTransactionById({
     transactionId: getTransactionId,
   });
 
-  const transactionId: TransactionId = transaction?.orderId as TransactionId
+  const transactionId: TransactionId = transaction?.orderId as TransactionId;
   const { updateStatus } = useUpdateStatusTransactionById({
     transactionId,
     getTransactionById,
@@ -27,8 +29,8 @@ const ConfirmPayment = () => {
 
   const createdAt: string = formatDate(transaction?.createdAt);
 
-  if(!getTransactionId) return redirect('/')
-  
+  if (!getTransactionId) return redirect('/');
+
   return (
     <>
       <Header />

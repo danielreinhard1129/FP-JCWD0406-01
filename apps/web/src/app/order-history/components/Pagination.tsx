@@ -39,7 +39,7 @@ const Pagination = ({
       ) : (
         <div>
           <div className="mb-10">
-            {formattedDataArray?.map((transaction: any) => (
+            {formattedDataArray?.map((transaction: ITransaction) => (
               <div key={transaction.id}>
                 <div className="flex justify-around border mt-5 h-[80px] items-center bg-gray-100">
                   <div className="text-[12.5px] p-4 md:text-base font-bold flex-shrink-0 lg:w-1/5 text-center">

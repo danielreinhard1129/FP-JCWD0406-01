@@ -10,6 +10,10 @@ export interface IProductDetaiParams {
   id: string;
 }
 
+export interface ICategoryParams {
+  slug: string;
+}
+
 export type TransactionId = string;
 
 export type TransactionStatus = string;
@@ -112,7 +116,10 @@ export interface IUseGetJournalsParams {
   isSuperAdmin: boolean;
 }
 
-
 export interface IUseGetBranchsParams {
   setBranches: (input: IStoreBranch[]) => void;
+}
+
+export interface IUseGetProductsParams {
+  limit: number;
 }

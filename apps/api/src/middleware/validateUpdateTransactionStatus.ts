@@ -7,7 +7,7 @@ export const validateUpdateTransactionStatus = [
     .withMessage('statusId is required')
     .isInt()
     .withMessage('statusId must number'),
-  body('reason').isString().withMessage('reason must string'),
+  body('reason').optional().isString().withMessage('reason must string'),
 
   (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req);

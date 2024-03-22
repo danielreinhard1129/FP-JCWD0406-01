@@ -1,10 +1,13 @@
 import { logger } from '@/logger';
+import { IProductDB } from '@/types/product.type';
 
 export function checkAndProcessOrder({ products, productsFromDB }: any) {
   let insufficientProducts = [];
 
   for (const req of products) {
-    const productInDB = productsFromDB.find((p: any) => p.productId === req.id);
+    const productInDB = productsFromDB.find(
+      (p: IProductDB) => p.productId === req.id,
+    );
 
     if (productInDB) {
       if (productInDB.amount >= req.quantity) {

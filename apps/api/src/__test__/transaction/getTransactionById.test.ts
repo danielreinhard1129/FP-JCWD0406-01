@@ -6,7 +6,7 @@ jest.mock('@/repositories/transaction/getTransactionById.ts');
 
 describe('GET /:id', () => {
   const { app } = new App();
- 
+
   const transaction = {
     id: 2,
     orderId: 'GRC-zRzh-jiO',
@@ -22,18 +22,19 @@ describe('GET /:id', () => {
     userId: 1,
     statusId: 5,
     user: {
-        id: 1,
-        username: 'budi',
-        email:'budi@mail.com'
-    }
+      id: 1,
+      username: 'budi',
+      email: 'budi@mail.com',
+    },
   };
 
-  const transactionId = 'GRC-zRzh-jiO'
+  const transactionId = 'GRC-zRzh-jiO';
   it('should get transaction by id successfully', async () => {
-
     (getTransactionById as jest.Mock).mockResolvedValue(transaction);
-    
-    const response = await request(app).get(`/api/transactions/${transactionId}`)
+
+    const response = await request(app).get(
+      `/api/transactions/${transactionId}`,
+    );
     expect(response.status).toBe(200);
     expect(response.body).toEqual({
       message: `get transaction with id ${transactionId} was success`,
@@ -42,13 +43,15 @@ describe('GET /:id', () => {
     });
   });
 
-    it('should error when get transaction by id', async () => {
-      (getTransactionById as jest.Mock).mockRejectedValue(
-        new Error('Failed to get transaction by id'),
-      );
+  it('should error when get transaction by id', async () => {
+    (getTransactionById as jest.Mock).mockRejectedValue(
+      new Error('Failed to get transaction by id'),
+    );
 
-      const response = await request(app).get(`/api/transactions/${transactionId}`)
-      expect(response.status).toBe(500);
-      expect(response.text).toEqual('Failed to get transaction by id');
-    });
+    const response = await request(app).get(
+      `/api/transactions/${transactionId}`,
+    );
+    expect(response.status).toBe(500);
+    expect(response.text).toEqual('Failed to get transaction by id');
+  });
 });

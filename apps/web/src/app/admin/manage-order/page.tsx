@@ -15,7 +15,7 @@ const ManageOrderPage = () => {
     <>
       <div className="flex justify-center">
         <SidebarAdmin isOpen={sidebarOpen} onClose={toggleSidebar} />
-        <OrderPage isOpen={sidebarOpen} onClose={toggleSidebar}/>
+        <OrderPage isOpen={sidebarOpen} onClose={toggleSidebar} />
       </div>
     </>
   );

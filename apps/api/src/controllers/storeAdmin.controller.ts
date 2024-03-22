@@ -21,23 +21,22 @@ export class StoreAdminController {
       next(error);
     }
   }
-  async updateStoreAdmin(req: Request, res: Response, next: NextFunction){
+  async updateStoreAdmin(req: Request, res: Response, next: NextFunction) {
     try {
-        const {id} = req.params
-        const result = await updateStoreAdminAction(parseInt(id,0),req.body)
-        res.status(result.status).send(result)
+      const { id } = req.params;
+      const result = await updateStoreAdminAction(parseInt(id, 0), req.body);
+      res.status(result.status).send(result);
     } catch (error) {
-        next(error)
+      next(error);
     }
   }
-  async deleteStoreAdmin(req: Request, res: Response, next: NextFunction){
+  async deleteStoreAdmin(req: Request, res: Response, next: NextFunction) {
     try {
-        const {id} = req.params
-        const result = await deleteStoreAdminAction(parseInt(id,0))
-        res.status(result.status).send(result)
+      const { id } = req.params;
+      const result = await deleteStoreAdminAction(parseInt(id, 0));
+      res.status(result.status).send(result);
     } catch (error) {
-        next(error)
+      next(error);
     }
   }
-  
 }

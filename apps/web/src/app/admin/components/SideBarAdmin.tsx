@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { FaBoxOpen } from 'react-icons/fa6';
 import { MdDashboard } from 'react-icons/md';
 
-export function SidebarAdmin({ isOpen, onClose }: ISidebarAdminProps) {
+export function SidebarAdmin({ isOpen }: ISidebarAdminProps) {
   return (
     <div className={`${isOpen ? '' : 'sidebar'} relative`}>
       <section className="bg-[#272c2f] text-white w-max h-screen pl-10 pt-4 md:px-12 sticky top-0 500 shadow-[rgb(165,170,178)_3px_0px_8px_0px] shadow-black">
