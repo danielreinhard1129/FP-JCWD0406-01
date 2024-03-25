@@ -127,6 +127,7 @@ export interface INavbarAdminProps {
 
 export interface ISidebarAdminProps {
   isOpen: boolean;
+  onClose: () => void;
 }
 
 export interface IOrderPageProps {
