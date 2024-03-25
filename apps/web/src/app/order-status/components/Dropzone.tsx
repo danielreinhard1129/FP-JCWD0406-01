@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { ArrowUpTrayIcon, XMarkIcon } from '@heroicons/react/24/solid';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { axiosInstance } from '@/libs/axios';
 import { toast } from 'sonner';
 import { IDropzoneProps } from '@/types/props.type';
@@ -79,7 +79,10 @@ const Dropzone = ({
       paymentProof = response?.data.url.toString();
       toast.success('upload proof of successful payment');
     } catch (error) {
-      console.log(error);
+      if (error instanceof AxiosError) {
+        const errorMsg = error.response?.data || error.message;
+        toast.error(errorMsg);
+      }
     } finally {
       setIsLoading(false);
     }

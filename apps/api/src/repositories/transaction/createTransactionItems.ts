@@ -6,7 +6,7 @@ export const createTransactionItems = async (
   transactionId: string,
   transaction?: any,
 ) => {
-  const data: any = products.map((product: Partial<IProductDB>) => ({
+  const data = products.map((product: Partial<IProductDB>) => ({
     orderId: transactionId,
     productId: product?.product?.id,
     productName: product?.product?.name,

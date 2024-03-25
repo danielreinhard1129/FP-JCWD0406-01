@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 
-interface IRegisterAdmin {
+export interface IRegisterAdminParams {
   email: string;
   username: string;
   password: string;
@@ -8,7 +8,7 @@ interface IRegisterAdmin {
 }
 
 export const createAdmin = async (
-  data: IRegisterAdmin,
+  data: IRegisterAdminParams,
   transaction?: any,
 ) => {
   try {

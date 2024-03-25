@@ -23,7 +23,6 @@ import { logger } from '@/logger';
 import prisma from '@/prisma';
 import { ICreateTransactionParams } from '@/types/params.type';
 import { IProductDB, IProductRequest } from '@/types/product.type';
-import { sendMailPaymentReceivedVerification } from '@/helpers/sendmail/payment-received-verification';
 import { sendMailOrderCancel } from '@/helpers/sendmail/order-cancel';
 import { FindNearestBranch } from '@/helpers/findNearestBranch';
 import { checkAndProcessOrder } from '@/helpers/checkAndProcessOrder';
@@ -32,6 +31,7 @@ import { isStockSufficient } from '@/helpers/isStockSufficient';
 import { IUser } from '@/types/user.type';
 import { INearestBranch } from '@/types/branch.type';
 import { IStock } from '@/types/stock.type';
+import { sendMailPaymentRequired } from '@/helpers/sendmail/payment-required';
 
 export const createTransactionAction = async (
   body: ICreateTransactionParams,
@@ -48,7 +48,7 @@ export const createTransactionAction = async (
 
       const totalStock: Record<string, number> = {};
 
-      getProducts.forEach((item: any) => {
+      getProducts.forEach((item: IStock) => {
         if (totalStock[item.productId]) {
           totalStock[item.productId] += item.amount;
         } else {
@@ -79,8 +79,6 @@ export const createTransactionAction = async (
         products,
         branchId,
       });
-
-      console.log({getStocksByProductIdAndBranchId})
 
       const BeforeChange = productsFromDB;
 
@@ -137,10 +135,10 @@ export const createTransactionAction = async (
         branchId: closestBranch?.nearestBranch?.id,
       });
 
-      nearestBranch?.insufficientProducts.forEach((item:any) => {
+      nearestBranch?.insufficientProducts.forEach((item: IProductRequest) => {
         const { id, quantity } = item;
         const stockItem = getStockLendingStore.find(
-          (item: any) => item.productId === id,
+          (item: IStock) => item.productId === id,
         );
 
         if (stockItem) {
@@ -233,7 +231,7 @@ export const createTransactionAction = async (
         transaction,
       );
 
-      sendMailPaymentReceivedVerification({
+      sendMailPaymentRequired({
         user: user?.username,
         orderId: transactionId,
         to: user?.email,

@@ -9,6 +9,8 @@ import { calculateTotalAmount } from '@/app/utils/calculateTotalAmount ';
 import { addToCartHandler } from '@/app/utils/addToCartHandler';
 import { IUserState } from '@/types/userState.type';
 import { IProductDetailProps } from '@/types/props.type';
+import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 const ProductDetails = ({ product }: IProductDetailProps) => {
   const user: IUserState = useAppSelector((state) => state.user);
@@ -16,6 +18,7 @@ const ProductDetails = ({ product }: IProductDetailProps) => {
   const { addItemToCart, cart } = useContext(CartContext);
   const imgRef = useRef<HTMLImageElement | null>(null);
   const readyStock: boolean = stock >= 1;
+  const router = useRouter();
 
   setTimeout(() => {
     if (product?.stocks?.length) {
@@ -25,7 +28,20 @@ const ProductDetails = ({ product }: IProductDetailProps) => {
   });
 
   const handleAddToCart = () => {
-    addToCartHandler(user, product, stock, cart, addItemToCart);
+    if (!user.id && !user.email) {
+      toast.error('Please log in first to add items to your cart');
+      return router.push('/login');
+    }
+
+    if (!user.isVerified) {
+      return toast.info('Your account is not yet verified');
+    }
+
+    if (!readyStock) {
+      return toast.error('Product in your cart is out of stock');
+    }
+
+    addToCartHandler(product, stock, cart, addItemToCart);
   };
 
   return (
@@ -61,23 +77,12 @@ const ProductDetails = ({ product }: IProductDetailProps) => {
               <p className="mb-4 font-semibold text-xl">
                 {product?.price ? numberToRupiah(product.price) : ''}
               </p>
-              <p className="mb-4 text-gray-500">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Reprehenderit tempore, quidem qui quos sed voluptas natus ex
-                vitae aperiam quaerat nostrum blanditiis sequi quasi esse nulla.
-                Tempore dignissimos quidem saepe? Odio sequi eaque, corporis
-                quisquam voluptate, dolor fugiat iste quam laborum beatae
-                tempora est. Ipsum quo sed ab non qui eius reprehenderit nulla
-                maiores eos officiis, expedita corrupti accusamus labore! Harum
-                assumenda officiis, voluptates laborum laudantium qui, pariatur
-                sint eveniet sed earum modi molestiae quaerat neque.
-              </p>
+              <p className="mb-4 text-gray-500">{product?.description}</p>
 
               <div className="flex flex-wrap gap-2 mb-5">
                 <button
                   className="px-4 py-2 inline-block text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700"
                   onClick={handleAddToCart}
-                  disabled={!readyStock}
                 >
                   <i className="fa fa-shopping-cart mr-2"></i>
                   Add to cart

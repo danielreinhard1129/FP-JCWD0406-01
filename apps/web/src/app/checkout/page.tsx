@@ -1,4 +1,4 @@
-"use client"
+'use client';
 import isAuthUser from '@/components/isAuthUser';
 import Checkout from './components/Checkout';
 import { Header } from '@/components/Header';

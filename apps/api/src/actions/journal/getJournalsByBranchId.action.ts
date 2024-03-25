@@ -8,14 +8,13 @@ export const getJournalsByBranchIdAction = async (
   perPage: number,
 ) => {
   try {
-
     const skip: number = (page - 1) * perPage;
     const result = await getJournalsByBranchId(branchId, skip, perPage);
     const getTotalJournals = await getTotalJournalsByBranchId(branchId);
 
-    logger.info(`get journals by branch id ${branchId} was success`)
+    logger.info(`get journals by branch id ${branchId} was success`);
     return {
-      message:`get journals by branch id ${branchId} was success`,
+      message: `get journals by branch id ${branchId} was success`,
       status: 200,
       data: result,
       total: getTotalJournals,

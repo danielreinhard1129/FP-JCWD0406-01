@@ -33,7 +33,7 @@ export interface IUser {
 }
 
 export interface IStatus {
-  id: number 
+  id: number;
   title: string;
 }
 

@@ -14,6 +14,7 @@ import { UserRouter } from './routers/user.router';
 import { BranchRouter } from './routers/branch.router';
 import { AdminRouter } from './routers/admin.router';
 import { JournalRouter } from './routers/journal.router';
+import { CategoryRouter } from './routers/category.router';
 
 export default class App {
   // private app: Express;
@@ -60,6 +61,7 @@ export default class App {
     const branchRouter = new BranchRouter();
     const adminRouter = new AdminRouter();
     const journalRouter = new JournalRouter();
+    const categoryRouter = new CategoryRouter();
 
     this.app.use('/api/users', userRouter.getRouter());
     this.app.use('/api/products', productRouter.getRouter());
@@ -67,6 +69,7 @@ export default class App {
     this.app.use('/api/branchs', branchRouter.getRouter());
     this.app.use('/api/admins', adminRouter.getRouter());
     this.app.use('/api/journals', journalRouter.getRouter());
+    this.app.use('/api/categories', categoryRouter.getRouter());
   }
 
   public start(): void {

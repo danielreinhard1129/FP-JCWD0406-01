@@ -8,7 +8,7 @@ export const getJournalsAction = async (page: number, perPage: number) => {
     const result = await getJournals(skip, perPage);
     const getTotalJournal = await getTotalJournals();
 
-    logger.info('get journals success')
+    logger.info('get journals success');
     return {
       message: 'get journals success',
       status: 200,

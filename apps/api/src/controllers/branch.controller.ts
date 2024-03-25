@@ -18,7 +18,12 @@ export class BranchController {
     next: NextFunction,
   ) {
     try {
-      const result = await getBranchByGeolocationAction(req.body);
+      const latitude = String(req.query.latitude);
+      const longitude = String(req.query.longitude);
+      const result = await getBranchByGeolocationAction({
+        latitude,
+        longitude,
+      });
       return res.status(result.status).send(result);
     } catch (error) {
       next(error);

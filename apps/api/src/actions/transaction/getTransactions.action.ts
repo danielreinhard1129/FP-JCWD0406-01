@@ -8,7 +8,7 @@ export const getTransactionsAction = async (page: number, perPage: number) => {
     const result = await getTransactions(skip, perPage);
     const getTotalTransaction = await getTotalTransactions();
 
-    logger.info('get transactions success')
+    logger.info('get transactions success');
     return {
       message: 'get transactions success',
       status: 200,

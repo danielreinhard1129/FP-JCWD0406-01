@@ -3,6 +3,7 @@ export interface IAddToCart {
   name: string;
   price: number;
   image: string;
+  description: string;
   stock: number;
   seller: string;
   quantity: any;
@@ -38,27 +39,27 @@ export interface IProduct {
   storeBranch: IStoreBranch;
 }
 
-
 export interface ICartItem {
-  productId: number
-  name: string
-  price: number
-  image: string
-  quantity: number
-  stock: number
+  productId: number;
+  name: string;
+  price: number;
+  image: string;
+  quantity: number;
+  stock: number;
 }
 
 export interface ICart {
-  cartItems: ICartItem[]
+  cartItems: ICartItem[];
 }
 
 export interface IAddItemToCart {
-  productId: number
-  name: string
-  price: number
-  image: string
-  stock: number
-  branchId: number
-  seller: string
-  quantity: number
+  productId: number;
+  name: string;
+  price: number;
+  image: string;
+  description: string;
+  stock: number;
+  branchId: number;
+  seller: string;
+  quantity: number;
 }

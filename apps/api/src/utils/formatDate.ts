@@ -1,10 +1,10 @@
 export const formatDate = (date: Date): string => {
-    const transactionDate = new Date(date);
-    const formatDate = transactionDate.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
-    const monthName = formatDate.split(',')[0];
-    return `${transactionDate.getFullYear()} ${monthName}`;
+  const transactionDate = new Date(date);
+  const formatDate = transactionDate.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+  const monthName = formatDate.split(',')[0];
+  return `${transactionDate.getFullYear()} ${monthName}`;
 };

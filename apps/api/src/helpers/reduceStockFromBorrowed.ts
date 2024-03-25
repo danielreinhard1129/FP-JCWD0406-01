@@ -1,10 +1,12 @@
+import { IProductDB, IProductRequest } from '@/types/product.type';
+
 export function reduceStockFromBorrowed({
   BeforeChange,
   borrowedProducts,
 }: any) {
-  borrowedProducts.forEach((borrowedProduct: any) => {
+  borrowedProducts.forEach((borrowedProduct: IProductRequest) => {
     const indeksProdukExisting = BeforeChange.findIndex(
-      (item: any) => item.productId === borrowedProduct.id,
+      (item: IProductDB) => item.productId === borrowedProduct.id,
     );
 
     if (indeksProdukExisting !== -1) {

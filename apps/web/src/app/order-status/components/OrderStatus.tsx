@@ -1,12 +1,12 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
 import Dropzone from './Dropzone';
-import CountdownTimer from './CountDown';
 import ModalBankTransfer from './ModalBankTransfer';
 import ModalConfirmOrderCancel from './ModalConfirmOrderCancel';
 import ModalConfirmOrderReceived from './ModalConfirmOrderReceived';
 import { numberToRupiah } from '@/app/utils/numberToRupiah';
 import { IOrderStatusProps } from '@/types/props.type';
+import { IOrderItem } from '@/types/transaction.type';
 
 const OrderStatus = ({
   transaction,
@@ -21,9 +21,6 @@ const OrderStatus = ({
   return (
     <div>
       <div className="container mx-auto max-w-7xl">
-        {/* <div className='my-10'>
-          <CountdownTimer orderId={transaction?.orderId}/>
-        </div> */}
         <div className="border">
           <div className="flex bg-gray-100 py-4 flex-col md:flex-row md:justify-around border md:h-[100px] md:items-center">
             <div className="flex justify-between md:flex-col md:text-base flex-shrink-0 md:w-1/5 p-4">
@@ -75,7 +72,7 @@ const OrderStatus = ({
             <p className="font-[500]">{transaction?.user.phone}</p>
           </div>
         </div>
-        {transaction?.orderItem?.map((product: any) => (
+        {transaction?.orderItem?.map((product: IOrderItem) => (
           <div
             key={product.id}
             className="flex py-10 px-4 md:p-10 justify-between border"
@@ -101,7 +98,7 @@ const OrderStatus = ({
         {transaction?.status.id === 1 && (
           <>
             <div className="max-w-max-lg:max-w-xl mx-auto bg-white rounded-md mt-5">
-              <div className="flex flex-row justify-center">
+              <div className="flex flex-row justify-center hover:cursor-pointer">
                 <div
                   onClick={() => {
                     setOpenModal(true);
@@ -144,7 +141,7 @@ const OrderStatus = ({
             <button
               disabled={transaction?.statusId === 5}
               onClick={() => setOpenConfirm(true)}
-              className={`w-full md:min-w-[150px] px-6 py-3.5 mx-2 text-sm text-white rounded-md hover:bg-[#111] ${
+              className={`max-md:w-full md:min-w-[150px] px-6 py-3.5 mx-2 text-sm text-white rounded-md hover:bg-[#333] ${
                 transaction?.statusId === 5 ? 'bg-[#444]' : 'bg-[#111]'
               }`}
             >

@@ -25,6 +25,7 @@ export const CartProvider = ({ children }) => {
     name,
     price,
     image,
+    description,
     stock,
     branchId,
     seller,
@@ -35,6 +36,7 @@ export const CartProvider = ({ children }) => {
       name,
       price,
       image,
+      description,
       stock,
       branchId,
       seller,
@@ -65,7 +67,7 @@ export const CartProvider = ({ children }) => {
     localStorage.setItem('cart', JSON.stringify({ cartItems: newCartItems }));
     setCartToState();
 
-    toast.success("product removed successfully")
+    toast.success('product removed successfully');
   };
 
   const clearCart = () => {
@@ -79,7 +81,7 @@ export const CartProvider = ({ children }) => {
         cart,
         addItemToCart,
         deleteItemFromCart,
-        clearCart
+        clearCart,
       }}
     >
       {children}

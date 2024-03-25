@@ -1,5 +1,5 @@
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa';
-import { AiOutlineSkype } from "react-icons/ai";
+import { AiOutlineSkype } from 'react-icons/ai';
 
 const Footer = () => {
   return (
@@ -98,22 +98,54 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className='w-full bg-gray-900 text-gray-400 px-10'>
-        <div className='max-w-7xl flex flex-col sm:flex-row py-4 mx-auto justify-between items-center'>
-          <div className='text-center'>
+      <div className="w-full bg-gray-900 text-gray-400 px-10">
+        <div className="max-w-7xl flex flex-col sm:flex-row py-4 mx-auto justify-between items-center">
+          <div className="text-center">
             <div>
-              Copyright <strong><span>company</span></strong>, All Rights Reserved
+              Copyright{' '}
+              <strong>
+                <span>company</span>
+              </strong>
+              , All Rights Reserved
             </div>
             <div>
-              Made by <a href="#" className='text-gray-400'>Grocery</a>
+              Made by{' '}
+              <a href="#" className="text-gray-400">
+                Grocery
+              </a>
             </div>
           </div>
-          <div className='text-xl text-white'>
-            <a href="#" className='w-10 h-10 p-[10px] rounded-full bg-gray-500 hover:bg-gray-600 inline-block'><FaTwitter /></a>
-            <a href="#" className='w-10 h-10 p-[10px] rounded-full bg-gray-500 hover:bg-gray-600 inline-block'><FaInstagram /></a>
-            <a href="#" className='w-10 h-10 p-[10px] rounded-full bg-gray-500 hover:bg-gray-600 inline-block'><FaFacebook /></a>
-            <a href="#" className='w-10 h-10 p-[10px] rounded-full bg-gray-500 hover:bg-gray-600 inline-block'><AiOutlineSkype /></a>
-            <a href="#" className='w-10 h-10 p-[10px] rounded-full bg-gray-500 hover:bg-gray-600 inline-block'><FaLinkedin /></a>
+          <div className="text-xl text-white">
+            <a
+              href="#"
+              className="w-10 h-10 p-[10px] rounded-full bg-gray-500 hover:bg-gray-600 inline-block"
+            >
+              <FaTwitter />
+            </a>
+            <a
+              href="#"
+              className="w-10 h-10 p-[10px] rounded-full bg-gray-500 hover:bg-gray-600 inline-block"
+            >
+              <FaInstagram />
+            </a>
+            <a
+              href="#"
+              className="w-10 h-10 p-[10px] rounded-full bg-gray-500 hover:bg-gray-600 inline-block"
+            >
+              <FaFacebook />
+            </a>
+            <a
+              href="#"
+              className="w-10 h-10 p-[10px] rounded-full bg-gray-500 hover:bg-gray-600 inline-block"
+            >
+              <AiOutlineSkype />
+            </a>
+            <a
+              href="#"
+              className="w-10 h-10 p-[10px] rounded-full bg-gray-500 hover:bg-gray-600 inline-block"
+            >
+              <FaLinkedin />
+            </a>
           </div>
         </div>
       </div>

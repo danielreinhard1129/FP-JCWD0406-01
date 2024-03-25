@@ -11,6 +11,3 @@ export interface IBranchService {
   nearestBranch: IStoreBranch;
   distance: string;
 }
-
-
-

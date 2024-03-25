@@ -18,9 +18,9 @@ export const getTransactionByDateAction = async (
     const result = await getTransactionByDate(gte, lte, skip, perPage);
     const total = await getTotalTransactionsByDate(gte, lte);
 
-    logger.info(`get transaction with date ${date} was success`)
+    logger.info(`get transaction with date ${date} was success`);
     return {
-      message:`get transaction with date ${date} was success`,
+      message: `get transaction with date ${date} was success`,
       status: 200,
       data: result,
       total,

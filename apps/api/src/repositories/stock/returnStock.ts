@@ -1,3 +1,4 @@
+import { IOrderItem } from '@/types/orderItem.type';
 import { PrismaClient } from '@prisma/client';
 export const returnStock = async (
   branchId: number,
@@ -5,7 +6,7 @@ export const returnStock = async (
   transaction?: any,
 ) => {
   try {
-    products.map(async (product: any) => {
+    products.map(async (product: IOrderItem) => {
       const productId = product.productId;
       const quantity = product.quantity;
 

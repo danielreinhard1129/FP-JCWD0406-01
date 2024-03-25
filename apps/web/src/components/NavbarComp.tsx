@@ -5,19 +5,19 @@ import { TbReport } from 'react-icons/tb';
 import Link from 'next/link';
 import { Poppins } from 'next/font/google';
 import { RiAccountCircleLine } from 'react-icons/ri';
-import { FormEventHandler, useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 const poppins = Poppins({ subsets: ['latin'], weight: '600' });
 
 const NavbarComp = () => {
   const [search, setSearch] = useState('');
-  
-  const router =  useRouter()
-  const handleSearch = (e: any) => {
-    e.preventDefault()
-    router.push(`/products?search=${search}`)
-  }
+
+  const router = useRouter();
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    router.push(`/products?search=${search}`);
+  };
   return (
     <div className="sticky top-0 z-50 bg-white">
       <div className="hidden text-xl sm:flex sm:flex-row sm:justify-center sm:max-w-7xl sm:container  sm:mx-auto sm:p-5 items-center">

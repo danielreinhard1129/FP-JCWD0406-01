@@ -6,7 +6,7 @@ import { Spinner } from 'flowbite-react';
 import isAuthUser from '@/components/isAuthUser';
 import { Header } from '@/components/Header';
 import Footer from '@/components/Footer';
-import PaymentSuccess from './components/PaymentSuccess';
+import PaymentSuccess from './components/PaymentStatus';
 import { TransactionId, TransactionStatus } from '@/types/params.type';
 
 const ConfirmPayment = () => {

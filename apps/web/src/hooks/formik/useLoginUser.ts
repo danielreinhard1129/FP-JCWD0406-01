@@ -47,5 +47,5 @@ export const useLoginUser = () => {
     },
   });
 
-  return {formik};
+  return { formik };
 };

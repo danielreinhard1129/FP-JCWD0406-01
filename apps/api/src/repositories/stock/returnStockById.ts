@@ -1,3 +1,4 @@
+import { IStockMutation } from '@/types/stockMutation';
 import { PrismaClient } from '@prisma/client';
 
 export const returnStockById = async (
@@ -5,7 +6,7 @@ export const returnStockById = async (
   transaction?: any,
 ) => {
   try {
-    stockproducts.map(async (product: any) => {
+    stockproducts.map(async (product: IStockMutation) => {
       const quantity = product.quantity;
       const id = product.stockId;
 
