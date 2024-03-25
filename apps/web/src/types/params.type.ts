@@ -66,6 +66,7 @@ export interface IUsePaymentByMidtransParams {
   message: string;
   cart: ICart;
   setMessage: (input: string) => void;
+  router: any;
 }
 
 export interface IUsePaymnetByManualParams {

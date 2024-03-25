@@ -3,7 +3,6 @@ import { AxiosError } from 'axios';
 import { useContext, useState } from 'react';
 import { toast } from 'sonner';
 import useSnap from '@/hooks/useSnap';
-import { useRouter } from 'next/navigation';
 import CartContext from '@/context/CartContext';
 import { IUsePaymentByMidtransParams } from '@/types/params.type';
 import { IAddItemToCart } from '@/types/cart.type';
@@ -17,11 +16,11 @@ export const usePaymentByMidtrans = ({
   message,
   cart,
   setMessage,
+  router,
 }: IUsePaymentByMidtransParams) => {
   const { snapEmbed } = useSnap();
   const [snapShow, setSnapShow] = useState<boolean>(false);
-  const [midtrans, setMidtrans] = useState<string>();
-  const router = useRouter();
+  const [midtrans, setMidtrans] = useState<null>(null);
   const { clearCart } = useContext(CartContext);
 
   const handlePaymentByMidtrans = async () => {
@@ -49,30 +48,28 @@ export const usePaymentByMidtrans = ({
 
         setSnapShow(true);
         snapEmbed(response.data.transaction.snapToken, 'snap-container', {
-          onSuccess: function (result: string) {
-            setMidtrans(JSON.parse(result));
+          onSuccess: function (result: any) {
             router.push(
-              `/order-status?transaction_id=${response.data.transaction.orderId}`,
+              `/payment-status?order_id=${result?.order_id}&status_code=${result?.status_code}&transaction_status=${result?.transaction_status}`,
+            );
+            setMidtrans(result);
+            setSnapShow(false);
+          },
+          onPending: function (result: any) {
+            setMidtrans(result);
+            router.push(
+              `/payment-status?order_id=${result?.order_id}&status_code=${result?.status_code}&transaction_status=${result?.transaction_status}`,
             );
             setSnapShow(false);
           },
-          onPending: function (result: string) {
+          onClose: function (result: any) {
             setMidtrans(result);
             router.push(
-              `/order-status?transaction_id=${response.data.transaction.orderId}`,
-            );
-            setSnapShow(false);
-          },
-          onClose: function (result: string) {
-            setMidtrans(result);
-            router.push(
-              `/order-status?transaction_id=${response.data.transaction.orderId}`,
+              `/payment-status?order_id=${result?.order_id}&status_code=${result?.status_code}&transaction_status=${result?.transaction_status}`,
             );
             setSnapShow(false);
           },
         });
-      } else if (response && response.status === 3) {
-        console.log(response);
       }
     } catch (error) {
       if (error instanceof AxiosError) {

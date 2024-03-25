@@ -1,24 +1,13 @@
 import { IAddItemToCart, ICart } from '@/types/cart.type';
 import { IProduct } from '@/types/product.type';
-import { IUserState } from '@/types/userState.type';
-import { redirect } from 'next/navigation';
 import { toast } from 'sonner';
 
 export const addToCartHandler = (
-  user: IUserState,
   product: IProduct | null,
   stock: number,
   cart: ICart,
   addItemToCart: (item: Partial<IAddItemToCart>) => void,
 ) => {
-  if (!user.id) {
-    return redirect('/login');
-  }
-
-  if (!user.isVerified) {
-    return toast.info('Your account is not yet verified');
-  }
-
   const cartItem: Partial<IAddItemToCart> = {
     productId: product?.id,
     name: product?.name,

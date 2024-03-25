@@ -1,4 +1,4 @@
-import winston, { exceptions } from 'winston';
+import winston from 'winston';
 import DailyRotateFile from 'winston-daily-rotate-file';
 
 export const logger = winston.createLogger({

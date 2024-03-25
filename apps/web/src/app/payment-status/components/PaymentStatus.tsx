@@ -1,7 +1,7 @@
 import { IPaymentSuccessProps } from '@/types/props.type';
 import Link from 'next/link';
 
-const PaymentSuccess = ({
+const PaymentStatus = ({
   transactionStatus,
   transactionId,
 }: IPaymentSuccessProps) => {
@@ -51,4 +51,4 @@ const PaymentSuccess = ({
   );
 };
 
-export default PaymentSuccess;
+export default PaymentStatus;

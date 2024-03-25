@@ -13,12 +13,13 @@ import BranchService from './BranchService';
 import { useGetBranchByGeolocation } from '@/hooks/branch/useGetBranchByGeolocation';
 import { numberToRupiah } from '@/app/utils/numberToRupiah';
 import { IUserState } from '@/types/userState.type';
-import { redirect } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import { ISelectedAddress } from '@/types/address.type';
 import { IAddToCart } from '@/types/cart.type';
 
 const Checkout = () => {
   const user: IUserState = useAppSelector((state) => state.user);
+  const router = useRouter();
   const { cart } = useContext(CartContext);
   const [shipping, setShipping] = useState<number>(25000);
   const [tax, setTax] = useState<number>(10000);
@@ -38,6 +39,7 @@ const Checkout = () => {
     message,
     cart,
     setMessage,
+    router,
   });
 
   const { handlePaymentByManual } = usePaymentByManual({
